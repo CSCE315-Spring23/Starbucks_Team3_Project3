@@ -4,13 +4,9 @@ from flask_cors import CORS #comment this on deployment
 app = Flask(__name__)
 CORS(app) #comment this on deployment
 
-@app.route("/")
-def main():
-    return "hit main"
+import models.orderlist as _
 
-@app.route("/serve")
-def serve():
-    return [{"name": "serve"}, 
-           {"name": "paul"},
-           {"name": "lucas"}]
+
+import api.management as _
+import api.orderlist as _
 
