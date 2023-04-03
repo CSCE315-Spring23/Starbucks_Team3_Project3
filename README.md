@@ -2,9 +2,10 @@
 
 # Setting up the Project
 ## Task 0: Pull Project
+- Download Git for Linux, go to: https://git-scm.com/download/linux
 - Clone the project down from Github
 ```bash
-
+git clone https://github.com/CSCE315-Spring23/Starbucks_Team3_Project3.git
 ```
 ## Task 1: Set up Flask
 - Go into the directory `backend`
