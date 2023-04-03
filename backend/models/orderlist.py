@@ -1,3 +1,5 @@
+import psycopg2
+
 class Orderlist:
     def __init__(self):
         self.current_orderlist = []

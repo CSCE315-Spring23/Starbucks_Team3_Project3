@@ -26,3 +26,4 @@ yarn-error.log*
 # python
 /backend/flask_venv
 __pycache__
+/backend/test_env
