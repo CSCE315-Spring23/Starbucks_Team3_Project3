@@ -1,4 +1,4 @@
-import psycopg2
+import backend.private_tools.db_connection as db
 
 class Orderlist:
     def __init__(self):
@@ -22,7 +22,7 @@ class Orderlist:
         return self.num_of_items
 
     def _getLatestTransactionID():
-        # TODO: get the transaction ID, return as an int
+        # TODO: get the latest transaction ID, return as an int
         pass
 
     def _getLatestTime():
