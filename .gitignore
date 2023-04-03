@@ -27,3 +27,4 @@ yarn-error.log*
 /backend/flask_venv
 __pycache__
 /backend/test_env
+/backend/private_tools/db_access.csv
