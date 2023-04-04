@@ -6,7 +6,7 @@ class DBConnection():
     def __init__(self):
         try:
             db = {}
-            with open("../private_tools/db_access.csv", 'r') as datfile:
+            with open("./private_tools/db_access.csv", 'r') as datfile:
                 reader = list(csv.reader(datfile))
                 for i in reader:
                     db[i[0]] = i[1]
