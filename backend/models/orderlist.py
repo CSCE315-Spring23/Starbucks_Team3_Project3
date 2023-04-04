@@ -80,17 +80,6 @@ class Orderlist:
             self.discounts.append(discount)
 
     def _getPriceFor(self, item_name):
-        '''
-        TODO:
-        0. get the price from item_name
-        0.1. if self.discounts is empty, return price right now
-        1. Get the discounts from the discount_table
-        2. Concatenate all the discounts
-        3. Get all the discounts that applies to that item_name
-        4. Multiply all the discounts together
-        5. Multiply by the original price
-        6. return the discounted price.
-        '''
         conn = db.DBConnection()
         price = float(conn.query(f"SELECT price FROM menu_items WHERE item_name='{item_name}'")[0][0])
         conn.close()
@@ -104,7 +93,6 @@ class Orderlist:
         ol = "{" + ", ".join(str(i) for i in self.orderlist_db) + "}"
         conn = db.DBConnection()
         conn.query(f"INSERT INTO transactions (transaction_id, transaction_date) VALUES ({self.transaction_id}, '{datetime.date.today()}')", False)
-        # conn.query(f"UPDATE transactions SET transaction_date={self.time}", False)
         conn.query(f"UPDATE transactions SET order_size={self.num_of_items} WHERE transaction_id={self.transaction_id}", False)
         conn.query(f"UPDATE transactions SET order_list='{ol}' WHERE transaction_id={self.transaction_id}", False)
         conn.query(f"UPDATE transactions SET employee='{self.employee}' WHERE transaction_id={self.transaction_id}", False)
@@ -139,6 +127,7 @@ def getJSON(id):
     order = [] if queue[1] == "" else [json.loads(i) for i in queue[1].split(';')[:-1]]
     discounts = [] if queue[2] == "" else queue[2].split(';')
     returnJSON = {'employee': employee, 'orderlist': order, 'discounts':discounts}
+    conn.close()
     return returnJSON
 
 
@@ -147,7 +136,6 @@ def deleteOrderlist(id):
     conn.execute(f"DELETE FROM orderlist WHERE id={id}")
     conn.commit()
     conn.close()
-    return 202
 
 def processOrderlist(id):
     conn = queue_connection()
@@ -168,13 +156,20 @@ def updateEmployee(id, employee):
     conn.close()
 
 def addItem(id, orderlist):
-    print(orderlist)
     conn = queue_connection()
     currlist = str(conn.execute(f"SELECT order_list FROM orderlist WHERE id={id}").fetchone()[0])
     newlist = currlist + json.dumps(orderlist) + ';'
-    print(newlist)
     conn.execute(f"UPDATE orderlist SET order_list='{newlist}' WHERE id={id}")
     conn.commit()
     conn.close()
 
 
+def removeItem(id, orderlist):
+    # conn = queue_connection()
+    # queue = conn.execute(f"SELECT * FROM orderlist WHERE id={id}").fetchall()[0]
+    # order = [] if queue[1] == "" else [json.loads(i) for i in queue[1].split(';')[:-1]]
+    # for i in order:
+    #     if i == orderlist:
+    #         order.remove(i)
+    #         break
+    pass

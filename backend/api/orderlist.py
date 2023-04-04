@@ -13,7 +13,7 @@ def editOrderlist(id):
         return ol.getJSON(id)
     else:
         ol.deleteOrderlist(id)
-        return 202
+        return "Successfully deleted", 202
     
 @app.route("/orderlist/<int:id>/complete-order", methods=["GET"])
 def completeOrder(id):
@@ -36,7 +36,7 @@ def addItem(id):
 @app.route("/orderlist/<int:id>/remove-item", methods=["PUT"])
 def removeItem(id):
     orderlist = request.form["orderlist"]
-    # ol.removeItem(id, orderlist)
+    ol.removeItem(id, orderlist)
 
 @app.route("/orderlist/<int:id>/add-discount", methods=["PUT"])
 def addDiscount(id):
