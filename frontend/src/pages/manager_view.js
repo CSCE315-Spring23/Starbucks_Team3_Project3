@@ -29,42 +29,42 @@ function manager_view() {
 
     const buttonCol = [
         {
-            id: 1,
+            id: "server-view",
             onClick: () => handleClick(),
             label: "Switch to Server View"
         },
         {
-            id: 2,
+            id: "inventory-view",
             onClick: () => handleClick(),
             label: "Show Inventory"
         },
         {
-            id: 3,
+            id: "low-stock-view",
             onClick: () => handleClick(),
             label: "Show Low Stock Inventory"
         },
         {
-            id: 4,
+            id: "menu-item-view",
             onClick: () => handleClick(),
             label: "Show Menu Item List"
         },
         {
-            id: 5,
+            id: "sales-view",
             onClick: () => handleClick(),
             label: "Show Sales"
         },
         {
-            id: 6,
+            id: "transactions-view",
             onClick: () => handleClick(),
             label: "Show Transactions"
         },
         {
-            id: 7,
+            id: "employee-list-view",
             onClick: () => handleClick(),
             label: "Show Employee List"
         },
         {
-            id: 8,
+            id: "reports-view",
             onClick: () => handleClick(),
             label: "Show X/Z Reports"
         }
