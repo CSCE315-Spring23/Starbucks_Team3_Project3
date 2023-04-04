@@ -10,7 +10,7 @@ function Button(props) {
 
 function Column(props) {
     return (
-        <div>
+        <div style={{float: 'left'}}>
             {props.buttons.map(button => (
                 <Button
                     key={button.id}
