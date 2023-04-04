@@ -15,6 +15,10 @@ psql -h csce-315-db.engr.tamu.edu -U <username> -d csce315331_team_3
 ```bash
 python3 -m pip install --user virtualenv
 ```
+- If above command fails, you can try:
+```
+pip install virtualenv
+```
 
 ## Set up SQLite3
 - In terminal (under `Starbucks_Team3_Project3/backend`), type:
