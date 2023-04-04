@@ -22,6 +22,20 @@ function Row(props) {
     );
 }
 
+function Column(props) {
+    return (
+        <div style={{float: 'left'}}>
+            {props.buttons.map(button => (
+                <Button
+                    key={button.id}
+                    onClick={button.onClick}
+                    label={button.label}
+                />
+            ))}
+        </div>
+    );
+}
+
 function server_view() {
     function handleClick() {
         alert("This button has been clicked.")
@@ -60,9 +74,28 @@ function server_view() {
         }
     ]
 
+    const buttonCol = [
+        {
+            id: "venti-button",
+            onClick: () => handleClick(),
+            label: "Venti"
+        },
+        {
+            id: "grande-button",
+            onClick: () => handleClick(),
+            label: "Grande"
+        },
+        {
+            id: "tall-button",
+            onClick: () => handleClick(),
+            label: "Tall"
+        }
+    ]
+
     return (
         <div>
             <Row buttonRow={buttonRow} />
+            <Column buttonCol={buttonCol} />
         </div>
     );
 }
