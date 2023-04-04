@@ -10,5 +10,6 @@ def postOrderlist():
     orderlist = ol.Orderlist()
     orderlist.addOrderlist(data.get("orderlist"))
     orderlist.addDiscounts(data.get("discounts"))
+    orderlist.processOrderlist()
     
 

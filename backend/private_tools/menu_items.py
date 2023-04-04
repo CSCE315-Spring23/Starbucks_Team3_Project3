@@ -1,4 +1,4 @@
-import db_connection as db
+import private_tools.db_connection as db
 
 def getAllMenuItems():
     conn = db.DBConnection()
@@ -19,3 +19,9 @@ def deleteItem(item_name):
     conn = db.DBConnection()
     conn.query(f"DELETE FROM menu_items WHERE item_name='{item_name}'", False)
     conn.close()
+
+def getItemID(item_name):
+    conn = db.DBConnection()
+    res = conn.query(f"SELECT item_id FROM menu_items WHERE item_name='{item_name}'")
+    conn.close()
+    return int(res[0][0])
