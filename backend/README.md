@@ -20,6 +20,22 @@ python3 -m pip install --user virtualenv
 pip install virtualenv
 ```
 
+## Check and install Pip
+- Check if you have pip installed:
+```
+pip --version
+```
+or
+```
+pip3 --version
+```
+You can use whichever one you have
+- If not installed, try:
+```
+sudo apt update
+sudo apt install python3-pip
+```
+
 ## Set up SQLite3
 - In terminal (under `Starbucks_Team3_Project3/backend`), type:
 ```
