@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import ReactDOM from 'react-dom';
+import React from "react";
 
 function Square({value, onSquareClick}) {
     return (
@@ -42,3 +43,5 @@ function Keypad() {
         </>
     );
 }
+
+ReactDOM.render(<Keypad />, document.getElementById('keypad'));
