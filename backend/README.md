@@ -16,6 +16,12 @@ psql -h csce-315-db.engr.tamu.edu -U <username> -d csce315331_team_3
 python3 -m pip install --user virtualenv
 ```
 
+## Set up SQLite3
+- In terminal (under `Starbucks_Team3_Project3/backend`), type:
+```
+python3 models/queue_db_setup.py
+```
+
 ## Set up Flask
 ```bash
 python3 -m venv venv
@@ -23,5 +29,6 @@ source env/bin/activate
 pip3 install -r requirements.txt
 flask run
 ```
+
 
 The frontend will run on `localhost:3000`, while the backend will run on `localhost:5000`.
