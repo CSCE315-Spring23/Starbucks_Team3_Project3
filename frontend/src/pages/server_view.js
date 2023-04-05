@@ -1,4 +1,4 @@
-import "./App.css"
+import "../App.css"
 import { useEffect, useState } from 'react';
 
 function Server() {
@@ -12,7 +12,7 @@ function Server() {
     return (
         <ul>
         {data.map(item => (
-          <li>{item.name}</li>
+          <li>{item.name}, {item.category}</li>
         ))}
         </ul>
     );
