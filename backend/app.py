@@ -18,7 +18,7 @@ def main():
 
 @app.route("/serve")
 def serve():
-    return [{"name": "serve"}, 
+    return [{"name": "serve"},
            {"name": "paul"},
            {"name": "lucas"}]
 
@@ -40,5 +40,7 @@ def remove_item():
 def get_order_list():
     return jsonify(session['order'])
 
-
+import api.management as _
+import api.orderlist as _
+import api.menu_items as _
 
