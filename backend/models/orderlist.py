@@ -53,6 +53,7 @@ class Orderlist:
                      "num_of_items": self.num_of_items,
                      "transaction_id": self.transaction_id,
                      "time": self.time,
+                     "employee": self.employee,
                      "discounts": self.discounts,
                      "total": self.total
                     }

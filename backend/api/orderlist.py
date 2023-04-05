@@ -4,9 +4,24 @@ from app import app
 
 import models.orderlist as ol
 
-@app.route("/orderlist", methods=["GET"])
+@app.route("/orderlist", methods=["GET", "POST"])
 def createOrderlist():
-    return ol.getNewTransactionID(), 200
+    if request.method == "GET":
+        return ol.getNewTransactionID(), 200
+    elif request.method == "POST":
+        jsonOL = request.get_json()
+        orders = jsonOL['items']
+        discounts = jsonOL['discounts']
+        employee = jsonOL['employee']
+
+        newOL = ol.Orderlist()
+        newOL.addOrderlist(orders)
+        newOL.addDiscounts(discounts)
+        newOL.setEmployee(employee)
+        newOL.processOrderlist()
+        return newOL.returnJSON(), 200
+    return "Serversize error", 500
+
 
 @app.route("/orderlist/<int:id>", methods=["GET", "PUT", "DELETE"])
 def editOrderlist(id):
