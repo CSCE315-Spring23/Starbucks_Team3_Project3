@@ -45,7 +45,7 @@ python3 models/queue_db_setup.py
 ## Set up Flask
 ```bash
 python3 -m venv venv
-source env/bin/activate
+source venv/bin/activate
 pip3 install -r requirements.txt
 flask run
 ```
