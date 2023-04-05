@@ -1,101 +1,45 @@
-import { useState } from 'react';
+import "../App.css"
+import { useEffect, useState } from 'react';
 
-function Button(props) {
-    return (
-        <button onClick={props.onClick}>
-            {props.label}
-        </button>
-    );
-}
+function Server() {
+    const [data, setData] = useState([]);
+    useEffect(() => {
+      fetch("http://localhost:5000/menu-items")
+        .then(response => response.json())
+        .then(result => setData(result));
+    }, []);
 
-function Row(props) {
-    return (
-        <div style={{ display: 'flex' }}>
-            {props.buttons.map(button => (
-                <Button
-                    key={button.id}
-                    onClick={button.onClick}
-                    label={button.label}
-                />
-            ))}
-        </div>
-    );
-}
+    const [transactionID, setTransactionID] = useState([]);
+    useEffect(() => {
+      fetch("http://localhost:5000/orderlist")
+        .then(response => response.json())
+        .then(result => setTransactionID(result));
+    }, []);
 
-function Column(props) {
-    return (
-        <div style={{float: 'left'}}>
-            {props.buttons.map(button => (
-                <Button
-                    key={button.id}
-                    onClick={button.onClick}
-                    label={button.label}
-                />
-            ))}
-        </div>
-    );
-}
+    const [checked, setChecked] = useState(false);
 
-function server_view() {
-    function handleClick() {
-        alert("This button has been clicked.")
-    }
 
-    const buttonRow = [
-        {
-            id: "coffee-view",
-            onClick: () => handleClick(),
-            label: "Coffee View"
-        },
-        {
-            id: "espresso-view",
-            onClick: () => handleClick(),
-            label: "Espresso View"
-        },
-        {
-            id: "blended-view",
-            onClick: () => handleClick(),
-            label: "Blended View"
-        },
-        {
-            id: "tea-view",
-            onClick: () => handleClick(),
-            label: "Tea View"
-        },
-        {
-            id: "coffee-alt-view",
-            onClick: () => handleClick(),
-            label: "Coffee Alternatives View"
-        },
-        {
-            id: "food-view",
-            onClick: () => handleClick(),
-            label: "Food View"
-        }
-    ]
-
-    const buttonCol = [
-        {
-            id: "venti-button",
-            onClick: () => handleClick(),
-            label: "Venti"
-        },
-        {
-            id: "grande-button",
-            onClick: () => handleClick(),
-            label: "Grande"
-        },
-        {
-            id: "tall-button",
-            onClick: () => handleClick(),
-            label: "Tall"
-        }
-    ]
+    const handleChange = () => {
+        setChecked(!checked);
+    };
 
     return (
         <div>
-            <Row buttonRow={buttonRow} />
-            <Column buttonCol={buttonCol} />
+            <h2>Menu Items</h2>
+            <h3>Transaction ID: {transactionID.transaction_id}</h3>
+
+            <form action="/">
+                {data.map(item => (
+                    <label>
+                        <input type="checkbox" id={item.name} onChange={handleChange} />
+                        Name: {item.name} | Catetory: {item.category}<br></br>
+                    </label>
+                ))}
+            </form>
+            <button>Add Item</button>
+            <button>Submit Transaction</button>
         </div>
     );
 }
+
+export default Server;

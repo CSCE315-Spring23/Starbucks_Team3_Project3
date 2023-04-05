@@ -24,5 +24,8 @@ yarn-debug.log*
 yarn-error.log*
 
 # python
-/backend/flask_venv
+/backend/venv
 __pycache__
+/backend/test_env
+*.csv
+*.sqlite

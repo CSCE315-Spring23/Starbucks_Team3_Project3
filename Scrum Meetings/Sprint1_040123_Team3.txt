@@ -1,0 +1,80 @@
+SCRUM Meeting 2 for Project 3
+Prepared by: Sam Hirvilampi
+Meeting Date: 4/1/2023
+
+Meeting Attendees
+Devon Kelly
+Sam Hirvilampi
+David Liu
+Max Moody
+Yvan Tonthat
+Meeting Agenda Items
+ Discuss the start of project implementation with FLASK and REACT
+Discuss issues with setting up framework.
+Status Update Since Last Meeting
+Accomplishments:
+ Got everyone set up with FLASK and REACT to start working on tasks
+
+Tasks Completed:
+Task Description
+Assigned to
+Completed? (yes/no)
+Set up FLASK and REACT
+Devon
+yes
+Set up FLASK and REACT
+David
+yes
+Set up FLASK and REACT
+Max
+yes
+Set up FLASK and REACT
+Sam
+yes
+Set up FLASK and REACT
+Yvan
+yes
+
+Before The Next Meeting
+Plans:
+ Begin working on sprint 1 tasks
+Research about FLASK and REACT and APIs. Learn to use the stuff.
+
+Task Assignments:
+Task Description
+Assigned to
+Create a customer front-end view
+Yvan
+Create a server front-end view
+Yvan
+Create a manager front-end view
+Yvan
+Add current order list itemized by price
+Devon
+Add functionality to menu buttons that updates order list
+David
+Create method of storing sales information
+David
+Create method of storing menu information
+David
+Create method of storing ingredient information
+David
+Create method of storing transaction information
+David
+Create method of storing deliveries
+David
+Create log-in system for employee/manager
+Sam
+Input validation for log-in
+Sam
+Add specific CSS for all manager views
+Max
+Create CSS for customer view
+Max
+Add shared front end CSS
+Devon
+Add specific CSS for all server views
+Devon
+
+Minutes from Previous Meeting
+During the last meeting we talked about what options we had for this new project in terms of frameworks. We considered both NODE.JS and FLASK and decided to use FLASK for our back end since the majority of the team does not have JavaScript experience. We talked about the best front end to pair with FLASK and we determined that REACT would be the best option. We discussed everyone’s roles and who would work on front end, back end, and team lead. We decided we would stick with the same roles as project 2 where Sam and David are back end, Yvan and Max on front end, and Devon as the team leader. We ended the meeting by having everyone look into REACT and FLASK and installing it.
