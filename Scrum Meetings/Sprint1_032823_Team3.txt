@@ -1,0 +1,42 @@
+SCRUM Meeting 1 for Project 3
+Prepared by: Sam Hirvilampi
+Meeting Date: 03/28/2023
+
+Meeting Attendees
+Devon Kelly 
+ David Liu
+ Max Moody
+ Yvan Tonthat
+Sam Hirvilampi
+
+Meeting Agenda Items
+ Discuss goal for project
+Discuss roles and responsibilities
+
+Status Update Since Last Meeting
+Accomplishments:
+Created design document with roles, product log etc.
+
+Tasks Completed:
+Task Description
+Assigned to
+Completed? (yes/no)
+N/A
+N/A
+N/A
+N/A
+N/A
+N/A
+
+Before The Next Meeting
+Plans:
+ Set up framework for project (REACT, FLASK)
+
+
+Task Assignments:
+Assigned to
+Prepare FLASK and REACT for next meeting
+Everyone
+
+Minutes from Previous Meeting
+This was the first meeting so there were no previous minutes.
