@@ -8,5 +8,5 @@ import private_tools.menu_items as mi
 def getMenuItems():
     menuItemsTable = mi.getAllMenuItems()
     menuItems = [row[1] for row in menuItemsTable]
-    menuItemsJSON = [{"item-name": name} for name in menuItems]
+    menuItemsJSON = [{"name": name} for name in menuItems]
     return menuItemsJSON, 200
