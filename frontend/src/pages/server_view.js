@@ -2,44 +2,70 @@ import "../App.css"
 import { useEffect, useState } from 'react';
 
 function Server() {
-    const [data, setData] = useState([]);
-    useEffect(() => {
-      fetch("http://localhost:5000/menu-items")
-        .then(response => response.json())
-        .then(result => setData(result));
-    }, []);
-
-    const [transactionID, setTransactionID] = useState([]);
-    useEffect(() => {
-      fetch("http://localhost:5000/orderlist")
-        .then(response => response.json())
-        .then(result => setTransactionID(result));
-    }, []);
-
-    const [checked, setChecked] = useState(false);
+  const requestOptions = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ title: 'Finalized Order List' })
+  };
 
 
-    const handleChange = () => {
-        setChecked(!checked);
-    };
+  const [orderList, setOrderList] = useState([])
+  const [menuItems, setMenuItems] = useState([])
+  const [employee, setEmployee] = useState('')
 
-    return (
-        <div>
-            <h2>Menu Items</h2>
-            <h3>Transaction ID: {transactionID.transaction_id}</h3>
+  useEffect(() => {
+    fetch("http://localhost:5000/menu-items")
+      .then(response => response.json())
+      .then(result => setMenuItems(result));
+  }, []);
 
-            <form action="/">
-                {data.map(item => (
-                    <label>
-                        <input type="checkbox" id={item.name} onChange={handleChange} />
-                        Name: {item.name} | Catetory: {item.category}<br></br>
-                    </label>
-                ))}
-            </form>
-            <button>Add Item</button>
-            <button>Submit Transaction</button>
-        </div>
-    );
+  const addItemToOrder = async(item) =>{
+    let newItem = {
+      'name' : item,
+      'addons' : []
+    }
+    setOrderList([...orderList, newItem]);
+    console.log("Added new item")
+  }
+
+  const processOrder = () => {
+    let finalOrder = {
+      'items' : orderList,
+      'discounts' : [],
+      'employee' : employee
+    }
+    console.log(finalOrder)
+    fetch("http://localhost:5000/orderlist", {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+    },
+      body: JSON.stringify(finalOrder)
+    })
+    setOrderList([])
+  }
+
+  return (
+    <div className="App">
+      {menuItems.map((item, key) =>
+        <button key={key} className="menu-item-button" onClick={() => addItemToOrder(item.name)}>Item: {item.name} ({item.category})</button>
+      )}
+
+      <div className="server-input-employee">
+        Employee ----
+        <input
+        type="text"
+        onChange={(e) => setEmployee(e.target.value)}
+        />
+      </div>
+
+      <div className="server-buttons">
+        <button>Add Item</button>
+        <button className="server-submit-button" onClick={() => processOrder()}>Submit Order</button>
+      </div>
+    </div>
+  );
 }
 
 export default Server;
