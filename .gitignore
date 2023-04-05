@@ -28,3 +28,4 @@ yarn-error.log*
 __pycache__
 backend/orderlist.sqlite
 backend/private_tools/db_access.csv
+backend/test_env/orderlist_test.py
