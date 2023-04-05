@@ -14,11 +14,18 @@ function Server() {
 
   const addItemToOrder = async(item) =>{
     let newItem = {
-      'name' : item,
-      'addons' : []
+      'name' : item.name,
+      'addons' : [],
+      'category' : item.category,
+      'price' : item.price
     }
     setOrderList([...orderList, newItem]);
     console.log("Added new item")
+  }
+
+  const removeItem = async (item) => {
+    const newOL = orderList.filter(order => order.name !== item.name);
+    setOrderList(newOL)
   }
 
   const processOrder = () => {
@@ -41,9 +48,31 @@ function Server() {
 
   return (
     <div className="App">
-      {menuItems.map((item, key) =>
-        <button key={key} className="menu-item-button" onClick={() => addItemToOrder(item.name)}>Item: {item.name} ({item.category})</button>
-      )}
+      <div className="current-order-list">
+        <h2>Current Order List</h2>
+            <table className='order-list-table'>
+              <thead>
+                <tr>
+                  <td>Name</td>
+                  <td>Category</td>
+                  <td>Price</td>
+                </tr>
+              </thead>
+              <tbody>
+                { orderList ? orderList.map((item, key) => <tr key={key}>
+                  <td>{item.name}</td>
+                  <td>{item.category}</td>
+                  <td>{item.price}</td>
+                  <td>
+                    <button className='button-5' onClick={() => removeItem(item)}>Remove</button>
+                  </td>
+
+                </tr>)
+
+                : 'No Item in Cart'}
+              </tbody>
+            </table>
+      </div>
 
       <div className="server-input-employee">
         Employee ----
@@ -51,12 +80,16 @@ function Server() {
         type="text"
         onChange={(e) => setEmployee(e.target.value)}
         />
+        <button className="button-5" onClick={() => processOrder()}>Submit Order</button>
+      </div>
+      
+      <div className="menu-item-buttons">
+        {menuItems.map((item, key) =>
+          <button key={key} className="button-6" onClick={() => addItemToOrder(item)}>{item.name}</button>
+        )}
       </div>
 
-      <div className="server-buttons">
-        <button>Add Item</button>
-        <button className="server-submit-button" onClick={() => processOrder()}>Submit Order</button>
-      </div>
+
     </div>
   );
 }

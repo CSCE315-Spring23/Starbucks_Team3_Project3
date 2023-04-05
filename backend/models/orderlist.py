@@ -98,7 +98,7 @@ class Orderlist:
         conn.query(f"UPDATE transactions SET order_list='{ol}' WHERE transaction_id={self.transaction_id}", False)
         conn.query(f"UPDATE transactions SET employee='{self.employee}' WHERE transaction_id={self.transaction_id}", False)
         conn.query(f"UPDATE transactions SET game_day=False WHERE transaction_id={self.transaction_id}", False)
-        conn.query(f"UPDATE transactions SET order_total={self.total} WHERE transaction_id={self.transaction_id}", False)
+        conn.query(f"UPDATE transactions SET order_total={round(self.total, 2)} WHERE transaction_id={self.transaction_id}", False)
         conn.close()
 
 
