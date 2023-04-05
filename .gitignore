@@ -26,3 +26,5 @@ yarn-error.log*
 # python
 /backend/flask_venv
 __pycache__
+backend/orderlist.sqlite
+backend/private_tools/db_access.csv
