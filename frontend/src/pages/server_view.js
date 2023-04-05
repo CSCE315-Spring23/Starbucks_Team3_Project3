@@ -2,13 +2,6 @@ import "../App.css"
 import { useEffect, useState } from 'react';
 
 function Server() {
-  const requestOptions = {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ title: 'Finalized Order List' })
-  };
-
-
   const [orderList, setOrderList] = useState([])
   const [menuItems, setMenuItems] = useState([])
   const [employee, setEmployee] = useState('')
