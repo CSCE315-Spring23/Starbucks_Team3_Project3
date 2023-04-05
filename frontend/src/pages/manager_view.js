@@ -1,3 +1,4 @@
+import "../App.css";
 import React from 'react';
 
 function Button(props) {
@@ -76,3 +77,5 @@ function manager_view() {
         </div>
     );
 }
+
+export default Manager;
