@@ -22,24 +22,6 @@ def serve():
            {"name": "paul"},
            {"name": "lucas"}]
 
-
-@app.route('/api/order/add', methods=['POST'])
-def add_item():
-    item = request.json
-    session['order'].append(item)
-    return jsonify({'message': 'Item added to order'})
-
-
-@app.route('/api/order/remove', methods=['POST'])
-def remove_item():
-    item = request.json
-    session['order'].remove(item)
-    return jsonify({'message': 'Item removed from order'})
-
-@app.route('/api/order/get', methods=['GET'])
-def get_order_list():
-    return jsonify(session['order'])
-
 import api.management as _
 import api.orderlist as _
 import api.menu_items as _
