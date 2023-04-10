@@ -27,3 +27,6 @@ with app.app_context():
 def main():
     return "Howdy! You've reached the backend Flask server!"
 
+import api.management as _
+import api.orderlist as _
+import api.menu_items as _
