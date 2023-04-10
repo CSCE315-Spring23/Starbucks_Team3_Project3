@@ -28,3 +28,5 @@ yarn-error.log*
 __pycache__
 backend/orderlist.sqlite
 backend/api/client_secret.json
+backend/private_tools/db_access.csv
+*.lock
