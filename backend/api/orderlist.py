@@ -1,5 +1,5 @@
 
-from flask import request, jsonify
+from flask import request
 from app import app
 
 import models.orderlist as ol
