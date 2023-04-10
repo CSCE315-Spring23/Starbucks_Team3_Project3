@@ -1,0 +1,93 @@
+SCRUM Meeting 3 for Project3
+Prepared by: Sam Hirvilampi
+Meeting Date: 4/4/2023
+
+Meeting Attendees
+Sam Hirvilampi
+Max Moody
+Yvan Tonthat
+David Liu
+Devon Kelly
+
+Meeting Agenda Items
+~Discuss project status for Sprint 1
+~Talk about any other issues that have come up.
+
+Accomplishments:
+ Everyone has gotten their systems set up and started working on the project.
+
+Tasks Completed:
+Task Description
+Assigned to
+Completed? (yes/no)
+Create a customer front-end view
+Yvan
+no
+Create a server front-end view
+Yvan
+no
+Create a manager front-end view
+Yvan
+no
+Add current order list itemized by price
+Devon
+no
+Add functionality to menu buttons that updates order list
+David
+no
+Create method of storing sales information
+David
+no
+Create method of storing menu information
+David
+no
+Create method of storing ingredient information
+David
+no
+Create method of storing transaction information
+David
+no
+Create method of storing deliveries
+David
+no
+Create log-in system for employee/manager
+Sam
+no
+Input validation for log-in
+Sam
+no
+Add specific CSS for all manager views
+Max
+no
+Create CSS for customer view
+Max
+no
+Add shared front end CSS
+Devon
+no
+Add specific CSS for all server views
+Devon
+no
+
+Before The Next Meeting
+Plans:
+ Finish up tasks and prepare for Sprint 2
+Brainstorm Sprint 2 MVP
+
+Task Assignments:
+Task Description
+Assigned to
+Finish Sprint 1 Tasks
+David
+Finish Sprint 1 Tasks
+Devon
+Finish Sprint 1 Tasks
+Yvan
+Finish Sprint 1 Tasks
+Sam
+Finish Sprint 1 Tasks
+Max
+
+Minutes For Previous Meeting:
+
+In our last meeting we talked about our tasks and issues we were facing with refactoring our project. We discussed what we wanted to refactor for our sprint 1 MVP. We decided we wanted to work on getting backend and frontend to work together for example being able to display database information on the front end. We also wanted to set up basic back end functionality and have some front end views ready for our MVP. We helped each other with errors we had when setting up our new framework.
