@@ -29,3 +29,4 @@ __pycache__
 /backend/test_env
 *.csv
 *.sqlite
+frontend/yarn.lock

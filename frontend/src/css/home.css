@@ -1,0 +1,56 @@
+.App {
+    display: flexbox;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+}
+
+h2 {
+    justify-content: center;
+}
+
+.nav-button {
+    background-color: white;
+    color: black;
+    border: 2px solid black;
+    padding: 1vh 2vh;
+    text-align: center;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.nav-button:hover {
+    transition-duration: 0.4s;
+    background-color: #4CAF50;
+    border: 2px solid white;
+    color: white;
+}
+
+@keyframes bgcolor {
+    0% {
+        background-color: #45a3e5
+    }
+
+    30% {
+        background-color: #66bf39
+    }
+
+    60% {
+        background-color: #eb670f
+    }
+
+    90% {
+        background-color: #f35
+    }
+
+    100% {
+        background-color: #864cbf
+    }
+}
+
+body {
+    -webkit-animation: bgcolor 20s infinite;
+    animation: bgcolor 10s infinite;
+    -webkit-animation-direction: alternate;
+    animation-direction: alternate;
+}
