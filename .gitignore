@@ -24,5 +24,7 @@ yarn-debug.log*
 yarn-error.log*
 
 # python
-/backend/flask_venv
+/backend/venv
 __pycache__
+backend/orderlist.sqlite
+backend/api/client_secret.json
