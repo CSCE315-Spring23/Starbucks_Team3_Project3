@@ -1,8 +1,5 @@
 import datetime
 import private_tools.db_connection as db
-import private_tools.menu_items as mi
-import sqlite3
-import json
 
 
 class Orderlist:
