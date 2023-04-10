@@ -31,4 +31,4 @@ backend/private_tools/db_access.csv
 /backend/test_env
 *.csv
 *.sqlite
-frontend/yarn.lock
+*.lock
