@@ -26,5 +26,11 @@ yarn-error.log*
 # python
 /backend/venv
 __pycache__
+<<<<<<< HEAD
 frontend/yarn.lock
 backend/private_tools/db_access.csv
+=======
+/backend/test_env
+*.csv
+*.sqlite
+>>>>>>> b6cfa9862f24e89bd5a20d2f456eac5a805054c8
