@@ -13,14 +13,18 @@ psql -h csce-315-db.engr.tamu.edu -U <username> -d csce315331_team_3
 - Download Python from www.python.org
 - Download Python Virtual Environment
 ```bash
-python3 -m pip install --user virtualenv
+python3 -m pip install virtualenv
 ```
 
-## Set up Flask
+## Set up Environment and install everything from requirements.txt
 ```bash
 python3 -m venv venv
 source env/bin/activate
 pip3 install -r requirements.txt
+```
+
+## Start Flask
+```
 flask run
 ```
 
