@@ -1,6 +1,14 @@
 import { useEffect, useState } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+} from 'react-router-dom';
+import Server from './pages/server_view';
+import Home from './pages/home';
+import Customer from "./pages/customer_view"
+import Manager from "./pages/manager_view"
 
 function App() {
   const [data, setData] = useState([]);
@@ -11,27 +19,14 @@ function App() {
   }, [])
   
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <ul>
-        {data.map(item => (
-          <li>{item.name}</li>
-        ))}
-        </ul>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home/>} />
+        <Route path="/server" element={<Server/>} />
+        <Route path="/customer" element={<Customer/>} />
+        <Route path="/manager" element={<Manager/>} />
+      </Routes>
+    </Router>
   );
 }
 
