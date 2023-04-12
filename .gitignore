@@ -24,8 +24,9 @@ yarn-debug.log*
 yarn-error.log*
 
 # python
-/backend/flask_venv
+/backend/venv
 __pycache__
 backend/orderlist.sqlite
 backend/private_tools/db_access.csv
 backend/test_env/orderlist_test.py
+*.lock
