@@ -1,9 +1,9 @@
-import "../App.css"
-import { useEffect, useState } from 'react';
+import React from 'react'
 
 function Server() {
   return (
-  );
+    <div>Server</div>
+  )
 }
 
-export default Server;
+export default Server
