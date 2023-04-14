@@ -62,11 +62,26 @@ def callback():
     session["name"] = id_info.get("name")
     session["email"] = id_info.get("email")
 
-    returnURL = "http://localhost:3000/server"
-    
+    print(session["email"])
+
+    session["role"] = "manager" if session["email"] == "david_liu@tamu.edu" else "NA"
+    # session["role"] = "server" if session["email"] == "liudavidwang@gmail.com" else "NA"
+
+
+
+    returnURL = "http://localhost:3000/"
+
+    if session["role"] == "manager":
+        returnURL = returnURL + "manager"
+    elif session["role"] == "server":
+        returnURL = returnURL + "server"
+    else:
+        session.clear()
+        return "Sorry, access denied", 401
+
 
     # check if manager or not
-    # if manag
+    # if manager, then 
     return redirect(returnURL)
 
 
