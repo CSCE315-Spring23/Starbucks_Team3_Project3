@@ -10,7 +10,7 @@ package-lock.json
 /coverage
 
 # production
-/build
+/frontend/build
 
 # misc
 .DS_Store
@@ -33,3 +33,4 @@ backend/private_tools/db_access.csv
 *.sqlite
 *.lock
 backend/private_tools/credentials.json
+backend/.env
