@@ -1,30 +1,19 @@
-import React, { useState } from 'react'
-import { useNavigate} from 'react-router-dom'
-
-function CustomerFooter({ orderList, totalItems, totalPrice }) {
-  const navigate = useNavigate();
-  const [customerName, setCustomerName] = useState("Customer")
-  const [transactionID, setTransactionID] = useState(0)
-
+function CustomerFooter({ orderList, totalPrice, setSection }) {
+  const finalizeOrder = () => {
+    setSection(4)
+  }
 
   return (
     <div>
       <div className="footer-total-items">
-        Total Items: {totalItems}
+        Total Items: {orderList.length}
       </div>
 
       <div className="footer-total-price">
         Total Price: ${totalPrice}
       </div>
 
-      <div className='name-input'>
-        <input
-          type="text"
-          onChange={(e) => setCustomerName(e.target.value)}
-        />
-      </div>
-
-      <div className='finalize-order-button' onClick={() => navigate("/thank-you", {state: {name:customerName, id:transactionID}})}>
+      <div className='finalize-order-button' onClick={() => finalizeOrder()}>
         Finalize Order
       </div>
     </div>

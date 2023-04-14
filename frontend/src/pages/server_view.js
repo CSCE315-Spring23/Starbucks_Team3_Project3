@@ -24,7 +24,7 @@ function Server() {
   }
 
   const removeItem = async (item) => {
-    const newOL = orderList.filter(order => order.name !== item.name);
+    const newOL = orderList.filter(order => order.name !== item.name && order.addons !== item.addons);
     setOrderList(newOL)
   }
 

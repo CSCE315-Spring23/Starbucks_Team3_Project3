@@ -9,7 +9,6 @@ function Login() {
 
   return (
     <div>
-      <CustomerBanner/>
       Login
     </div>
   )
