@@ -32,3 +32,4 @@ backend/private_tools/db_access.csv
 *.csv
 *.sqlite
 *.lock
+backend/private_tools/credentials.json

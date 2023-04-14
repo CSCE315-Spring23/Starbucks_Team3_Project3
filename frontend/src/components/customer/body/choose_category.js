@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
-function ChooseCategory({ order }) {
+function ChooseCategory({ order, setSection }) {
   const [categoryList, setCategoryList] = useState([{"name": "hot-coffee", "display": "Hot Coffee"}, {"name": "iced-coffee", "display": "Iced Coffee"}]);
 
   // useEffect(() => {
@@ -11,7 +11,8 @@ function ChooseCategory({ order }) {
 
   const setCategory = (category) => {
     order.category = category.name;
-  };
+    setSection(1)
+  }
 
   return (
     <>

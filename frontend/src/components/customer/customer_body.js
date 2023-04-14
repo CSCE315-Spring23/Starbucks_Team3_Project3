@@ -31,20 +31,18 @@ function CustomerBody({ orderList, setOrderList, totalPrice, setTotalPrice, curr
   return (
     <>
     {currSection === 0 ? (
-      <ChooseCategory order={order}/>
+      <ChooseCategory order={order} setSection={setSection}/>
     ) : currSection === 1 ? (
-      <ChooseItem order={order}/>
+      <ChooseItem order={order} setSection={setSection}/>
     ) : currSection === 2 ? (
-      <ChooseSize order={order}/>
+      <ChooseSize order={order} setSection={setSection}/>
     ) : currSection === 3 ? (
       <ChooseAddons order={order}/>
     ) : null}
 
     {currSection === 3 ? (
       <button onClick={() => addItem()}>Add Item</button>
-    ) : (
-      <button onClick={() => setSection(currSection + 1)}>Next</button>
-    )}
+    ) : null}
     <button onClick={() => setSection(currSection - 1)}>Back</button>
     <button onClick={() => refresh()}>Start Over</button>
     </>

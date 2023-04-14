@@ -1,20 +1,25 @@
 import os
 import pathlib
 import requests
-from flask import Flask, session, abort, redirect, request
+from flask import session, abort, redirect, request
 from google.oauth2 import id_token
 from google_auth_oauthlib.flow import Flow
 from pip._vendor import cachecontrol
 import google.auth.transport.requests
 from app import app
-app.secret_key = "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"
+import json
+
+with open('./private_tools/credentials.json', 'r') as file:
+    credentials = json.load(file)["web"]
+
+app.secret_key = credentials["client_secret"]
 os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1" # to allow Http traffic for local dev
-GOOGLE_CLIENT_ID = "784838590397-09qh9626eog7edfqacf6obnkjhdiplam.apps.googleusercontent.com"
-client_secrets_file = os.path.join(pathlib.Path(__file__).parent, "client_secret.json")
+GOOGLE_CLIENT_ID = credentials["client_id"]
+client_secrets_file = os.path.join(pathlib.Path("./private_tools/"), "credentials.json")
 flow = Flow.from_client_secrets_file(
     client_secrets_file=client_secrets_file,
     scopes=["https://www.googleapis.com/auth/userinfo.profile", "https://www.googleapis.com/auth/userinfo.email", "openid"],
-    redirect_uri="http://localhost/callback"
+    redirect_uri="http://localhost:5000/callback"
 )
 
 def login_is_required(function):
@@ -37,6 +42,7 @@ def login():
 @app.route("/callback")
 def callback():
     flow.fetch_token(authorization_response=request.url)
+    print("Found callback")
 
     if not session["state"] == request.args["state"]:
         abort(500)  # State does not match!
@@ -54,7 +60,14 @@ def callback():
 
     session["google_id"] = id_info.get("sub")
     session["name"] = id_info.get("name")
-    return redirect("/protected_area")
+    session["email"] = id_info.get("email")
+
+    returnURL = "http://localhost:3000/server"
+    
+
+    # check if manager or not
+    # if manag
+    return redirect(returnURL)
 
 
 @app.route("/logout")
@@ -63,19 +76,10 @@ def logout():
     return redirect("/")
 
 
-@app.route("/")
-def index():
-    return "Login <a href='/login'><button>Login</button></a>"
-
-
-@app.route("/protected_area")
+@app.route("/check-credentials")
 @login_is_required
 def protected_area():
-    return f"Hello {session['name']}! <br/> <a href='/logout'><button>Logout</button></a>"
-
-
-# if __name__ == "__main__":
-#     app.run(host='0.0.0.0', port=80, debug=True)
+    return 
 
 
 

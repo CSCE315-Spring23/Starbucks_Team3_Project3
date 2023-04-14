@@ -3,6 +3,9 @@ import { useNavigate } from "react-router-dom";
 
 function CustomerBanner({ setSection }) {
   const navigate = useNavigate();
+
+  
+
   return (
   <div>
     <div className='starbucks-logo'>Starbucks Logo</div>
