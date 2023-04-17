@@ -1,4 +1,4 @@
-import "../App.css"
+import "../../server.css"
 import { useEffect, useState } from 'react';
 
 function Server() {
@@ -12,7 +12,7 @@ function Server() {
       .then(result => setMenuItems(result));
   }, []);
 
-  const addItemToOrder = async(item) => {
+  const addItemToOrder = async(item) =>{
     let newItem = {
       'name' : item.name,
       'addons' : [],
@@ -24,7 +24,7 @@ function Server() {
   }
 
   const removeItem = async (item) => {
-    const newOL = orderList.filter(order => order.name !== item.name && order.addons !== item.addons);
+    const newOL = orderList.filter(order => order.name !== item.name);
     setOrderList(newOL)
   }
 
