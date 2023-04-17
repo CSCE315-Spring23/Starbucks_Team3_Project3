@@ -27,6 +27,7 @@ function App() {
         <Route path="/manager" element={<Manager/>} />
       </Routes>
     </Router>
+    
   );
 }
 
