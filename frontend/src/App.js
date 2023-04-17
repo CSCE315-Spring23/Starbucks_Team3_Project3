@@ -9,6 +9,7 @@ import Server from './pages/server_view';
 import Home from './pages/home';
 import Customer from "./pages/customer_view"
 import Manager from "./pages/manager_view"
+import Menu from "./pages/full_menu_view"
 
 function App() {
   const [data, setData] = useState([]);
@@ -25,6 +26,7 @@ function App() {
         <Route path="/server" element={<Server/>} />
         <Route path="/customer" element={<Customer/>} />
         <Route path="/manager" element={<Manager/>} />
+        <Route path="/menu" element={<Menu/>} />
       </Routes>
     </Router>
   );
