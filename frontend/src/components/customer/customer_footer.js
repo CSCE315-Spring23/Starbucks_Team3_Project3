@@ -13,9 +13,9 @@ function CustomerFooter({ orderList, totalPrice, setSection }) {
         Total Price: ${totalPrice}
       </div>
 
-      <div className='finalize-order-button' onClick={() => finalizeOrder()}>
+      <button className='finalize-order-button' onClick={() => finalizeOrder()}>
         Finalize Order
-      </div>
+      </button>
     </div>
   )
 }
