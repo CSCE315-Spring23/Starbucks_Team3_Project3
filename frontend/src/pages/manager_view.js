@@ -1,8 +1,9 @@
-import "../App.css";
-import React from 'react';
+import React from 'react'
 
 function Manager() {
-
+  return (
+    <div>Manager</div>
+  )
 }
 
-export default Manager;
+export default Manager
