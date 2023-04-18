@@ -22,6 +22,12 @@ class DBConnection():
             return self.cur.fetchall()
         return 1
 
+    def query(self, query, params, allowFetch = True):
+        self.cur.execute(query, params)
+        self.conn.commit()
+        if allowFetch:
+            return self.cur.fetchall()
+        return 1
     def close(self):
         self.cur.close()
         self.conn.close()

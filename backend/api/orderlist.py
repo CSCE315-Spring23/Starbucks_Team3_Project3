@@ -3,6 +3,7 @@ from app import app
 
 import models.orderlist as ol
 
+
 @app.route("/orderlist", methods=["GET", "POST"])
 def createOrderlist():
     if request.method == "GET":
@@ -19,7 +20,7 @@ def createOrderlist():
         newOL.setEmployee(employee)
         newOL.processOrderlist()
         return newOL.returnJSON(), 200
-    return "Serversize error", 500
+    return "Serverside error", 500
 
 
 @app.route("/orderlist/<int:id>", methods=["GET", "PUT", "DELETE"])
@@ -29,17 +30,20 @@ def editOrderlist(id):
     else:
         ol.deleteOrderlist(id)
         return "Successfully deleted", 202
-    
+
+
 @app.route("/orderlist/<int:id>/complete-order", methods=["GET"])
 def completeOrder(id):
     ol.processOrderlist(id)
     return ol.getJSON(id)
-    
+
+
 @app.route("/orderlist/<int:id>/update-employee", methods=["PUT"])
 def updateEmployee(id):
     employee = request.form["employee"]
     ol.updateEmployee(id, employee)
     return ol.getJSON(id)
+
 
 @app.route("/orderlist/<int:id>/add-item", methods=["PUT"])
 def addItem(id):
@@ -48,15 +52,18 @@ def addItem(id):
     ol.addItem(id, orderlist)
     return ol.getJSON(id)
 
+
 @app.route("/orderlist/<int:id>/remove-item", methods=["PUT"])
 def removeItem(id):
     orderlist = request.form["orderlist"]
     ol.removeItem(id, orderlist)
 
+
 @app.route("/orderlist/<int:id>/add-discount", methods=["PUT"])
 def addDiscount(id):
     discounts = request.form["discounts"]
     # ol.addDiscount(id, discounts)
+
 
 @app.route("/orderlist/<int:id>/remove-discount", methods=["PUT"])
 def removeDiscount(id):
