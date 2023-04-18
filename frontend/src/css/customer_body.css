@@ -1,0 +1,10 @@
+.body {
+    background-color: bisque;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: space-around;
+    align-items: center;
+    height: 648px;
+    width: 1920px;
+}

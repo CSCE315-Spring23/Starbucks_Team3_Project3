@@ -6,6 +6,8 @@ import ChooseSize from './body/choose_size'
 import ChooseAddons from './body/choose_addons'
 import FinalizeOrder from './finalize_order'
 
+import "../../css/customer_body.css"
+
 
 function CustomerBody({ orderList, setOrderList, totalPrice, setTotalPrice, currSection, setSection}) {
   // Sections: Category -> Item -> size -> addons
@@ -29,23 +31,23 @@ function CustomerBody({ orderList, setOrderList, totalPrice, setTotalPrice, curr
   }
 
   return (
-    <>
-    {currSection === 0 ? (
-      <ChooseCategory order={order} setSection={setSection}/>
-    ) : currSection === 1 ? (
-      <ChooseItem order={order} setSection={setSection}/>
-    ) : currSection === 2 ? (
-      <ChooseSize order={order} setSection={setSection}/>
-    ) : currSection === 3 ? (
-      <ChooseAddons order={order}/>
-    ) : null}
+    <div className="body">
+      {currSection === 0 ? (
+        <ChooseCategory order={order} setSection={setSection}/>
+      ) : currSection === 1 ? (
+        <ChooseItem order={order} setSection={setSection}/>
+      ) : currSection === 2 ? (
+        <ChooseSize order={order} setSection={setSection}/>
+      ) : currSection === 3 ? (
+        <ChooseAddons order={order}/>
+      ) : null}
 
-    {currSection === 3 ? (
-      <button onClick={() => addItem()}>Add Item</button>
-    ) : null}
-    <button onClick={() => setSection(currSection - 1)}>Back</button>
-    <button onClick={() => refresh()}>Start Over</button>
-    </>
+      {currSection === 3 ? (
+        <button onClick={() => addItem()}>Add Item</button>
+      ) : null}
+      <button onClick={() => setSection(currSection - 1)}>Back</button>
+      <button onClick={() => refresh()}>Start Over</button>
+    </div>
   )
 }
 
