@@ -10,7 +10,7 @@ import ThankYou from '../components/customer/thank_you'
 
 function Customer() {
   const [orderList, setOrderList] = useState([]);
-  // const [discountList, setDiscountList] = useState([])
+  // const [discountList, setDiscountList] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0.0)
   const [currSection, setSection] = useState(0)
   const [customerName, setCustomerName] = useState("Customer")
