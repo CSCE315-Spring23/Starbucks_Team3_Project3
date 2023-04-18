@@ -1,7 +1,5 @@
 import React, {useEffect, useState} from 'react'
 
-import "../css/customer_view.css"
-
 import CustomerBanner from "../components/customer/customer_banner.js"
 import CustomerBody from "../components/customer/customer_body.js"
 import CustomerFooter from "../components/customer/customer_footer"
