@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 
+import "../../../css/choose_item.css"
+
 function ChooseItem({ order, setSection }) {
   const [menuItems, setMenuItems] = useState([{"name": "coffee", "sized": true}, {"name": "latte", "sized": false}])
 
@@ -22,7 +24,7 @@ function ChooseItem({ order, setSection }) {
 
   return (
     <>
-      <div>ChooseItem</div>
+      <div className="category-title">ChooseItem</div>
       {menuItems.map((item, key) =>
         <button key={key} className='menu-item-buttons' onClick={() => setItem(item)}>{item.name}</button>
       )}
