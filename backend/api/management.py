@@ -13,9 +13,7 @@ def getXReport():
     dateJson = request.get_json()
     start = dateJson['start']
     end = dateJson['end']
-    categorySales = man.categorizeSales(start, end)
-
-    pass
+    return man.categorizeSales(start, end), 200
 
 @app.route("/management/zreport", method=["GET"])
 def getZReport():
