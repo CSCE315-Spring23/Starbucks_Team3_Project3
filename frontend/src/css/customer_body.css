@@ -30,9 +30,9 @@
 
 @keyframes blink {
     0%, 100% {
-        background-color: transparent;
+        background-color: bisque;
     }
-    25%, 75% {
+    25%, 50% {
         background-color: yellow;
     }
 }
