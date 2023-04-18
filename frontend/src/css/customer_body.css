@@ -23,3 +23,16 @@
     background-color: grey;
     color: white;
 }
+
+.blink {
+    animation: blink 1s ease-in-out;
+}
+
+@keyframes blink {
+    0%, 100% {
+        background-color: transparent;
+    }
+    25%, 75% {
+        background-color: yellow;
+    }
+}

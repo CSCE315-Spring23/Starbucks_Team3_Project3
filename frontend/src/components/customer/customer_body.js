@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 
 import ChooseCategory from './body/choose_category'
 import ChooseItem from './body/choose_item'
@@ -30,8 +30,17 @@ function CustomerBody({ orderList, setOrderList, totalPrice, setTotalPrice, curr
     console.log(order)
   }
 
+  const blinkRef = useRef(null);
+
+  function makeItBlink() {
+    blinkRef.current.classList.add('blink');
+    setTimeout(() => {
+      blinkRef.current.classList.remove('blink');
+    }, 1000);
+  }
+
   return (
-    <div className="body">
+    <div className="body" ref={blinkRef}>
       {currSection === 0 ? (
         <ChooseCategory order={order} setSection={setSection}/>
       ) : currSection === 1 ? (
@@ -43,7 +52,7 @@ function CustomerBody({ orderList, setOrderList, totalPrice, setTotalPrice, curr
       ) : null}
 
       {currSection === 3 ? (
-        <button className="body-button" onClick={() => addItem()}>Add Item</button>
+        <button className="body-button" onClick={() => { addItem(); makeItBlink() }}>Add Item</button>
       ) : null}
       <button className="body-button" onClick={() => setSection(currSection - 1)}>Back</button>
       <button className="body-button" onClick={() => refresh()}>Start Over</button>
