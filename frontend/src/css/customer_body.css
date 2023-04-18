@@ -8,3 +8,18 @@
     height: 648px;
     width: 1920px;
 }
+
+.body-button {
+    background-color: white;
+    color: black;
+    line-height: 150px;
+    width: 200px;
+    text-align: center;
+    font-size: 24px;
+}
+
+.body-button:hover {
+    transition-duration: 0.1s;
+    background-color: grey;
+    color: white;
+}

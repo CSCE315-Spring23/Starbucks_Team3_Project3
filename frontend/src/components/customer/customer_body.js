@@ -43,10 +43,10 @@ function CustomerBody({ orderList, setOrderList, totalPrice, setTotalPrice, curr
       ) : null}
 
       {currSection === 3 ? (
-        <button onClick={() => addItem()}>Add Item</button>
+        <button className="body-button" onClick={() => addItem()}>Add Item</button>
       ) : null}
-      <button onClick={() => setSection(currSection - 1)}>Back</button>
-      <button onClick={() => refresh()}>Start Over</button>
+      <button className="body-button" onClick={() => setSection(currSection - 1)}>Back</button>
+      <button className="body-button" onClick={() => refresh()}>Start Over</button>
     </div>
   )
 }
