@@ -14,12 +14,16 @@ def matchItemToCategoryAndPrice() -> dict:
     return listings
 
 
-def categorizeSales(startDate: str, endDate: str) -> dict:
+def categorizeSales(startDate, endDate):
     categories = {'total': 0.0}
     conn = db.DBConnection()
-    formattedStart = datetime.datetime.strptime(startDate, '%Y-%m-%d').date()
-    formattedEnd = datetime.datetime.strptime(endDate, '%Y-%m-%d').date()
-    orders = conn.query("SELECT order_list FROM transactions WHERE transaction_date >= %s AND transaction_date <= %s", (formattedStart, formattedEnd))
+    formattedStart = startDate
+    formattedEnd = endDate
+    if isinstance(startDate, str):
+        formattedStart = datetime.datetime.strptime(startDate, '%Y-%m-%d').date()
+        formattedEnd = datetime.datetime.strptime(endDate, '%Y-%m-%d').date()
+
+    orders = conn.query("SELECT order_list FROM transactions WHERE transaction_date >= %s AND transaction_date <= %s", params=(formattedStart, formattedEnd))
     matchedItems = matchItemToCategoryAndPrice()
     for order in orders:
         for item in order[0]:
@@ -29,9 +33,16 @@ def categorizeSales(startDate: str, endDate: str) -> dict:
             else:
                 categories[category] += price
             categories['total'] += price
-
+    for category in categories.keys():
+        categories[category] = round(categories[category], 2)
     return categories
 
 
 def markDaysAsReported():
-    pass
+    conn = db.DBConnection()
+    conn.query("UPDATE sales SET z_reported=true WHERE z_reported=false", False)
+
+def getZDateRange():
+    conn = db.DBConnection()
+    dateRange = conn.query("SELECT MIN(sales_date),MAX(sales_date) FROM sales WHERE z_reported=false")[:][0]
+    return dateRange

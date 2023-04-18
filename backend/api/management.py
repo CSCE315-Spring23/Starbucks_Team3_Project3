@@ -8,13 +8,18 @@ import models.management as man
 def getAllSales():
     pass
 
-@app.route("/management/xreport", method=["POST"])
+@app.route("/management/x-report", methods=["POST"])
 def getXReport():
     dateJson = request.get_json()
     start = dateJson['start']
     end = dateJson['end']
     return man.categorizeSales(start, end), 200
 
-@app.route("/management/zreport", method=["GET"])
+@app.route("/management/z-report", methods=["GET"])
 def getZReport():
-    pass
+    start,end = man.getZDateRange()
+    # print(start, end)
+    if start is None:
+        return {}, 204
+    man.markDaysAsReported()
+    return man.categorizeSales(start, end), 200
