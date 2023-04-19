@@ -5,7 +5,7 @@
     gap: 10px;
     justify-content: space-around;
     align-items: center;
-    height: 648px;
+    height: 840px;
     width: 1920px;
 }
 
@@ -33,6 +33,6 @@
         background-color: bisque;
     }
     25%, 50% {
-        background-color: yellow;
+        background-color: #ffd96c;
     }
 }
