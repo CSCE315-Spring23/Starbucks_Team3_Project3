@@ -1,5 +1,6 @@
 import "../App.css"
 import { useEffect, useState } from 'react';
+import { useNavigate } from "react-router-dom";
 
 function Server() {
   const [orderList, setOrderList] = useState([])
@@ -46,9 +47,12 @@ function Server() {
     setOrderList([])
   }
 
+  const navigate = useNavigate();
+
   return (
     <div className="App">
       <div className="current-order-list">
+        <button className="button-5" onClick={() => navigate("/")}>Back Home</button>
         <h2>Current Order List</h2>
             <table className='order-list-table'>
               <thead>

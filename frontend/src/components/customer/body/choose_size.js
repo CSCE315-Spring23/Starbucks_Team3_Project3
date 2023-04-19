@@ -1,5 +1,7 @@
 import React from 'react'
 
+import "../../../css/choose_size.css"
+
 function ChooseSize({ order, setSection }) {
   const sizes = ["tall", "grande", "venti"]
 
@@ -10,7 +12,7 @@ function ChooseSize({ order, setSection }) {
 
   return (
     <>
-    <div>ChooseSize</div>
+    <div className="size-title">ChooseSize</div>
     {sizes.map((size, key) =>
       <button key={key} className='size-button' onClick={() => setSize(size)}>{size}</button>
     )}
