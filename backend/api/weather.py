@@ -13,4 +13,18 @@ def getWeather(zipCode, apiKey):
     result = requests.get(url)
     return result.json()
 
+@app.route('/')
+def dashboard():
+    return render_template('index.html')
+
+@app.route('/results', methods=['POST'])
+def render_results():
+    zipCode = request.form['zipCode']
+    api_key = apiKey()
+    info = getWeather(zipCode, apiKey)
+    temp = "{0:.2f}".format(info["main"]["temp"])
+    weather = info["weather"][0]["main"]
+    location = info["name"]
+    return render_template('results.html', location=location, temp=temp, weather=weather)
+
 print(getWeather("77840", apiKey()))
