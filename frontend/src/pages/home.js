@@ -10,6 +10,7 @@ function Home() {
                 <h2>Welcome to Starbucks!</h2>
                 <button className="nav-button" onClick={() => navigate("/server")}>Server Page</button>
                 <button className="nav-button" onClick={() => navigate("/customer")}>Customer Page</button>
+                <button className="nav-button" onClick={() => navigate("/manager")}>Manager Page</button>
             </div>
         <div>
             <h2>Howdy! This is the home page!</h2>
