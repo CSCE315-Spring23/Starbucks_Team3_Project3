@@ -1,0 +1,60 @@
+SCRUM Meeting 1 for Sprint 2
+Prepared by: Sam Hirvilampi
+Meeting Date: 4/5/2023
+
+Meeting Attendees
+Devon Kelly
+ Sam Hirvilampi
+ Yvan Tonthat
+ David Liu
+Max Moody
+
+Meeting Agenda Items
+ Discuss progress
+Look over server view
+Talk about customer/manager views
+Status Update Since Last Meeting
+
+Accomplishments:
+ Finished MVP for server view
+Finished code for OAuth 2.0
+
+Tasks Completed:
+Task Description
+Assigned to
+Completed? (yes/no)
+Finish Sprint 1 Tasks
+David
+yes
+Finish Sprint 1 Tasks
+Devon
+yes
+Finish Sprint 1 Tasks
+Yvan
+yes
+Finish Sprint 1 Tasks
+Sam
+yes
+Finish Sprint 1 Tasks
+Max
+no
+
+Before The Next Meeting
+Plans:
+ Finish up server view
+Work on APIs
+
+Task Assignments:
+Task Description
+Assigned to
+Order list API
+David
+OAuth
+Sam
+Server view
+(Multiple)
+
+Minutes from Previous Meeting
+
+Last talked about are MVP for Sprint 1. We decided we will have a basic server view ready for the MVP that lets a person create and process an order. We then talked about Google OAuth. OAuth was almost ready and needed to be finished up and tested. For the start of Sprint 2 we wanted to finish what we planned on finishing for Sprint 1 which we did. We finally finished discussing Sprint 2 and our goal. We intend to create a functioning manager view for Sprint 2 and complete two APIs (Google Translate & OAuth).
+
