@@ -1,3 +1,5 @@
+import "../../css/finalize_order.css"
+
 function FinalizeOrder({ orderList, setOrderList, setCustomerName, setTransactionID, setSection}) {
   const returnToCategory = () => {
     setSection(0)
@@ -14,7 +16,8 @@ function FinalizeOrder({ orderList, setOrderList, setCustomerName, setTransactio
   }
 
   return (
-    <div>
+    <div className="background">
+      <div className="order">
       { orderList ? orderList.map((item, key) => <tr key={key}>
       <td>{item.name}</td>
       <td>{item.addons}</td>
@@ -27,20 +30,28 @@ function FinalizeOrder({ orderList, setOrderList, setCustomerName, setTransactio
       </tr>)
 
       : 'No Item in Cart'}
-
-      <div className='name-input'>
-        <input
-          type="text"
-          onChange={(e) => setCustomerName(e.target.value)}
-        />
       </div>
 
-      <div className='back-button' onClick={() => returnToCategory()}>
-        Back to Ordering
-      </div>
+      <div>
+        <div>Enter name</div>
+        <div className='name-input'>
+          <input
+            type="text"
+            onChange={(e) => setCustomerName(e.target.value)}
+          />
+        </div>
 
-      <div className='finalize-order-button' onClick={() => submitOrder()}>
-        Confirm Order
+        <div className="buffer"></div>
+
+        <div className='back-button' onClick={() => returnToCategory()}>
+          Back to Ordering
+        </div>
+
+        <div className="buffer"></div>
+
+        <div className='confirm-order-button' onClick={() => submitOrder()}>
+          Confirm Order
+        </div>
       </div>
     </div>
   );
