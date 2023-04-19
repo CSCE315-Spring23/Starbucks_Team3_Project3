@@ -11,6 +11,10 @@ function Home() {
                 <button className="nav-button" onClick={() => navigate("/server")}>Server Page</button>
                 <button className="nav-button" onClick={() => navigate("/customer")}>Customer Page</button>
             </div>
+        <div>
+            <h2>Howdy! This is the home page!</h2>
+            <button onClick={() => navigate("/server_view.js")}>Server Page</button>
+            <button onClick={() => navigate("/manager_view.js")}>Manager Page</button>
         </div>
     );
 }
