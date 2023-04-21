@@ -1,6 +1,6 @@
 import "../../css/finalize_order.css"
 
-function FinalizeOrder({ orderList, setOrderList, setCustomerName, setTransactionID, setSection}) {
+function FinalizeOrder({ orderList, totalPrice, setOrderList, setCustomerName, setTransactionID, setSection}) {
   const returnToCategory = () => {
     setSection(0)
   }
@@ -33,8 +33,8 @@ function FinalizeOrder({ orderList, setOrderList, setCustomerName, setTransactio
         </div>
 
         <div className="info-box-container">
-          <div className="info-box">Total Items:</div>
-          <div className="info-box">Total Price:</div>
+          <div className="info-box">Total Items: {orderList.length}</div>
+          <div className="info-box">Total Price: ${totalPrice}</div>
         </div>
       </div>
 
