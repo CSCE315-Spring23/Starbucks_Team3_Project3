@@ -1,10 +1,10 @@
 import React from 'react'
 
-import "../../../css/choose_addons.css"
+import "../../../css/customer_body.css"
 
 function ChooseAddons() {
   return (
-    <div className="choose-addons">ChooseAddons</div>
+    <div className="body-info-box">ChooseAddons</div>
   )
 }
 

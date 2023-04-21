@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import "../../../css/choose_item.css"
+import "../../../css/customer_body.css"
 
 function ChooseItem({ order, setSection }) {
   const [menuItems, setMenuItems] = useState([{"name": "coffee", "sized": true}, {"name": "latte", "sized": false}])
@@ -24,9 +24,9 @@ function ChooseItem({ order, setSection }) {
 
   return (
     <>
-      <div className="category-title">ChooseItem</div>
+      <div className="body-info-box">ChooseItem</div>
       {menuItems.map((item, key) =>
-        <button key={key} className='menu-item-buttons' onClick={() => setItem(item)}>{item.name}</button>
+        <button key={key} className='body-button' onClick={() => setItem(item)}>{item.name}</button>
       )}
     </>
   )
