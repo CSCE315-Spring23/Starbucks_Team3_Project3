@@ -17,19 +17,25 @@ function FinalizeOrder({ orderList, setOrderList, setCustomerName, setTransactio
 
   return (
     <div className="background">
-      <div className="order">
-      { orderList ? orderList.map((item, key) => <tr key={key}>
-      <td>{item.name}</td>
-      <td>{item.addons}</td>
-      <td>{item.category}</td>
-      <td>{item.price}</td>
-      <td>
-      <button onClick={() => removeItem(item)}>Remove</button>
-      </td>
 
-      </tr>)
+      <div className="order-container">
+        <div className="order">
+          { orderList ? orderList.map((item, key) => <tr key={key}>
+              <td>{item.name}</td>
+              <td>{item.addons}</td>
+              <td>{item.category}</td>
+              <td>{item.price}</td>
+              <td>
+                <button onClick={() => removeItem(item)}>Remove</button>
+              </td>
+            </tr>)
+            : 'No Item in Cart'}
+        </div>
 
-      : 'No Item in Cart'}
+        <div className="info-box-container">
+          <div className="info-box">Total Items:</div>
+          <div className="info-box">Total Price:</div>
+        </div>
       </div>
 
       <div>
