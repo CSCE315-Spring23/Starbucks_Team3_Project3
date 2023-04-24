@@ -1,0 +1,50 @@
+.background {
+    background-color: bisque;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: space-around;
+    align-items: center;
+    height: 648px;
+    width: 1920px;
+}
+
+.order {
+    background-color: beige;
+    height: 500px;
+    width: 300px;
+}
+
+.back-button {
+    background-color: white;
+    color: black;
+    line-height: 150px;
+    width: 200px;
+    text-align: center;
+    font-size: 24px;
+}
+
+.back-button:hover {
+    transition-duration: 0.1s;
+    background-color: grey;
+    color: white;
+}
+
+.confirm-order-button {
+    background-color: white;
+    color: black;
+    line-height: 150px;
+    width: 200px;
+    text-align: center;
+    font-size: 24px;
+}
+
+.confirm-order-button:hover {
+    transition-duration: 0.1s;
+    background-color: grey;
+    color: white;
+}
+
+.buffer {
+    height: 50px;
+}

@@ -1,6 +1,5 @@
-import "../App.css"
+import "../../server.css"
 import { useEffect, useState } from 'react';
-import { useNavigate } from "react-router-dom";
 
 function Server() {
   const [orderList, setOrderList] = useState([])
@@ -13,7 +12,7 @@ function Server() {
       .then(result => setMenuItems(result));
   }, []);
 
-  const addItemToOrder = async(item) => {
+  const addItemToOrder = async(item) =>{
     let newItem = {
       'name' : item.name,
       'addons' : [],
@@ -25,7 +24,7 @@ function Server() {
   }
 
   const removeItem = async (item) => {
-    const newOL = orderList.filter(order => order.name !== item.name && order.addons !== item.addons);
+    const newOL = orderList.filter(order => order.name !== item.name);
     setOrderList(newOL)
   }
 
@@ -47,12 +46,9 @@ function Server() {
     setOrderList([])
   }
 
-  const navigate = useNavigate();
-
   return (
     <div className="App">
       <div className="current-order-list">
-        <button className="button-5" onClick={() => navigate("/")}>Back Home</button>
         <h2>Current Order List</h2>
             <table className='order-list-table'>
               <thead>
