@@ -37,7 +37,7 @@ function Customer() {
         </>
       ) : currSection === 4 ? (
         <div className='finalize-order'>
-          <FinalizeOrder orderList={orderList} setOrderList={setOrderList} setCustomerName={setCustomerName} setTransactionID={setTransactionID} setSection={setSection}/>
+          <FinalizeOrder orderList={orderList} totalPrice={totalPrice} setOrderList={setOrderList} setCustomerName={setCustomerName} setTransactionID={setTransactionID} setSection={setSection}/>
         </div>
       ) : currSection === 5 ? (
         <div className='thank-you'>
