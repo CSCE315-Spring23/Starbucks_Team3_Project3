@@ -1,6 +1,5 @@
 from flask import request
 from app import app
-
 import models.orderlist as ol
 
 @app.route("/orderlist", methods=["GET", "POST"])
