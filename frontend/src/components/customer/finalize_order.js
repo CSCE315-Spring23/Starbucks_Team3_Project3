@@ -1,4 +1,4 @@
-import "../../css/finalize_order.css"
+import "../../css/customer.css"
 
 function FinalizeOrder({ orderList, totalPrice, setOrderList, setCustomerName, setTransactionID, setSection}) {
   const returnToCategory = () => {
@@ -32,9 +32,9 @@ function FinalizeOrder({ orderList, totalPrice, setOrderList, setCustomerName, s
             : 'No Item in Cart'}
         </div>
 
-        <div className="info-box-container">
-          <div className="info-box">Total Items: {orderList.length}</div>
-          <div className="info-box">Total Price: ${totalPrice}</div>
+        <div className="final-info-box-container">
+          <div className="final-info-box">Total Items: {orderList.length}</div>
+          <div className="final-info-box">Total Price: ${totalPrice}</div>
         </div>
       </div>
 

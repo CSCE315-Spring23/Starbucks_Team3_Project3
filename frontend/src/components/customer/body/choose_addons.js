@@ -1,6 +1,6 @@
 import React from 'react'
 
-import "../../../css/customer_body.css"
+import "../../../css/customer.css"
 
 function ChooseAddons() {
   return (

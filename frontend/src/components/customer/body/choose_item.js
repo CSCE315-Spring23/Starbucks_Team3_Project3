@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import "../../../css/customer_body.css"
+import "../../../css/customer.css"
 
 function ChooseItem({ order, setSection }) {
   const [menuItems, setMenuItems] = useState([{"name": "Coffee", "sized": true}, {"name": "Latte", "sized": false}])

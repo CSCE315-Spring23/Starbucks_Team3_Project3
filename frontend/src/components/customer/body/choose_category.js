@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
-import "../../../css/customer_body.css"
+import "../../../css/customer.css"
 
 function ChooseCategory({ order, setSection }) {
   const [categoryList, setCategoryList] = useState([{"name": "hot-coffee", "display": "Hot Coffee"}, {"name": "iced-coffee", "display": "Iced Coffee"},

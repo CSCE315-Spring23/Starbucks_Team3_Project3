@@ -1,17 +1,24 @@
+import React, { useState } from "react";
+
 function CustomerFooter({ orderList, totalPrice, setSection }) {
   const finalizeOrder = () => {
     setSection(4)
   }
 
+  const [highConstrastMode, toggle] = useState(false);
+  const toggleStyle = () => {
+    toggle(!highConstrastMode);
+  }
+
   return (
     <div className="banner">
-      <button className='button'> High Constrast </button>
+      <button className='banner-button' onClick={toggleStyle}> High Constrast </button>
 
-      <div className="info-box"> Total Items: {orderList.length} </div>
+      <div className="banner-info-box"> Total Items: {orderList.length} </div>
 
-      <div className="info-box"> Total Price: ${totalPrice} </div>
+      <div className="banner-info-box"> Total Price: ${totalPrice} </div>
 
-      <button className='button' onClick={() => finalizeOrder()}> To Checkout </button>
+      <button className='banner-button' onClick={() => finalizeOrder()}> To Checkout </button>
     </div>
   )
 }
