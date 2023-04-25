@@ -1,0 +1,219 @@
+/*Banner and Footer*/
+.banner {
+    background-color: #00704A;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    height: 120px;
+    width: 1920px;
+}
+
+.starbucks-logo {
+    height: 100px;
+    width: 100px;
+    text-align: center;
+    font-size: 24px;
+}
+
+.weather-time {
+    background-color: white;
+    color: black;
+    line-height: 100px;
+    width: 600px;
+    text-align: center;
+    font-size: 24px;
+}
+
+.banner-button {
+    background-color: white;
+    color: black;
+    line-height: 100px;
+    min-width: 200px;
+    text-align: center;
+    font-size: 24px;
+}
+
+.banner-button:hover {
+    transition-duration: 0.1s;
+    background-color: grey;
+    color: white;
+}
+
+.banner-info-box {
+    background-color: white;
+    color: black;
+    line-height: 100px;
+    width: 200px;
+    text-align: center;
+    font-size: 24px;
+}
+
+
+/*Body*/
+.body {
+    background-color: bisque;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: space-around;
+    align-items: center;
+    height: 840px;
+    width: 1920px;
+}
+
+.body-info-box {
+    background-color: white;
+    color: black;
+    line-height: 150px;
+    min-width: 200px;
+    text-align: center;
+    font-size: 24px;
+}
+
+.body-button {
+    background-color: white;
+    color: black;
+    line-height: 150px;
+    min-width: 200px;
+    text-align: center;
+    font-size: 24px;
+}
+
+.body-button:hover {
+    transition-duration: 0.1s;
+    background-color: grey;
+    color: white;
+}
+
+.blink {
+    animation: blink 1s ease-in-out;
+}
+
+@keyframes blink {
+    0%, 100% {
+        background-color: bisque;
+    }
+    25%, 50% {
+        background-color: #ffd96c;
+    }
+}
+
+
+/*Finalize*/
+.background {
+    background-color: bisque;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: space-around;
+    align-items: center;
+    height: 960px;
+    width: 1920px;
+}
+
+.order-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    justify-content: space-around;
+    align-items: center;
+    height: 620px;
+    width: 400px;
+}
+
+.order {
+    background-color: beige;
+    height: 500px;
+    width: 400px;
+}
+
+.final-info-box-container {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    justify-content: space-around;
+    align-items: center;
+    height: 120px;
+    width: 400px;
+}
+
+.final-info-box {
+    background-color: white;
+    color: black;
+    line-height: 90px;
+    width: 200px;
+    text-align: center;
+    font-size: 16px;
+}
+
+.back-button {
+    background-color: white;
+    color: black;
+    line-height: 150px;
+    width: 200px;
+    text-align: center;
+    font-size: 24px;
+}
+
+.back-button:hover {
+    transition-duration: 0.1s;
+    background-color: grey;
+    color: white;
+}
+
+.confirm-order-button {
+    background-color: white;
+    color: black;
+    line-height: 150px;
+    width: 200px;
+    text-align: center;
+    font-size: 24px;
+}
+
+.confirm-order-button:hover {
+    transition-duration: 0.1s;
+    background-color: grey;
+    color: white;
+}
+
+.buffer {
+    height: 50px;
+}
+
+
+/*Thank You*/
+.thanks {
+    background-color: bisque;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: space-around;
+    align-items: center;
+    height: 960px;
+    width: 1920px;
+}
+
+.text-box {
+    background-color: white;
+    color: black;
+    line-height: 150px;
+    width: 1000px;
+    text-align: center;
+    font-size: 24px;
+}
+
+.customer-view-button {
+    background-color: white;
+    color: black;
+    line-height: 150px;
+    width: 1000px;
+    text-align: center;
+    font-size: 24px;
+}
+
+.customer-view-button:hover {
+    transition-duration: 0.1s;
+    background-color: grey;
+    color: white;
+}
