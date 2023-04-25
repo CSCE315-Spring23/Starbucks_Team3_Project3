@@ -49,6 +49,11 @@
     font-size: 24px;
 }
 
+.google-translate {  /*Doesn't work*/
+    position: absolute;
+    top: 0;
+    left: 0;
+}
 
 /*Body*/
 .body {
