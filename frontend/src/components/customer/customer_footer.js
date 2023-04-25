@@ -1,5 +1,3 @@
-import "../../css/customer_banner.css"
-
 function CustomerFooter({ orderList, totalPrice, setSection }) {
   const finalizeOrder = () => {
     setSection(4)
@@ -7,17 +5,13 @@ function CustomerFooter({ orderList, totalPrice, setSection }) {
 
   return (
     <div className="banner">
-      <div className="info-box">
-        Total Items: {orderList.length}
-      </div>
+      <button className='button'> High Constrast </button>
 
-      <div className="info-box">
-        Total Price: ${totalPrice}
-      </div>
+      <div className="info-box"> Total Items: {orderList.length} </div>
 
-      <div className='button' onClick={() => finalizeOrder()}>
-        To Checkout
-      </div>
+      <div className="info-box"> Total Price: ${totalPrice} </div>
+
+      <button className='button' onClick={() => finalizeOrder()}> To Checkout </button>
     </div>
   )
 }

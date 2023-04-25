@@ -1,7 +1,8 @@
 import React from 'react'
 import { useNavigate } from "react-router-dom";
+import image from "../../pictures/starbucks-logo-png-25.png"
 
-import "../../css/customer_banner.css"
+import "../../css/alt_customer_banner.css"
 
 function CustomerBanner({ setSection }) {
   const navigate = useNavigate();
@@ -10,10 +11,11 @@ function CustomerBanner({ setSection }) {
 
   return (
   <div className='banner'>
-    <div className='starbucks-logo'>Starbucks Logo</div>
-    <div className='weather-time'>Weather and Time</div>
-    <div className='button'>Change Language</div>
-    <div className='button' onClick={() => navigate("/login")}>Login Button</div>
+    <div className="starbucks-logo" style={{backgroundImage:`url(${image}`}}></div>
+    <div className='weather-time'> Weather and Time </div>
+    <button className='button'> Change Language </button>
+    <button className='button'> Show Menu Board </button>
+    <button className='button' onClick={() => navigate("/login")}> Login Button </button>
   </div>
   )
 }
