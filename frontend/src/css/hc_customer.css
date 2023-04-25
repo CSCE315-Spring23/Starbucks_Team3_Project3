@@ -1,6 +1,6 @@
 /*Banner and Footer*/
 .banner {
-    background-color: #00704A;
+    background-color: #012601;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -17,8 +17,8 @@
 }
 
 .weather-time {
-    background-color: white;
-    color: black;
+    background-color: black;
+    color: cyan;
     line-height: 100px;
     width: 600px;
     text-align: center;
@@ -26,8 +26,8 @@
 }
 
 .banner-button {
-    background-color: white;
-    color: black;
+    background-color: black;
+    color: cyan;
     line-height: 100px;
     min-width: 200px;
     text-align: center;
@@ -36,13 +36,13 @@
 
 .banner-button:hover {
     transition-duration: 0.1s;
-    background-color: grey;
-    color: white;
+    background-color: slategray;
+    color: cyan;
 }
 
 .banner-info-box {
-    background-color: white;
-    color: black;
+    background-color: black;
+    color: cyan;
     line-height: 100px;
     width: 200px;
     text-align: center;
@@ -52,7 +52,7 @@
 
 /*Body*/
 .body {
-    background-color: bisque;
+    background-color: cornflowerblue;
     display: flex;
     flex-direction: row;
     gap: 10px;
@@ -63,8 +63,8 @@
 }
 
 .body-info-box {
-    background-color: white;
-    color: black;
+    background-color: black;
+    color: cyan;
     line-height: 150px;
     min-width: 200px;
     text-align: center;
@@ -72,8 +72,8 @@
 }
 
 .body-button {
-    background-color: white;
-    color: black;
+    background-color: black;
+    color: cyan;
     line-height: 150px;
     min-width: 200px;
     text-align: center;
@@ -82,8 +82,8 @@
 
 .body-button:hover {
     transition-duration: 0.1s;
-    background-color: grey;
-    color: white;
+    background-color: slategray;
+    color: cyan;
 }
 
 .blink {
@@ -92,7 +92,7 @@
 
 @keyframes blink {
     0%, 100% {
-        background-color: bisque;
+        background-color: cornflowerblue;
     }
     25%, 50% {
         background-color: #ffd96c;
@@ -102,7 +102,7 @@
 
 /*Finalize*/
 .background {
-    background-color: bisque;
+    background-color: cornflowerblue;
     display: flex;
     flex-direction: row;
     gap: 10px;
@@ -123,8 +123,8 @@
 }
 
 .order {
-    background-color: white;
-    color: black;
+    background-color: black;
+    color: cyan;
     height: 500px;
     width: 400px;
 }
@@ -140,8 +140,8 @@
 }
 
 .final-info-box {
-    background-color: white;
-    color: black;
+    background-color: black;
+    color: cyan;
     line-height: 90px;
     width: 200px;
     text-align: center;
@@ -149,8 +149,8 @@
 }
 
 .back-button {
-    background-color: white;
-    color: black;
+    background-color: black;
+    color: cyan;
     line-height: 150px;
     width: 200px;
     text-align: center;
@@ -159,13 +159,13 @@
 
 .back-button:hover {
     transition-duration: 0.1s;
-    background-color: grey;
-    color: white;
+    background-color: slategray;
+    color: cyan;
 }
 
 .confirm-order-button {
-    background-color: white;
-    color: black;
+    background-color: black;
+    color: cyan;
     line-height: 150px;
     width: 200px;
     text-align: center;
@@ -174,8 +174,8 @@
 
 .confirm-order-button:hover {
     transition-duration: 0.1s;
-    background-color: grey;
-    color: white;
+    background-color: slategray;
+    color: cyan;
 }
 
 .buffer {
@@ -185,7 +185,7 @@
 
 /*Thank You*/
 .thanks {
-    background-color: bisque;
+    background-color: cornflowerblue;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -196,8 +196,8 @@
 }
 
 .text-box {
-    background-color: white;
-    color: black;
+    background-color: black;
+    color: cyan;
     line-height: 150px;
     width: 1000px;
     text-align: center;
@@ -205,8 +205,8 @@
 }
 
 .customer-view-button {
-    background-color: white;
-    color: black;
+    background-color: black;
+    color: cyan;
     line-height: 150px;
     width: 1000px;
     text-align: center;
@@ -215,6 +215,6 @@
 
 .customer-view-button:hover {
     transition-duration: 0.1s;
-    background-color: grey;
-    color: white;
+    background-color: slategray;
+    color: cyan;
 }
