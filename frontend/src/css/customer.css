@@ -1,5 +1,6 @@
 /*Banner and Footer*/
 .banner {
+    position: relative;
     background-color: #00704A;
     display: flex;
     flex-direction: row;
@@ -26,6 +27,7 @@
 }
 
 .banner-button {
+    position: relative;
     background-color: white;
     color: black;
     line-height: 100px;
@@ -50,8 +52,7 @@
 }
 
 .google-translate {  /*Doesn't work*/
-    background-color: #00704A !important;
-    position: fixed !important;
+    position: relative !important;
     top: 10px !important;
     right: 10px !important;
 }
