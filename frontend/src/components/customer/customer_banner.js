@@ -27,16 +27,15 @@ function CustomerBanner({ setSection }) {
       <div className="starbucks-logo" style={{ backgroundImage: `url(${image}` }}></div>
       <div className='weather-time'> {weather.main} | Temperature: {weather.temp}
       </div>
-      <button className='banner-button' onClick={HandleTranslateClick}> Change Language </button>
-      {showTranslate && (
-          <div className="google-translate" id="google_translate_element"></div>
-      )}
-      <button className='banner-button' onClick={() => navigate("/login")}> Login Button </button>
-      {/* Code below makes the translation widget visible when Change Language button is clicked */}
 
       <button className='banner-button'> Show Full Menu </button>
 
       <button className='banner-button' onClick={() => navigate("/login")}> Login Button </button>
+
+      <button className='banner-button' onClick={HandleTranslateClick}> Change Language </button>
+      {showTranslate && (
+        <div className="google-translate" id="google_translate_element"></div>
+      )}
 
     </div>
   )
