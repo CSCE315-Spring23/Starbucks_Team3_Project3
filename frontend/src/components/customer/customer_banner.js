@@ -21,8 +21,6 @@ function CustomerBanner({ setSection }) {
     //   .then(response => response.json())
     //   .then(result => setWeather(result))
     // }, [])
-
-
   
   return (
     <div className='banner'>
@@ -33,9 +31,12 @@ function CustomerBanner({ setSection }) {
       {showTranslate && (
           <div className="google-translate" id="google_translate_element"></div>
       )}
-      <button className='banner-button'> Show Menu Board </button>
       <button className='banner-button' onClick={() => navigate("/login")}> Login Button </button>
       {/* Code below makes the translation widget visible when Change Language button is clicked */}
+
+      <button className='banner-button'> Show Full Menu </button>
+
+      <button className='banner-button' onClick={() => navigate("/login")}> Login Button </button>
 
     </div>
   )
