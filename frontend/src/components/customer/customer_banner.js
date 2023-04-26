@@ -2,14 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import image from "../../pictures/starbucks-logo-png-25.png"
 
-import "../../css/customer.css"
-
 function CustomerBanner({ setSection }) {
   const navigate = useNavigate();
   const [showTranslate, setShowTranslate] = useState(false);
   const [weather, setWeather] = useState({'main': 'cloudy', 'temp': 97})
 
-  {/* Code below will toggle the google translate widget on click*/ }
+  {/* Code below will toggle the Google Translate widget on click*/ }
   const HandleTranslateClick = () => {
     const wrapper = document.getElementById('google_translate_wrapper');
     if (wrapper) {
