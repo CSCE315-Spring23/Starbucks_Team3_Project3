@@ -1,7 +1,5 @@
 import React from 'react'
 
-import "../../css/customer.css"
-
 function ThankYou({ customerName, transactionID, setSection }) {
   return (
     <div className="thanks">

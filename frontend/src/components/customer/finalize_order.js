@@ -1,5 +1,3 @@
-import "../../css/customer.css"
-
 function FinalizeOrder({ orderList, totalPrice, setOrderList, setCustomerName, setTransactionID, setSection}) {
   const returnToCategory = () => {
     setSection(0)
@@ -49,15 +47,15 @@ function FinalizeOrder({ orderList, totalPrice, setOrderList, setCustomerName, s
 
         <div className="buffer"></div>
 
-        <div className='back-button' onClick={() => returnToCategory()}>
+        <button className='back-button' onClick={() => returnToCategory()}>
           Back to Ordering
-        </div>
+        </button>
 
         <div className="buffer"></div>
 
-        <div className='confirm-order-button' onClick={() => submitOrder()}>
+        <button className='confirm-order-button' onClick={() => submitOrder()}>
           Confirm Order
-        </div>
+        </button>
       </div>
     </div>
   );

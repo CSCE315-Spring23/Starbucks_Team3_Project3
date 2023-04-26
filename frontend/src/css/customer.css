@@ -50,9 +50,10 @@
 }
 
 .google-translate {  /*Doesn't work*/
-    position: absolute;
-    top: 0;
-    left: 0;
+    background-color: #00704A !important;
+    position: fixed !important;
+    top: 10px !important;
+    right: 10px !important;
 }
 
 /*Body*/

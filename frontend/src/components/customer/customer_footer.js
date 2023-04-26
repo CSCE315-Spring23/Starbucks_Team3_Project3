@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 
+import "../../css/customer.css"
+
 function CustomerFooter({ orderList, totalPrice, setSection }) {
   const finalizeOrder = () => {
     setSection(4)
@@ -12,7 +14,7 @@ function CustomerFooter({ orderList, totalPrice, setSection }) {
 
   return (
     <div className="banner">
-      <button className='banner-button' onClick={toggleStyle}> High Constrast </button>
+      <button className='banner-button' onClick={toggleStyle}> Toggle High Contrast </button>
 
       <div className="banner-info-box"> Total Items: {orderList.length} </div>
 

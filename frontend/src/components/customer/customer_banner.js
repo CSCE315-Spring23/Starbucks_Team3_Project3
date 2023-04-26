@@ -2,13 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import image from "../../pictures/starbucks-logo-png-25.png"
 
-import "../../css/customer.css"
-
 function CustomerBanner({ setSection }) {
   const navigate = useNavigate();
   const [showTranslate, setShowTranslate] = useState(false);
 
-  {/* Code below will toggle the google translate widget on click*/ }
+  {/* Code below will toggle the Google Translate widget on click*/ }
   const HandleTranslateClick = () => {
     const wrapper = document.getElementById('google_translate_wrapper');
     if (wrapper) {
@@ -39,11 +37,13 @@ function CustomerBanner({ setSection }) {
       <button className='banner-button'> Show Menu Board </button>
       <button className='banner-button' onClick={() => navigate("/login")}> Login Button </button>
       {/* Code below makes the translation widget visible when Change Language button is clicked */}
+      <div className="google-translate">
       {showTranslate && (
-        <div className="google-translate" id="google_translate_wrapper">
-          <div className="google-translate" id="google_translate_element"></div>
+        <div id="google_translate_wrapper" style={{ position: "fixed", top: "10px", right: "10px" }}>
+          <div id="google_translate_element"></div>
         </div>
       )}
+      </div>
     </div>
   )
 }
