@@ -7,9 +7,9 @@ function CustomerFooter({ orderList, totalPrice, setSection }) {
     setSection(4)
   }
 
-  const [highConstrastMode, toggle] = useState(false);
+  const [highContrastMode, toggle] = useState(false);
   const toggleStyle = () => {
-    toggle(!highConstrastMode);
+    toggle(!highContrastMode);
   }
 
   return (
