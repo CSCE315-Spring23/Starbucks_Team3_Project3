@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 function CustomerFooter({ orderList, totalPrice, setSection }) {
   const finalizeOrder = () => {
     setSection(4)
@@ -11,16 +10,16 @@ function CustomerFooter({ orderList, totalPrice, setSection }) {
   }
 
   return (
-    <div className="banner">
-      <button className='banner-button' onClick={toggleStyle}> High Constrast </button>
+        <div className="banner">
+          <button className='banner-button' onClick={toggleStyle}> High Constrast </button>
 
-      <div className="banner-info-box"> Total Items: {orderList.length} </div>
+          <div className="banner-info-box"> Total Items: {orderList.length} </div>
 
-      <div className="banner-info-box"> Total Price: ${totalPrice} </div>
+          <div className="banner-info-box"> Total Price: ${totalPrice} </div>
 
-      <button className='banner-button' onClick={() => finalizeOrder()}> To Checkout </button>
-    </div>
-  )
+          <button className='banner-button' onClick={() => finalizeOrder()}> To Checkout </button>
+        </div>
+        )
 }
 
-export default CustomerFooter
+        export default CustomerFooter
