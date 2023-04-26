@@ -7,6 +7,7 @@ import "../../css/customer.css"
 function CustomerBanner({ setSection }) {
   const navigate = useNavigate();
   const [showTranslate, setShowTranslate] = useState(false);
+  const [weather, setWeather] = useState({'main': 'cloudy', 'temp': 97})
 
   {/* Code below will toggle the google translate widget on click*/ }
   const HandleTranslateClick = () => {
@@ -18,32 +19,26 @@ function CustomerBanner({ setSection }) {
 
     // const [value, setValue] = useState([]);
     // useEffect(() => {
-    //   apiValues()
+    //   fetch("http://localhost:5000/weather/77840")
+    //   .then(response => response.json())
+    //   .then(result => setWeather(result))
     // }, [])
-    // const apiValues = async () => {
-    //   const resp = await fetch('http://localhost:5000/weather/77840')
-    //   setValue(await resp.json())
-    // }
+
+
   
   return (
     <div className='banner'>
       <div className="starbucks-logo" style={{ backgroundImage: `url(${image}` }}></div>
-      <div className='weather-time'> Weather and Time 
-      {/* {value.map((data) => {
-        return(
-          <li className="weather-time" key={data.name}> {data.temp}</li>
-        )
-      })} */}
+      <div className='weather-time'> {weather.main} | Temperature: {weather.temp}
       </div>
       <button className='banner-button' onClick={HandleTranslateClick}> Change Language </button>
+      {showTranslate && (
+          <div className="google-translate" id="google_translate_element"></div>
+      )}
       <button className='banner-button'> Show Menu Board </button>
       <button className='banner-button' onClick={() => navigate("/login")}> Login Button </button>
       {/* Code below makes the translation widget visible when Change Language button is clicked */}
-      {showTranslate && (
-        <div className="google-translate" id="google_translate_wrapper">
-          <div className="google-translate" id="google_translate_element"></div>
-        </div>
-      )}
+
     </div>
   )
 }

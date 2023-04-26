@@ -39,14 +39,14 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
-    <div id="google_translate_wrapper" style="display:none;">
+    <div id="google_translate_wrapper" style="display: none;">
       <div id="google_translate_element"></div>
     </div>
     <script src="http://translate.google.com/translate_a/element.js?cb=googleTranslateInit"></script>
     <script>
       function googleTranslateInit(){
         new google.translate.TranslateElement(
-          {pageLanguage: 'en'},
+          {pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE},
           'google_translate_element'
         );
       }
