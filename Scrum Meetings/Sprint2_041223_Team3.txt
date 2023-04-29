@@ -1,0 +1,67 @@
+SCRUM Meeting 2 for Project 3 – Sprint 2
+Prepared by: Max Moody
+Meeting Date: Wed Apr 12
+
+Meeting Attendees
+ Devon Kelly
+ Sam Hirvilampi
+ Yvan Tonthat
+ David Liu
+Max Moody
+
+Meeting Agenda Items
+Discuss progress
+Review server view
+Customer view
+Plan tasks before next meeting
+
+Status Update Since Last Meeting
+Accomplishments:
+ Set up server view 
+ Created working page for building order
+
+Tasks Completed:
+Task Description
+Assigned to
+Completed? (yes/no)
+Order list API
+David
+Yes
+OAuth
+Sam
+Yes
+Server view
+(Multiple)
+Yes
+
+
+
+Before The Next Meeting
+Plans:
+Finish backend and implement frontend for translate
+MVP for customer page
+Begin and implement manager view pages
+
+Task Assignments:
+Task Description
+Assigned to
+Finish Google Translate API work
+Sam 
+Testing OAuth
+Sam 
+Further work on Customer view for Sprint 2 MVP 
+Yvan
+Manager API creation
+Devon
+Updating server views
+David
+Manager view page work
+Max 
+
+Minutes from Previous Meeting
+Created full server front end
+No categories yet
+Started on Translate API
+Started on OAuth API
+Started on Customer View
+Burndown Chart updated to be accurate

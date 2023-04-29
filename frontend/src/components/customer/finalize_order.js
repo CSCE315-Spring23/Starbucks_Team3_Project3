@@ -1,4 +1,6 @@
-function FinalizeOrder({ orderList, setOrderList, setCustomerName, setTransactionID, setSection}) {
+import "../../css/finalize_order.css"
+
+function FinalizeOrder({ orderList, totalPrice, setOrderList, setCustomerName, setTransactionID, setSection}) {
   const returnToCategory = () => {
     setSection(0)
   }
@@ -14,33 +16,48 @@ function FinalizeOrder({ orderList, setOrderList, setCustomerName, setTransactio
   }
 
   return (
-    <div>
-      { orderList ? orderList.map((item, key) => <tr key={key}>
-      <td>{item.name}</td>
-      <td>{item.addons}</td>
-      <td>{item.category}</td>
-      <td>{item.price}</td>
-      <td>
-      <button onClick={() => removeItem(item)}>Remove</button>
-      </td>
+    <div className="background">
 
-      </tr>)
+      <div className="order-container">
+        <div className="order">
+          { orderList ? orderList.map((item, key) => <tr key={key}>
+              <td>{item.name}</td>
+              <td>{item.addons}</td>
+              <td>{item.category}</td>
+              <td>{item.price}</td>
+              <td>
+                <button onClick={() => removeItem(item)}>Remove</button>
+              </td>
+            </tr>)
+            : 'No Item in Cart'}
+        </div>
 
-      : 'No Item in Cart'}
-
-      <div className='name-input'>
-        <input
-          type="text"
-          onChange={(e) => setCustomerName(e.target.value)}
-        />
+        <div className="info-box-container">
+          <div className="info-box">Total Items: {orderList.length}</div>
+          <div className="info-box">Total Price: ${totalPrice}</div>
+        </div>
       </div>
 
-      <div className='back-button' onClick={() => returnToCategory()}>
-        Back to Ordering
-      </div>
+      <div>
+        <div>Enter name</div>
+        <div className='name-input'>
+          <input
+            type="text"
+            onChange={(e) => setCustomerName(e.target.value)}
+          />
+        </div>
 
-      <div className='finalize-order-button' onClick={() => submitOrder()}>
-        Confirm Order
+        <div className="buffer"></div>
+
+        <div className='back-button' onClick={() => returnToCategory()}>
+          Back to Ordering
+        </div>
+
+        <div className="buffer"></div>
+
+        <div className='confirm-order-button' onClick={() => submitOrder()}>
+          Confirm Order
+        </div>
       </div>
     </div>
   );

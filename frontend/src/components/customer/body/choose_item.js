@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
 
+import "../../../css/customer_body.css"
+
 function ChooseItem({ order, setSection }) {
-  const [menuItems, setMenuItems] = useState([{"name": "coffee", "sized": true}, {"name": "latte", "sized": false}])
+  const [menuItems, setMenuItems] = useState([{"name": "Coffee", "sized": true}, {"name": "Latte", "sized": false}])
 
   // useEffect(() => {
   //   const category = orderList.slice(-1)
@@ -22,9 +24,9 @@ function ChooseItem({ order, setSection }) {
 
   return (
     <>
-      <div>ChooseItem</div>
+      <div className="body-info-box">Choose Item</div>
       {menuItems.map((item, key) =>
-        <button key={key} className='menu-item-buttons' onClick={() => setItem(item)}>{item.name}</button>
+        <button key={key} className='body-button' onClick={() => setItem(item)}>{item.name}</button>
       )}
     </>
   )

@@ -1,5 +1,7 @@
 import React from 'react'
 
+import "../../../css/customer_body.css"
+
 function ChooseSize({ order, setSection }) {
   const sizes = ["tall", "grande", "venti"]
 
@@ -10,9 +12,9 @@ function ChooseSize({ order, setSection }) {
 
   return (
     <>
-    <div>ChooseSize</div>
+    <div className="body-info-box">ChooseSize</div>
     {sizes.map((size, key) =>
-      <button key={key} className='size-button' onClick={() => setSize(size)}>{size}</button>
+      <button key={key} className='body-button' onClick={() => setSize(size)}>{size}</button>
     )}
     </>
   )

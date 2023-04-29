@@ -1,10 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 
 import ChooseCategory from './body/choose_category'
 import ChooseItem from './body/choose_item'
 import ChooseSize from './body/choose_size'
 import ChooseAddons from './body/choose_addons'
 import FinalizeOrder from './finalize_order'
+
+import "../../css/customer_body.css"
 
 
 function CustomerBody({ orderList, setOrderList, totalPrice, setTotalPrice, currSection, setSection}) {
@@ -28,24 +30,33 @@ function CustomerBody({ orderList, setOrderList, totalPrice, setTotalPrice, curr
     console.log(order)
   }
 
-  return (
-    <>
-    {currSection === 0 ? (
-      <ChooseCategory order={order} setSection={setSection}/>
-    ) : currSection === 1 ? (
-      <ChooseItem order={order} setSection={setSection}/>
-    ) : currSection === 2 ? (
-      <ChooseSize order={order} setSection={setSection}/>
-    ) : currSection === 3 ? (
-      <ChooseAddons order={order}/>
-    ) : null}
+  const blinkRef = useRef(null);
 
-    {currSection === 3 ? (
-      <button onClick={() => addItem()}>Add Item</button>
-    ) : null}
-    <button onClick={() => setSection(currSection - 1)}>Back</button>
-    <button onClick={() => refresh()}>Start Over</button>
-    </>
+  function makeItBlink() {
+    blinkRef.current.classList.add('blink');
+    setTimeout(() => {
+      blinkRef.current.classList.remove('blink');
+    }, 1000);
+  }
+
+  return (
+    <div className="body" ref={blinkRef}>
+      {currSection === 0 ? (
+        <ChooseCategory order={order} setSection={setSection}/>
+      ) : currSection === 1 ? (
+        <ChooseItem order={order} setSection={setSection}/>
+      ) : currSection === 2 ? (
+        <ChooseSize order={order} setSection={setSection}/>
+      ) : currSection === 3 ? (
+        <ChooseAddons order={order}/>
+      ) : null}
+
+      {currSection === 3 ? (
+        <button className="body-button" onClick={() => { addItem(); makeItBlink() }}>Add Item</button>
+      ) : null}
+      <button className="body-button" onClick={() => setSection(currSection - 1)}>Back</button>
+      <button className="body-button" onClick={() => refresh()}>Start Over</button>
+    </div>
   )
 }
 

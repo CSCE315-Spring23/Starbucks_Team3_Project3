@@ -1,0 +1,67 @@
+SCRUM Meeting 3 for Project 3 – Sprint 2
+Prepared by: Sam Hirvilampi
+Meeting Date: 04/15/2023
+
+Meeting Attendees
+Sam Hirvilampi
+David Liu
+Devon Kelly
+Max Moody
+Yvan Tonthat
+
+Meeting Agenda Items
+ Discuss sprint 2 MVP
+Talk about any work that needs to be caught up on
+Talk about tasks
+
+Status Update Since Last Meeting
+Accomplishments:
+ Finished OAuth API and Google Translate API
+Functioning backend for manager view
+Improved server view
+
+Tasks Completed:
+Task Description
+Assigned to
+Completed? (yes/no)
+Finish Google Translate API work
+Sam 
+yes
+Testing OAuth
+Sam 
+yes
+Further work on Customer view for Sprint 2 MVP 
+Yvan
+yes
+Manager API creation
+Devon
+yes
+Updating server views
+David
+yes
+Manager view page work
+Max 
+yes
+
+Before The Next Meeting
+Plans:
+ Finish frontend work on manager view
+Get work done on customer view front end
+Work on weather API
+
+Task Assignments:
+Task Description
+Assigned to
+Work more on customer view front end
+Yvan
+Finish up backend for manager view
+Devon
+Weather API
+Sam
+Polish server view
+David
+Implement front end functionality and CSS for manager view
+Max
+
+Minutes from Previous Meeting
+In the last meeting we finished testing and implementation of OAuth 2.0. We talked about getting the manager backend worked on and having Max get started on the front end for the manager view. Yvan had started creating the customer front end support. We discussed our progress on MVP for Sprint 2 and gauging where we were. We discussed Devon’s technology issues since his laptop broke and how to get Max’s IDEs up and running so he can work on the front end.  

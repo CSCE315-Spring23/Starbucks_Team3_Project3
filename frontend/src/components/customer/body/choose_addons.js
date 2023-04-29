@@ -1,36 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 
-function ChooseAddons({ order }) {
-  const [addonList, setAddonList] = useState([])
+import "../../../css/customer_body.css"
 
-  const [allAddons, setAllAddons] = useState([])
-
-  useEffect(() => {
-    fetch("http://localhost:5000/menu-items/addons")
-      .then(response => response.json())
-      .then(result => setAllAddons(result))
-  }, [])
-
-  function addToList(name) {
-    setAddonList(...addonList, name)
-  }
-
-  function removeFromList(name) {
-    setAddonList(...addonList, name)
-  }
-
+function ChooseAddons() {
   return (
-    <>
-    <div>ChooseAddons</div>
-    {allAddons.map(
-      (name, key) =>
-        <>
-          <button key={key} onClick={() => {addToList(name)}}>Item: {name}</button>
-          <button key={key} onClick={() => {removeFromList(name)}}>Remove: {name}</button>
-        </>
-      )
-    }
-    </>
+    <div className="body-info-box">ChooseAddons</div>
   )
 }
 
