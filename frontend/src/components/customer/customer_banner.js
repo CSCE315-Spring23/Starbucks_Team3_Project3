@@ -12,8 +12,8 @@ function CustomerBanner({ setSection }) {
   <div className='banner'>
     <div className='starbucks-logo'>Starbucks Logo</div>
     <div className='weather-time'>Weather and Time</div>
-    <div className='change-language'>Change Language</div>
-    <div className='login-button' onClick={() => navigate("/login")}>Login Button</div>
+    <div className='button'>Change Language</div>
+    <div className='button' onClick={() => navigate("/login")}>Login Button</div>
   </div>
   )
 }

@@ -4,14 +4,14 @@
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    height: 216px;
+    height: 120px;
     width: 1920px;
 }
 
 .starbucks-logo {
     background-color: white;
     color: black;
-    line-height: 150px;
+    line-height: 100px;
     text-align: center;
     font-size: 24px;
 }
@@ -19,38 +19,32 @@
 .weather-time {
     background-color: white;
     color: black;
-    line-height: 150px;
+    line-height: 100px;
     width: 600px;
     text-align: center;
     font-size: 24px;
 }
 
-.change-language {
+.button {
     background-color: white;
     color: black;
-    line-height: 150px;
+    line-height: 100px;
     width: 200px;
     text-align: center;
     font-size: 24px;
 }
 
-.change-language:hover {
+.button:hover {
     transition-duration: 0.1s;
     background-color: grey;
     color: white;
 }
 
-.login-button {
+.info-box {
     background-color: white;
     color: black;
-    line-height: 150px;
+    line-height: 100px;
     width: 200px;
     text-align: center;
     font-size: 24px;
-}
-
-.login-button:hover {
-    transition-duration: 0.1s;
-    background-color: grey;
-    color: white;
 }
