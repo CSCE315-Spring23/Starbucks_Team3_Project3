@@ -6,8 +6,11 @@ function MenuBoard() {
   return (
 
       <div className='background'>
-        <div>
-          <h1>Menu Board</h1>
+        <div className='center'>
+          <div>
+            <h1>Menu Board</h1>
+          </div>
+          <div className='weather-time'>Weather and Time</div>
         </div>
         <div>
         <body>
@@ -184,6 +187,9 @@ function MenuBoard() {
             <p>$2.95</p>
           </div>
         </body>
+          <div className='center'>
+            <div className='back'>Back</div>
+          </div>
         </div>
       </div>
   )
