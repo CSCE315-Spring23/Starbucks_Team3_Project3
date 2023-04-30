@@ -1,5 +1,6 @@
 import datetime
 import private_tools.db_connection as db
+from psycopg2.extras import execute_values
 
 def getAllSales():
     """
@@ -46,8 +47,9 @@ def categorizeSales(startDate, endDate):
         formattedStart = datetime.datetime.strptime(startDate, '%Y-%m-%d').date()
         formattedEnd = datetime.datetime.strptime(endDate, '%Y-%m-%d').date()
     elif not isinstance(startDate, datetime.datetime):
-        raise TypeError from startDate
-    orders = conn.query("SELECT order_list FROM transactions WHERE transaction_date >= %s AND transaction_date <= %s", params=(formattedStart, formattedEnd))
+        raise TypeError("Invalid type of date range, must be either datetime or str in format yyyy-mm-dd")
+    orders = conn.query("SELECT order_list FROM transactions WHERE transaction_date >= %s AND transaction_date <= %s",
+                        params=(formattedStart, formattedEnd))
     matchedItems = matchItemToCategoryAndPrice()
     for order in orders:
         for item in order[0]:
@@ -96,8 +98,281 @@ def viewTransactions(startDate=None, endDate=None):
         conn.cur.execute("SELECT * FROM transactions ORDER BY transaction_id DESC")
         transactions = conn.cur.fetchmany(500)
     else:
-        transactions = conn.query('SELECT * FROM transactions WHERE transaction_date >= %s AND transaction_date <= %s", params=(formattedStart, formattedEnd)')
+        transactions = conn.query(
+            'SELECT * FROM transactions WHERE transaction_date >= %s AND transaction_date <= %s", params=(formattedStart, formattedEnd)')
     return transactions
 
+
+def adjustPrice(identifier, price: float):
+    """
+    Adjusts the price of a given item
+
+    :param identifier: Flexible identifier token can either be the item id or name
+    :type identifier: str or int
+    :param price: The updated price
+    :type price: float
+    """
+    if price < 0:
+        raise ValueError("cannot have a negative price")
+    conn = db.DBConnection()
+    if isinstance(identifier, str):
+        conn.query(f'UPDATE menu_items SET price = {price} WHERE item_name=\'{identifier}\'', False)
+    elif isinstance(identifier, int):
+        conn.query(f'UPDATE menu_items SET price = {price} WHERE item_id={identifier}', False)
+    else:
+        raise TypeError("identifier is neither string or int")
+
+
+def addMenuItem(name: str, display: str, category: str, sized: bool, ingredients: list[tuple[str, float]],
+                price, autocalc=False):
+    """
+    Adds a menu item including the sized variants if applicable with the given ingredients and price
+    :param name: internal name of the item not including the size aka coffee-tall -> coffee, size will be added in function
+    :param display: external name of the item
+    :param category: category of the drink. includes: espresso-drinks, tea-hot-iced, bakery-coremark, coffee_hot_iced, add-on, frappuccino-and-blended
+    :param sized: boolean representing if the drink has tall/grande/venti variants or not
+    :param ingredients: list containing pairs of ingredients and their respective portions
+    :param price: price of the item or tuple for the three different prices
+    :param autocalc: flag that determines if pricing is auto-calculated for sized drink at ratio of .85 and 1.25 for tall and venti respectively
+    """
+    conn = db.DBConnection()
+    itemId = conn.query("SELECT MAX(item_id) FROM menu_items")[0][0] + 1
+    if len(conn.query(f"SELECT item_name FROM menu_items WHERE item_name LIKE {name + '%'}")[0]) < 1:
+        raise ValueError(f'{name} is already in the database')
+    if price < 0:
+        raise ValueError("Price cannot be less than 0")
+    for ingredient in ingredients:
+        if ingredient[1] < 0:
+            raise ValueError(f"{ingredient[0]} has amount less than 0")
+    # if category not in currentCategories:
+    #     raise ValueError("Category not currently supported")
+    if sized:
+        if autocalc:
+            price = (price * .85, price, price * 1.25)
+        conn.query(
+            "INSERT INTO menu_items (item_id, item_name, display_name, category, size, ingredients, amounts, price)"
+            "VALUES (%s, %s, %s, %s, 'tall', %s, %s, %s)",
+            False, (itemId, name + "-tall", display, category, ingredients[:][0], ingredients[:][1], price[0]))
+        itemId += 1
+        conn.query(
+            "INSERT INTO menu_items (item_id, item_name, display_name, category, size, ingredients, amounts, price)"
+            "VALUES (%s, %s, %s, %s, 'grande', %s, %s, %s)",
+            False, (itemId, name + "-grande", display, category, ingredients[:][0], ingredients[:][1], price[1]))
+        itemId += 1
+        conn.query(
+            "INSERT INTO menu_items (item_id, item_name, display_name, category, size, ingredients, amounts, price)"
+            "VALUES (%s, %s, %s, %s, 'venti', %s, %s, %s)",
+            False, (itemId, name + "-venti", display, category, ingredients[:][0], ingredients[:][1], price[2]))
+
+    else:
+        conn.query(
+            "INSERT INTO menu_items (item_id, item_name, display_name, category, size, ingredients, amounts, price)"
+            "VALUES (%s, %s, %s, %s, 'NA', %s, %s, %s)",
+            False, (itemId, name, display, category, ingredients[:][0], ingredients[:][1], price))
+
+
+def removeMenuItem(identifier):
+    """
+    Remove a menu item from the menu
+    :param identifier: a str for the item name or int for the item id
+    """
+    conn = db.DBConnection()
+    size = None
+    if isinstance(identifier, str):
+        size, identifier = conn.query("SELECT size,item_id FROM menu_items WHERE item_name=%s", params=identifier)
+
+    elif isinstance(identifier, int):
+        size = conn.query("SELECT size FROM menu_items WHERE item_id=%s", params=identifier)
+
+    else:
+        raise TypeError("identifier is not a string or int")
+
+    if size == 'NA':
+        conn.query("DELETE FROM menu_items WHERE item_id=%s", False, identifier)
+    elif size == 'tall':
+        conn.query("DELETE FROM menu_items WHERE item_id=%s", False, identifier)
+        conn.query("DELETE FROM menu_items WHERE item_id=%s", False, identifier + 1)
+        conn.query("DELETE FROM menu_items WHERE item_id=%s", False, identifier + 2)
+    elif size == 'grande':
+        conn.query("DELETE FROM menu_items WHERE item_id=%s", False, identifier - 1)
+        conn.query("DELETE FROM menu_items WHERE item_id=%s", False, identifier)
+        conn.query("DELETE FROM menu_items WHERE item_id=%s", False, identifier + 1)
+    else:
+        conn.query("DELETE FROM menu_items WHERE item_id=%s", False, identifier - 2)
+        conn.query("DELETE FROM menu_items WHERE item_id=%s", False, identifier - 1)
+        conn.query("DELETE FROM menu_items WHERE item_id=%s", False, identifier)
+
+
+def updateMenuIngredients(id, newIngredients, sized):
+    """
+    Updates the ingredients of the item with the given id to the updated list
+    :param id: id of the menu item
+    :param newIngredients: new ingredient list or lists if sized (3)
+    :param sized: bool of if the item is sized
+    :return:
+    """
+    conn = db.DBConnection()
+    if not sized:
+        conn.query("UPDATE menu_items SET ingredients = %s, amounts = %s WHERE item_id = %s", False,
+                   (newIngredients[:][0], newIngredients[:][1], id))
+    else:
+        size = conn.query("SELECT size FROM menu_items WHERE item_id=%s", True, id)[0][0]
+        if size == 'tall':
+            conn.query("UPDATE menu_items SET ingredients = %s, amounts = %s WHERE item_id = %s", False,
+                       (newIngredients[0][:][0], newIngredients[0][:][1], id))
+            conn.query("UPDATE menu_items SET ingredients = %s, amounts = %s WHERE item_id = %s", False,
+                       (newIngredients[1][:][0], newIngredients[1][:][1], id + 1))
+            conn.query("UPDATE menu_items SET ingredients = %s, amounts = %s WHERE item_id = %s", False,
+                       (newIngredients[2][:][0], newIngredients[2][:][1], id + 2))
+        elif size == 'grande':
+            conn.query("UPDATE menu_items SET ingredients = %s, amounts = %s WHERE item_id = %s", False,
+                       (newIngredients[0][:][0], newIngredients[0][:][1], id - 1))
+            conn.query("UPDATE menu_items SET ingredients = %s, amounts = %s WHERE item_id = %s", False,
+                       (newIngredients[1][:][0], newIngredients[1][:][1], id))
+            conn.query("UPDATE menu_items SET ingredients = %s, amounts = %s WHERE item_id = %s", False,
+                       (newIngredients[2][:][0], newIngredients[2][:][1], id + 1))
+        else:
+            conn.query("UPDATE menu_items SET ingredients = %s, amounts = %s WHERE item_id = %s", False,
+                       (newIngredients[0][:][0], newIngredients[0][:][1], id - 2))
+            conn.query("UPDATE menu_items SET ingredients = %s, amounts = %s WHERE item_id = %s", False,
+                       (newIngredients[1][:][0], newIngredients[1][:][1], id - 1))
+            conn.query("UPDATE menu_items SET ingredients = %s, amounts = %s WHERE item_id = %s", False,
+                       (newIngredients[2][:][0], newIngredients[2][:][1], id))
+
+
+def getIngredients(identifier):
+    """
+    Returns the ingredients and amounts from the item in the parameters
+    :param identifier: a string or int representing the item_name or item_id respectively
+    :return: returns the list of pairs of ingredients and their amounts
+    """
+    conn = db.DBConnection()
+    paired = []
+    if isinstance(identifier, str):
+        ingredients, amounts = conn.query(f"SELECT ingredients,amounts FROM menu_items WHERE item_name='{identifier}'")
+        for i, ingredient in enumerate(ingredients):
+            paired.append((ingredient, amounts[i]))
+    elif isinstance(identifier, int):
+        ingredients, amounts = conn.query(f"SELECT ingredients,amounts FROM menu_items WHERE item_id={identifier}")
+        for i, ingredient in enumerate(ingredients):
+            paired.append((ingredient, amounts[i]))
+    else:
+        raise TypeError("identifier is neither a string nor an int")
+    return paired
+
+def restockItem(identifier, amount):
+    """
+    Restocks the item given by identifier with the given amount of the item in the database
+    :param identifier: a string or int representing the item_name or item_id respectively
+    :param amount: amount of item to be restocked
+    """
+    if amount < 0:
+        raise ValueError("cannot have a negative amount")
+    conn = db.DBConnection()
+    if isinstance(identifier, str):
+        conn.query(f'UPDATE inventory SET last_restocked = %s, quantity=quantity+%s WHERE inventory_name=%s', False, (datetime.datetime.now().date(), amount, identifier))
+
+    elif isinstance(identifier, int):
+        conn.query('UPDATE inventory SET last_restocked = %s, quantity=quantity+%s WHERE inventory_id=%s', False, (datetime.datetime.now().date(), amount, identifier))
+    else:
+        raise TypeError("identifier is neither string or int")
+
+
+def addInventoryItem(name: str, initialAmount: int, cost: float, lowStockThreshold: float = 25):
+    """
+    Add a new inventory item. Checks for existing items and proper amounts
+    :param name: name of ingredient
+    :param initialAmount: initial amount of the item
+    :param cost: cost to supply the item
+    :param lowStockThreshold: threshold to be considered low stock
+    """
+    if cost < 0:
+        raise ValueError('cost cannot be less than 0')
+    if lowStockThreshold < 0:
+        raise ValueError('lowStockThreshold cannot be less than 0')
+    if initialAmount < 0:
+        raise ValueError('initialAmount cannot be less than 0')
+    conn = db.DBConnection()
+    if len(conn.query("SELECT inventory_id FROM inventory WHERE inventory_name=%s", True, name)) > 0:
+        raise ValueError('Item already exists')
+    nextId = conn.query("SELECT MAX(inventory_id) FROM inventory")[0][0] + 1
+    conn.query('INSERT INTO inventory (inventory_id, inventory_name, quantity, costs, minimum_quantity, last_restocked) VALUES (%s, %s, %s, %s, %s, %s)', False, (nextId, name, initialAmount, cost, lowStockThreshold, datetime.date.today()))
+
+def changeInventoryCost(identifier, cost: float):
+    """
+    Changes the inventory ingredient cost in the database
+    :param identifier: a string or int representing the inventory_name or inventory_id respectively
+    :param cost: new cost of the ingredient
+    """
+    if cost < 0:
+        raise ValueError('cost cannot be less than 0')
+    conn = db.DBConnection()
+    if isinstance(identifier, str):
+        conn.query('UPDATE inventory SET costs= %s WHERE inventory_name= %s', False, (cost, identifier))
+    elif isinstance(identifier, int):
+        conn.query('UPDATE inventory SET costs= %s WHERE inventory_id= %s', False, (cost, identifier))
+    else:
+        raise TypeError("identifier is neither string or int")
+
+def changeLowStockThreshold(identifier, threshold: float):
+    """
+    Changes the low stock threshold of the given item
+    :param identifier: a string or int representing the inventory_name or inventory_id respectively
+    :param threshold: new threshold of low stock
+    :return:
+    """
+    if threshold < 0:
+        raise ValueError('cost cannot be less than 0')
+    conn = db.DBConnection()
+    if isinstance(identifier, str):
+        conn.query('UPDATE inventory SET minimum_quantity= %s WHERE inventory_name= %s', False, (threshold, identifier))
+    elif isinstance(identifier, int):
+        conn.query('UPDATE inventory SET minimum_quantity= %s WHERE inventory_id= %s', False, (threshold, identifier))
+    else:
+        raise TypeError("identifier is neither string or int")
+
+
+def getLowStock():
+    """
+    Finds all items that are considered low stock (stock < minimum quantity)
+    :return: Table of all low stock items and all columns from the database
+    """
+    conn = db.DBConnection()
+    return conn.query('SELECT * FROM inventory WHERE quantity < minimum_quantity')
+
+
+def removeIngredient(identifier, deleteIfStockLeft: bool = False, deleteIfInMenu: bool = False):
+    """
+    Safely deletes an ingredient from the database. If deleteIfInMenu is enabled, menu items that rely on the ingredient will also be removed. Use with caution
+    :param identifier: a string or int representing the inventory_name or inventory_id respectively
+    :param deleteIfStockLeft: flag that will allow deletion if stock is still in the system
+    :param deleteIfInMenu: flag that will allow deletion if menu items are still in the menu, will also delete those menu items
+    :return: a bool indicating if the item was removed and a string message corresponding to the reason
+    """
+    conn = db.DBConnection()
+    name = None
+    if isinstance(identifier, str):
+        name = identifier
+        identifier = conn.query('SELECT inventory_id FROM inventory WHERE inventory_name= %s', True, identifier)[0][0]
+    elif isinstance(identifier, int):
+        name = conn.query('SELECT inventory_name FROM inventory WHERE inventory_id= %s', True, identifier)[0][0]
+    else:
+        raise TypeError("identifier is neither string or int")
+    stockLeft = conn.query("SELECT quantity FROM inventory WHERE inventory_id = %s", True, identifier)[0][0]
+    if (not deleteIfStockLeft) and stockLeft > 0:
+        return False, "Item not removed: Stock is left"
+    # Potentially move this into if statement if not needed to show manager
+    itemsUsingIngredient = conn.query('SELECT item_name FROM menu_items WHERE %s = ANY(ingredients)')[0][:]
+    if (not deleteIfInMenu) and len(itemsUsingIngredient) > 0:
+        return False, "Item not removed: menu items use this ingredient"
+    conn.query("DELETE FROM inventory WHERE inventory_id= %s", False, identifier)
+    if stockLeft > 0 and len(itemsUsingIngredient) > 0:
+        execute_values(conn.cur, "DELETE FROM menu_items WHERE item_name= %s", itemsUsingIngredient)
+        return True, f"Item removed: Stock Left: {stockLeft}, Items Deleted: {itemsUsingIngredient}"
+    elif stockLeft > 0:
+        return True, f"Item removed: lost {stockLeft} items"
+    elif len(itemsUsingIngredient) > 0:
+        execute_values(conn.cur, "DELETE FROM menu_items WHERE item_name= %s", itemsUsingIngredient)
+        return True, f"Item removed: Items Deleted: {itemsUsingIngredient}"
 
 
