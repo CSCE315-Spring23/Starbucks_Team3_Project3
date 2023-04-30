@@ -33,9 +33,9 @@ def categorizeSales(startDate, endDate):
     Specifically meant for X and Z report, but could be used elsewhere
 
     :param startDate: A string representing the starting date to be categorized or preset datetime
-    :type startDate: str or datetime
+    :type startDate: str or datetime.datetime
     :param endDate: A string representing the ending date to be categorized or preset datetime
-    :type endDate: str or datetime
+    :type endDate: str or datetime.datetime
     :return: A dictionary matching each category to the money spent on items of the category between the two dates
     :rtype: dict[str, float]
     """
@@ -72,7 +72,7 @@ def markDaysAsReported():
     conn.query("UPDATE sales SET z_reported=true WHERE z_reported=false", False)
 
 
-def getZDateRange() -> tuple[datetime.datetime]:
+def getZDateRange() -> tuple[datetime.datetime, datetime.datetime]:
     """
     Returns the date range needed to perform the Z report
     :return: A tuple of start date and ending date
@@ -123,6 +123,32 @@ def adjustPrice(identifier, price: float):
         raise TypeError("identifier is neither string or int")
 
 
+def getMenuItems():
+    """
+    Creates a JSON friendly dictionary from the database's menu
+    :return: Dictionary modeling JSON return
+    """
+    listings = {}
+    conn = db.DBConnection()
+    table = conn.query("SELECT * FROM menu_items")
+    for i in range(len(table[0])):
+        listings[i] = {
+            'item_id': table[0][i],
+            'item_name': table[1][i],
+            'display_name': table[2][i],
+            'category': table[3][i],
+            'size': table[4][i],
+            'ingredients': getIngredients(table[0][i]),
+            'price': table[6][i]
+        }
+    return listings
+
+
+def getInventory():
+    conn = db.DBConnection()
+    return conn.query("SELECT * FROM inventory")
+
+
 def addMenuItem(name: str, display: str, category: str, sized: bool, ingredients: list[tuple[str, float]],
                 price, autocalc=False):
     """
@@ -163,18 +189,19 @@ def addMenuItem(name: str, display: str, category: str, sized: bool, ingredients
             "INSERT INTO menu_items (item_id, item_name, display_name, category, size, ingredients, amounts, price)"
             "VALUES (%s, %s, %s, %s, 'venti', %s, %s, %s)",
             False, (itemId, name + "-venti", display, category, ingredients[:][0], ingredients[:][1], price[2]))
-
+        return itemId-2  # Item id of tall
     else:
         conn.query(
             "INSERT INTO menu_items (item_id, item_name, display_name, category, size, ingredients, amounts, price)"
             "VALUES (%s, %s, %s, %s, 'NA', %s, %s, %s)",
             False, (itemId, name, display, category, ingredients[:][0], ingredients[:][1], price))
-
+        return itemId
 
 def removeMenuItem(identifier):
     """
     Remove a menu item from the menu
     :param identifier: a str for the item name or int for the item id
+    :type identifier: int or str
     """
     conn = db.DBConnection()
     size = None
@@ -244,6 +271,7 @@ def getIngredients(identifier):
     """
     Returns the ingredients and amounts from the item in the parameters
     :param identifier: a string or int representing the item_name or item_id respectively
+    :type identifier: int or str
     :return: returns the list of pairs of ingredients and their amounts
     """
     conn = db.DBConnection()
@@ -251,19 +279,21 @@ def getIngredients(identifier):
     if isinstance(identifier, str):
         ingredients, amounts = conn.query(f"SELECT ingredients,amounts FROM menu_items WHERE item_name='{identifier}'")
         for i, ingredient in enumerate(ingredients):
-            paired.append((ingredient, amounts[i]))
+            paired.append({'inventory_name': ingredient, 'amount': amounts[i]})
     elif isinstance(identifier, int):
         ingredients, amounts = conn.query(f"SELECT ingredients,amounts FROM menu_items WHERE item_id={identifier}")
         for i, ingredient in enumerate(ingredients):
-            paired.append((ingredient, amounts[i]))
+            paired.append({'inventory_name': ingredient, 'amount': amounts[i]})
     else:
         raise TypeError("identifier is neither a string nor an int")
     return paired
+
 
 def restockItem(identifier, amount):
     """
     Restocks the item given by identifier with the given amount of the item in the database
     :param identifier: a string or int representing the item_name or item_id respectively
+    :type identifier: int or str
     :param amount: amount of item to be restocked
     """
     if amount < 0:
@@ -298,11 +328,14 @@ def addInventoryItem(name: str, initialAmount: int, cost: float, lowStockThresho
     nextId = conn.query("SELECT MAX(inventory_id) FROM inventory")[0][0] + 1
     conn.query('INSERT INTO inventory (inventory_id, inventory_name, quantity, costs, minimum_quantity, last_restocked) VALUES (%s, %s, %s, %s, %s, %s)', False, (nextId, name, initialAmount, cost, lowStockThreshold, datetime.date.today()))
 
+
 def changeInventoryCost(identifier, cost: float):
     """
     Changes the inventory ingredient cost in the database
     :param identifier: a string or int representing the inventory_name or inventory_id respectively
+    :type identifier: int or str
     :param cost: new cost of the ingredient
+    :type cost: float
     """
     if cost < 0:
         raise ValueError('cost cannot be less than 0')
@@ -314,12 +347,14 @@ def changeInventoryCost(identifier, cost: float):
     else:
         raise TypeError("identifier is neither string or int")
 
+
 def changeLowStockThreshold(identifier, threshold: float):
     """
     Changes the low stock threshold of the given item
     :param identifier: a string or int representing the inventory_name or inventory_id respectively
+    :type identifier: int or str
     :param threshold: new threshold of low stock
-    :return:
+    :type threshold: float or int
     """
     if threshold < 0:
         raise ValueError('cost cannot be less than 0')
@@ -345,9 +380,13 @@ def removeIngredient(identifier, deleteIfStockLeft: bool = False, deleteIfInMenu
     """
     Safely deletes an ingredient from the database. If deleteIfInMenu is enabled, menu items that rely on the ingredient will also be removed. Use with caution
     :param identifier: a string or int representing the inventory_name or inventory_id respectively
+    :type identifier: int or str
     :param deleteIfStockLeft: flag that will allow deletion if stock is still in the system
+    :type deleteIfStockLeft: bool
     :param deleteIfInMenu: flag that will allow deletion if menu items are still in the menu, will also delete those menu items
+    :type deleteIfInMenu: bool
     :return: a bool indicating if the item was removed and a string message corresponding to the reason
+    :rtype: tuple[bool, str]
     """
     conn = db.DBConnection()
     name = None
