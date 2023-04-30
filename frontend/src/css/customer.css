@@ -1,7 +1,32 @@
+:root {
+    --banner-bg-color: #00704A;
+    --body-bg-color: bisque;
+    --box-button-bg-color: white;
+    --hover-box-button-bg-color: grey;
+    --text-color: black;
+    --hover-text-color: white;
+}
+
+
+/*General Stuff*/
+.button {
+    background-color: var(--box-button-bg-color);
+    color: var(--text-color);
+    line-height: 100px;
+    min-width: 200px;
+    text-align: center;
+    font-size: 24px;
+}
+
+.button:hover {
+    transition-duration: 0.1s;
+    background-color: var(--hover-box-button-bg-color);
+    color: var(--hover-text-color);
+}
+
 /*Banner and Footer*/
 .banner {
-    position: relative;
-    background-color: #00704A;
+    background-color: var(--banner-bg-color);
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -18,35 +43,19 @@
 }
 
 .weather-time {
-    background-color: white;
-    color: black;
+    background-color: var(--box-button-bg-color);
+    color: var(--text-color);
     line-height: 100px;
     width: 600px;
     text-align: center;
     font-size: 24px;
 }
 
-.banner-button {
-    position: relative;
-    background-color: white;
-    color: black;
+.banner-info-box {
+    background-color: var(--box-button-bg-color);
+    color: var(--text-color);
     line-height: 100px;
     min-width: 200px;
-    text-align: center;
-    font-size: 24px;
-}
-
-.banner-button:hover {
-    transition-duration: 0.1s;
-    background-color: grey;
-    color: white;
-}
-
-.banner-info-box {
-    background-color: white;
-    color: black;
-    line-height: 100px;
-    width: 200px;
     text-align: center;
     font-size: 24px;
 }
@@ -59,7 +68,7 @@
 
 /*Body*/
 .body {
-    background-color: bisque;
+    background-color: var(--body-bg-color);
     display: flex;
     flex-direction: row;
     gap: 10px;
@@ -70,8 +79,8 @@
 }
 
 .body-info-box {
-    background-color: white;
-    color: black;
+    background-color: var(--box-button-bg-color);
+    color: var(--text-color);
     line-height: 150px;
     min-width: 200px;
     text-align: center;
@@ -79,8 +88,8 @@
 }
 
 .body-button {
-    background-color: white;
-    color: black;
+    background-color: var(--box-button-bg-color);
+    color: var(--text-color);
     line-height: 150px;
     min-width: 200px;
     text-align: center;
@@ -89,8 +98,8 @@
 
 .body-button:hover {
     transition-duration: 0.1s;
-    background-color: grey;
-    color: white;
+    background-color: var(--hover-box-button-bg-color);
+    color: var(--hover-text-color);
 }
 
 .blink {
@@ -109,7 +118,7 @@
 
 /*Finalize*/
 .background {
-    background-color: bisque;
+    background-color: var(--body-bg-color);
     display: flex;
     flex-direction: row;
     gap: 10px;
@@ -130,8 +139,8 @@
 }
 
 .order {
-    background-color: white;
-    color: black;
+    background-color: var(--box-button-bg-color);
+    color: var(--text-color);
     height: 500px;
     width: 400px;
 }
@@ -147,42 +156,12 @@
 }
 
 .final-info-box {
-    background-color: white;
-    color: black;
+    background-color: var(--box-button-bg-color);
+    color: var(--text-color);
     line-height: 90px;
     width: 200px;
     text-align: center;
     font-size: 16px;
-}
-
-.back-button {
-    background-color: white;
-    color: black;
-    line-height: 150px;
-    width: 200px;
-    text-align: center;
-    font-size: 24px;
-}
-
-.back-button:hover {
-    transition-duration: 0.1s;
-    background-color: grey;
-    color: white;
-}
-
-.confirm-order-button {
-    background-color: white;
-    color: black;
-    line-height: 150px;
-    width: 200px;
-    text-align: center;
-    font-size: 24px;
-}
-
-.confirm-order-button:hover {
-    transition-duration: 0.1s;
-    background-color: grey;
-    color: white;
 }
 
 .buffer {
@@ -192,7 +171,7 @@
 
 /*Thank You*/
 .thanks {
-    background-color: bisque;
+    background-color: var(--body-bg-color);
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -203,8 +182,8 @@
 }
 
 .text-box {
-    background-color: white;
-    color: black;
+    background-color: var(--box-button-bg-color);
+    color: var(--text-color);
     line-height: 150px;
     width: 1000px;
     text-align: center;
@@ -212,8 +191,8 @@
 }
 
 .customer-view-button {
-    background-color: white;
-    color: black;
+    background-color: var(--box-button-bg-color);
+    color: var(--text-color);
     line-height: 150px;
     width: 1000px;
     text-align: center;
@@ -222,10 +201,12 @@
 
 .customer-view-button:hover {
     transition-duration: 0.1s;
-    background-color: grey;
-    color: white;
+    background-color: var(--hover-box-button-bg-color);
+    color: var(--hover-text-color);
 }
 
+
+/*Something else*/
 .google-translate {
     display: inline-block;
 }

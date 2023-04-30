@@ -10,7 +10,7 @@ function ChooseSize({ order, setSection }) {
 
   return (
     <>
-    <div className="body-info-box">ChooseSize</div>
+    <div className="body-info-box">Choose Size</div>
     {sizes.map((size, key) =>
       <button key={key} className='body-button' onClick={() => setSize(size)}>{size}</button>
     )}
