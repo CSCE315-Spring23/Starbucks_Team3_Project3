@@ -47,13 +47,13 @@ function FinalizeOrder({ orderList, totalPrice, setOrderList, setCustomerName, s
 
         <div className="buffer"></div>
 
-        <button className='back-button' onClick={() => returnToCategory()}>
+        <button className='button' onClick={() => returnToCategory()}>
           Back to Ordering
         </button>
 
         <div className="buffer"></div>
 
-        <button className='confirm-order-button' onClick={() => submitOrder()}>
+        <button className='button' onClick={() => submitOrder()}>
           Confirm Order
         </button>
       </div>
