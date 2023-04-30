@@ -1,4 +1,4 @@
-import "../../css/customer_footer.css"
+import "../../css/customer_banner.css"
 
 function CustomerFooter({ orderList, totalPrice, setSection }) {
   const finalizeOrder = () => {
@@ -6,20 +6,16 @@ function CustomerFooter({ orderList, totalPrice, setSection }) {
   }
 
   return (
-    <div className="footer">
-      <div className="footer-total-items">
+    <div className="banner">
+      <div className="info-box">
         Total Items: {orderList.length}
       </div>
 
-      <div className="footer-total-price">
+      <div className="info-box">
         Total Price: ${totalPrice}
       </div>
 
-      <div className="customer-name-input">
-        Input Customer Name
-      </div>
-
-      <div className='finalize-order-button' onClick={() => finalizeOrder()}>
+      <div className='button' onClick={() => finalizeOrder()}>
         To Checkout
       </div>
     </div>

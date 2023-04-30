@@ -5,15 +5,24 @@
     gap: 10px;
     justify-content: space-around;
     align-items: center;
-    height: 648px;
+    height: 840px;
     width: 1920px;
+}
+
+.body-info-box {
+    background-color: white;
+    color: black;
+    line-height: 150px;
+    width: 200px;
+    text-align: center;
+    font-size: 24px;
 }
 
 .body-button {
     background-color: white;
     color: black;
     line-height: 150px;
-    width: 200px;
+    min-width: 200px;
     text-align: center;
     font-size: 24px;
 }
@@ -33,6 +42,6 @@
         background-color: bisque;
     }
     25%, 50% {
-        background-color: yellow;
+        background-color: #ffd96c;
     }
 }
