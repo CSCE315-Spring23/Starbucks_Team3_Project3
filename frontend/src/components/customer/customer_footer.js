@@ -7,8 +7,9 @@ function CustomerFooter({ orderList, totalPrice, setSection }) {
     setSection(4)
   }
 
-  const [isHighContrast, setStyle] = useState(false)
 
+  // This function accesses the root element and changes the color palate.
+  const [isHighContrast, setStyle] = useState(false)
   function handleHCToggle() {
     if (!isHighContrast) {
       document.documentElement.style.setProperty('--banner-bg-color', '#012601')
