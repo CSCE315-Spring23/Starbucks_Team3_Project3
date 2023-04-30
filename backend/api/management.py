@@ -23,3 +23,10 @@ def getZReport():
         return {}, 204
     man.markDaysAsReported()
     return man.categorizeSales(start, end), 200
+
+@app.route("/management/menuitems", methods=["GET","POST"])
+def getAndUpdateMenu():
+    if request.method == "GET":
+        pass
+    else:
+        pass
