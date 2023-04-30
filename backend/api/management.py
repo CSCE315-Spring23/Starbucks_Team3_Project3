@@ -4,6 +4,7 @@ import datetime
 import private_tools.db_connection as db
 import models.management as man
 
+
 @app.route("/management/sales", methods=["GET"])
 def getAllSales():
     """
@@ -11,6 +12,7 @@ def getAllSales():
     :return: 200 if completed successfully
     """
     return man.getAllSales(), 200
+
 
 @app.route("/management/x-report", methods=["POST"])
 def getXReport():
@@ -22,6 +24,7 @@ def getXReport():
     start = dateJson['start']
     end = dateJson['end']
     return man.categorizeSales(start, end), 200
+
 
 @app.route("/management/z-report", methods=["GET"])
 def getZReport():
@@ -35,6 +38,7 @@ def getZReport():
         return {}, 204
     man.markDaysAsReported()
     return man.categorizeSales(start, end), 200
+
 
 @app.route("/management/menuitems", methods=["GET","POST","DELETE","PUT"])
 def getAndUpdateMenu():
@@ -85,7 +89,7 @@ def getAndUpdateInventory():
     :return:
     """
     if request.method == "GET":
-        return man.getInventory(), 200
+        return man.getInventory()[0][0], 200
     elif request.method == 'PUT':
         data = request.get_json()
         try:
@@ -115,7 +119,7 @@ def getAndUpdateInventory():
             return e, 400
 
 
-@app.route("management/restock", methods=["POST"])
+@app.route("/management/restock", methods=["POST"])
 def restockInventory():
     """
     Attempts to restock the given inventory items listed, should be a series of items in the form
@@ -133,7 +137,7 @@ def restockInventory():
         return e, 400
 
 
-@app.route("management/transactions", methods=["POST", "GET"])
+@app.route("/management/transactions", methods=["POST", "GET"])
 def viewTransactions():
     """
     Returns JSON table-ready form of the requested transactions. GET returns the latest 500 and

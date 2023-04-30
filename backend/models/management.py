@@ -12,12 +12,12 @@ def getAllSales():
     conn = db.DBConnection()
     res = conn.query('SELECT * FROM sales ORDER BY sales_date DESC')
     json = {}
-    for i in range(len(res[0])):
+    for i in range(len(res)):
         json[i] = {
-            'date': res[0][i],
-            'game_day': res[1][i],
-            'total_orders': res[2][i],
-            'total_sales': res[3][i]
+            'date': res[i][0],
+            'game_day': res[i][1],
+            'total_orders': res[i][2],
+            'total_sales': res[i][3]
         }
     return json
 
@@ -88,7 +88,7 @@ def getZDateRange() -> tuple[datetime.datetime, datetime.datetime]:
     :rtype: Tuple[datetime, datetime]
     """
     conn = db.DBConnection()
-    dateRange = conn.query("SELECT MIN(sales_date),MAX(sales_date) FROM sales WHERE z_reported=false")[:][0]
+    dateRange = conn.query("SELECT MIN(sales_date),MAX(sales_date) FROM sales WHERE z_reported=false")[0][:]
     return dateRange
 
 
@@ -96,7 +96,9 @@ def viewTransactions(startDate=None, endDate=None):
     """
     Returns the list of transactions capping at either 500 or all entries if start and end dates are provided
     :param startDate: starting date
+    :type startDate: datetime.datetime or str
     :param endDate:  ending date
+    :type endDate: datetime.datetime or str
     :return: The results from the performed query based on the date range
     :rtype: List[Tuple]
     """
@@ -107,18 +109,24 @@ def viewTransactions(startDate=None, endDate=None):
         conn.cur.execute("SELECT * FROM transactions ORDER BY transaction_id DESC")
         transactions = conn.cur.fetchmany(500)
     else:
+        formattedStart = startDate
+        formattedEnd = endDate
+        if isinstance(startDate, str):
+            formattedStart = datetime.datetime.strptime(startDate, '%Y-%m-%d').date()
+            formattedEnd = datetime.datetime.strptime(endDate, '%Y-%m-%d').date()
         transactions = conn.query(
-            'SELECT * FROM transactions WHERE transaction_date >= %s AND transaction_date <= %s", params=(formattedStart, formattedEnd)')
+            'SELECT * FROM transactions WHERE transaction_date >= %s AND transaction_date <= %s ORDER BY transaction_id ',
+            params=(formattedStart, formattedEnd))
     json = {}
-    for i in range(len(transactions[0])):
+    for i in range(len(transactions)):
         json[i] = {
-            'id': transactions[0][i],
-            'date': transactions[1][i],
-            'count': transactions[2][i],
-            'items': transactions[3][i],
-            'employee': transactions[4][i],
-            'game_day': transactions[5][i],
-            'total': transactions[6][i]
+            'id': transactions[i][0],
+            'date': transactions[i][1],
+            'count': transactions[i][2],
+            'items': transactions[i][3],
+            'employee': transactions[i][4],
+            'game_day': transactions[i][5],
+            'total': transactions[i][6]
         }
     return json
 
@@ -148,25 +156,84 @@ def getMenuItems():
     Creates a JSON friendly dictionary from the database's menu
     :return: Dictionary modeling JSON return
     """
-    listings = {}
+    # listings = {}
     conn = db.DBConnection()
-    table = conn.query("SELECT * FROM menu_items")
-    for i in range(len(table[0])):
-        listings[i] = {
-            'item_id': table[0][i],
-            'item_name': table[1][i],
-            'display_name': table[2][i],
-            'category': table[3][i],
-            'size': table[4][i],
-            'ingredients': getIngredients(table[0][i]),
-            'price': table[6][i]
-        }
-    return listings
+    # table = conn.query("SELECT * FROM menu_items")
+    # for i in range(len(table)):
+    #     listings[i] = {
+    #         'item_id': table[i][0],
+    #         'item_name': table[i][1],
+    #         'display_name': table[i][2],
+    #         'category': table[i][3],
+    #         'size': table[i][4],
+    #         'ingredients': getIngredients(table[i][0]),
+    #         'price': table[i][7]
+    #     }
+    # listings = [{
+    #     'item_id': item[0],
+    #     'item_name': item[1],
+    #     'display_name': item[2],
+    #     'category': item[3],
+    #     'size': item[4],
+    #     'ingredients': getIngredients(item[0]),
+    #     'price': item[7]
+    # } for item in table]
+    # New method was still too slow returning unoptimized table instead
+    # 73 seconds vs 400 ms for returned table
+    table = conn.query("""
+    SELECT json_build_object(
+        'item_id', item_id,
+        'item_name', item_name,
+        'display_name', display_name,
+        'category', category,
+        'size', size,
+        'ingredients', json_agg(json_build_object(
+            'inventory_name', ingredient,
+            'amount', amount
+        )),
+        'price', price
+    ) AS listing
+    FROM (
+        SELECT mi.item_id, mi.item_name, mi.display_name, mi.category, mi.size,
+               i.ingredient, i.amount, mi.price
+        FROM menu_items mi
+        JOIN (
+            SELECT item_id, unnest(ingredients) AS ingredient, unnest(amounts) AS amount
+            FROM menu_items
+    ) i ON mi.item_id = i.item_id
+    ) items
+    GROUP BY item_id, item_name, display_name, category, size, price
+    """)
+    return table
 
 
 def getInventory():
     conn = db.DBConnection()
-    return conn.query("SELECT * FROM inventory")
+    # table = conn.query("SELECT * FROM inventory ORDER BY inventory_name")
+    # listings = {}
+    # for i in range(len(table)):
+    #     listings[i] = {
+    #         'inventory_id': table[i][0],
+    #         'inventory_name': table[i][1],
+    #         'quantity': table[i][2],
+    #         'cost': table[i][3],
+    #         'threshold': table[i][4],
+    #         'restockedOn': table[i][5]
+    #     }
+
+    results = conn.query("""
+            SELECT json_agg(json_build_object(
+                'inventory_id', inventory_id,
+                'inventory_name', inventory_name,
+                'quantity', quantity,
+                'cost', costs,
+                'threshold', minimum_quantity,
+                'restockedOn', last_restocked
+            )) AS listings
+            FROM inventory
+        """)
+
+    return results
 
 
 def addMenuItem(name: str, display: str, category: str, sized: bool, ingredients: list[tuple[str, float]],
@@ -183,7 +250,7 @@ def addMenuItem(name: str, display: str, category: str, sized: bool, ingredients
     """
     conn = db.DBConnection()
     itemId = conn.query("SELECT MAX(item_id) FROM menu_items")[0][0] + 1
-    if len(conn.query(f"SELECT item_name FROM menu_items WHERE item_name LIKE {name + '%'}")[0]) < 1:
+    if len(conn.query(f"SELECT item_name FROM menu_items WHERE item_name LIKE {name + '%'}")) < 1:
         raise ValueError(f'{name} is already in the database')
     if price < 0:
         raise ValueError("Price cannot be less than 0")
@@ -256,7 +323,6 @@ def updateMenuIngredients(id, newIngredients, sized):
     :param id: id of the menu item
     :param newIngredients: new ingredient list or lists if sized (3)
     :param sized: bool of if the item is sized
-    :return:
     """
     conn = db.DBConnection()
     if not sized:
@@ -294,19 +360,42 @@ def getIngredients(identifier):
     :type identifier: int or str
     :return: returns the list of pairs of ingredients and their amounts
     """
+    # conn = db.DBConnection()
+    # paired = []
+    # if isinstance(identifier, str):
+    #     ingredients, amounts = conn.query(f"SELECT ingredients,amounts FROM menu_items WHERE item_name='{identifier}'")[0]
+    #     for i, ingredient in enumerate(ingredients):
+    #         paired.append({'inventory_name': ingredient, 'amount': amounts[i]})
+    # elif isinstance(identifier, int):
+    #     ingredients, amounts = conn.query(f"SELECT ingredients,amounts FROM menu_items WHERE item_id={identifier}")[0]
+    #     for i, ingredient in enumerate(ingredients):
+    #         paired.append({'inventory_name': ingredient, 'amount': amounts[i]})
+    # else:
+    #     raise TypeError("identifier is neither a string nor an int")
+    # return paired
     conn = db.DBConnection()
-    paired = []
     if isinstance(identifier, str):
-        ingredients, amounts = conn.query(f"SELECT ingredients,amounts FROM menu_items WHERE item_name='{identifier}'")
-        for i, ingredient in enumerate(ingredients):
-            paired.append({'inventory_name': ingredient, 'amount': amounts[i]})
+        query = f"""
+                SELECT i.inventory_name, i.amount
+                FROM (
+                    SELECT item_id, UNNEST(ingredients) AS inventory_name, UNNEST(amounts) AS amount
+                    FROM menu_items
+                    WHERE item_name = '{identifier}'
+                ) i
+            """
     elif isinstance(identifier, int):
-        ingredients, amounts = conn.query(f"SELECT ingredients,amounts FROM menu_items WHERE item_id={identifier}")
-        for i, ingredient in enumerate(ingredients):
-            paired.append({'inventory_name': ingredient, 'amount': amounts[i]})
+        query = f"""
+                SELECT i.inventory_name, i.amount
+                FROM (
+                    SELECT item_id, UNNEST(ingredients) AS inventory_name, UNNEST(amounts) AS amount
+                    FROM menu_items
+                    WHERE item_id = {identifier}
+                ) i
+            """
     else:
         raise TypeError("identifier is neither a string nor an int")
-    return paired
+    results = conn.query(query)
+    return [{'inventory_name': item[0], 'amount': item[1]} for item in results]
 
 
 def restockItem(identifier, amount):
@@ -394,7 +483,18 @@ def getLowStock():
     :return: Table of all low stock items and all columns from the database
     """
     conn = db.DBConnection()
-    return conn.query('SELECT * FROM inventory WHERE quantity < minimum_quantity')
+    table = conn.query('SELECT * FROM inventory WHERE quantity < minimum_quantity')
+    listings = {}
+    for i in range(len(table)):
+        listings[i] = {
+            'inventory_id': table[i][0],
+            'inventory_name': table[i][1],
+            'quantity': table[i][2],
+            'cost': table[i][3],
+            'threshold': table[i][4],
+            'restockedOn': table[i][5]
+        }
+    return listings
 
 
 def removeIngredient(identifier, deleteIfStockLeft: bool = False, deleteIfInMenu: bool = False):
