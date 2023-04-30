@@ -5,7 +5,7 @@ import image from "../../pictures/starbucks-logo-png-25.png"
 function CustomerBanner({ setSection }) {
   const navigate = useNavigate();
   const [showTranslate, setShowTranslate] = useState(false);
-  const [weather, setWeather] = useState({'main': 'cloudy', 'temp': 97})
+  const [weather, setWeather] = useState({'name': 'College Station', 'main': 'cloudy', 'temp': 83})
 
   {/* Code below will toggle the Google Translate widget on click*/ }
   const HandleTranslateClick = () => {
@@ -25,7 +25,7 @@ function CustomerBanner({ setSection }) {
   return (
     <div className='banner'>
       <div className="starbucks-logo" style={{ backgroundImage: `url(${image}` }}></div>
-      <div className='weather-time'> {weather.main} | Temperature: {weather.temp}
+      <div className='weather-time'> {weather.name} | {weather.main} | Temperature: {weather.temp}
       </div>
 
       <button className='button'> Show Full Menu </button>
