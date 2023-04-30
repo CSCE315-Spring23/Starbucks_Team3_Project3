@@ -10,7 +10,16 @@ def getAllSales():
     :rtype: list[Tuple[dateTime, boolean, integer, float, boolean]]
     """
     conn = db.DBConnection()
-    return conn.query('SELECT * FROM sales ORDER BY sales_date DESC')
+    res = conn.query('SELECT * FROM sales ORDER BY sales_date DESC')
+    json = {}
+    for i in range(len(res[0])):
+        json[i] = {
+            'date': res[0][i],
+            'game_day': res[1][i],
+            'total_orders': res[2][i],
+            'total_sales': res[3][i]
+        }
+    return json
 
 
 def matchItemToCategoryAndPrice() -> dict:
@@ -100,7 +109,18 @@ def viewTransactions(startDate=None, endDate=None):
     else:
         transactions = conn.query(
             'SELECT * FROM transactions WHERE transaction_date >= %s AND transaction_date <= %s", params=(formattedStart, formattedEnd)')
-    return transactions
+    json = {}
+    for i in range(len(transactions[0])):
+        json[i] = {
+            'id': transactions[0][i],
+            'date': transactions[1][i],
+            'count': transactions[2][i],
+            'items': transactions[3][i],
+            'employee': transactions[4][i],
+            'game_day': transactions[5][i],
+            'total': transactions[6][i]
+        }
+    return json
 
 
 def adjustPrice(identifier, price: float):
@@ -327,6 +347,7 @@ def addInventoryItem(name: str, initialAmount: int, cost: float, lowStockThresho
         raise ValueError('Item already exists')
     nextId = conn.query("SELECT MAX(inventory_id) FROM inventory")[0][0] + 1
     conn.query('INSERT INTO inventory (inventory_id, inventory_name, quantity, costs, minimum_quantity, last_restocked) VALUES (%s, %s, %s, %s, %s, %s)', False, (nextId, name, initialAmount, cost, lowStockThreshold, datetime.date.today()))
+    return nextId
 
 
 def changeInventoryCost(identifier, cost: float):
@@ -415,3 +436,41 @@ def removeIngredient(identifier, deleteIfStockLeft: bool = False, deleteIfInMenu
         return True, f"Item removed: Items Deleted: {itemsUsingIngredient}"
 
 
+def voidItem(identifier, amount):
+    """
+    Void an amount of  the item given by identifier in the database
+    :param identifier: a string or int representing the item_name or item_id respectively
+    :type identifier: int or str
+    :param amount: amount of item to be restocked
+    :type amount: float
+    """
+    if amount < 0:
+        raise ValueError("cannot have a negative amount")
+    conn = db.DBConnection()
+    if isinstance(identifier, str):
+        if conn.query("SELECT quantity FROM inventory WHERE inventory_name=%s", True, identifier)[0][0] < amount:
+            raise ValueError("amount to void is greater than available inventory in database")
+        conn.query(f'UPDATE inventory SET last_restocked = %s, quantity=quantity+%s WHERE inventory_name=%s', False, (datetime.datetime.now().date(), amount, identifier))
+
+    elif isinstance(identifier, int):
+        if conn.query("SELECT quantity FROM inventory WHERE inventory_id=%s", True, identifier)[0][0] < amount:
+            raise ValueError("amount to void is greater than available inventory in database")
+        conn.query('UPDATE inventory SET last_restocked = %s, quantity=quantity+%s WHERE inventory_id=%s', False, (datetime.datetime.now().date(), amount, identifier))
+    else:
+        raise TypeError("identifier is neither string or int")
+
+
+def getAmountOfInventroy(identifier):
+    """
+    Get the quantity of item in the database
+    :param identifier: a string or int representing the item_name or item_id respectively
+    :type identifier: int or str
+    """
+    conn = db.DBConnection()
+    if isinstance(identifier, str):
+        return conn.query(f'SELECT quantity FROM inventory WHERE inventory_name=%s', True, identifier)[0][0]
+
+    elif isinstance(identifier, int):
+        return conn.query(f'SELECT quantity FROM inventory WHERE inventory_id=%s', True, identifier)[0][0]
+    else:
+        raise TypeError("identifier is neither string or int")
