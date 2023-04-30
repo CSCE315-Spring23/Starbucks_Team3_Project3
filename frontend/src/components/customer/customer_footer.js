@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 
-import "../../css/customer.css"
-
 function CustomerFooter({ orderList, totalPrice, setSection }) {
   const finalizeOrder = () => {
     setSection(4)

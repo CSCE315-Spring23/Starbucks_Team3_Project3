@@ -6,6 +6,8 @@ import CustomerFooter from "../components/customer/customer_footer"
 import FinalizeOrder from '../components/customer/finalize_order'
 import ThankYou from '../components/customer/thank_you'
 
+import '../css/customer.css'
+
 function Customer() {
   const [orderList, setOrderList] = useState([]);
   // const [discountList, setDiscountList] = useState([]);

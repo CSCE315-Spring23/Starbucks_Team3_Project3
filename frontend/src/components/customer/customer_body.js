@@ -4,9 +4,6 @@ import ChooseCategory from './body/choose_category'
 import ChooseItem from './body/choose_item'
 import ChooseSize from './body/choose_size'
 import ChooseAddons from './body/choose_addons'
-import FinalizeOrder from './finalize_order'
-// import background from "../../pictures/coffee-wallpaper.png"
-
 
 function CustomerBody({ orderList, setOrderList, totalPrice, setTotalPrice, currSection, setSection}) {
   // Sections: Category -> Item -> size -> addons
