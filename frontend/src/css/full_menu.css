@@ -1,9 +1,11 @@
 .background {
-    background: repeating-linear-gradient(45deg, #000000, #000000 50px, #111111 50px, #111111 100px);
+    background: repeating-linear-gradient(45deg, #000000, #000000 50px, #151515 50px, #151515 100px);
     height: 100%;
-    width: 100%;
+    min-width: 1250px;
+    width: 97vw;
     display: inline-block;
     margin: 20px;
+
 }
 
 h1 {

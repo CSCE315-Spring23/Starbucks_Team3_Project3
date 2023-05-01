@@ -11,7 +11,7 @@ function MenuBoard() {
   // }, [])
 
   return (
-
+    <div className='center'>
       <div className='background'>
         <div className='center'>
           <div>
@@ -199,6 +199,7 @@ function MenuBoard() {
           </div>
         </div>
       </div>
+    </div>
   )
 }
 
