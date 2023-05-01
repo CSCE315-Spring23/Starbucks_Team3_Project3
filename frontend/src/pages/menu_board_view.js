@@ -2,14 +2,24 @@ import React, {useEffect, useState} from 'react'
 import "../css/full_menu.css"
 
 function MenuBoard() {
- 
+  const [weather, setWeather] = useState({'name': 'College Station', 'main': 'cloudy', 'temp': 83})
+  // const [value, setValue] = useState([]);
+  // useEffect(() => {
+  //   fetch("http://localhost:5000/weather/77840")
+  //   .then(response => response.json())
+  //   .then(result => setWeather(result))
+  // }, [])
+
   return (
 
-    <div className='background'>
-      <div>
-        <h1>Menu Board</h1>
-      </div>
-      <div>
+      <div className='background'>
+        <div className='center'>
+          <div>
+            <h1>Menu Board</h1>
+          </div>
+          <div className='weather-time'>{weather.name} | {weather.main} | Temperature: {weather.temp}</div>
+        </div>
+        <div>
         <body>
           <div className='menu-items'>
             <h2>Hot and Iced Coffees:</h2>
@@ -184,8 +194,11 @@ function MenuBoard() {
             <p>$2.95</p>
           </div>
         </body>
+          <div className='center'>
+            <div className='back'>Back</div>
+          </div>
+        </div>
       </div>
-    </div>
   )
 }
 
