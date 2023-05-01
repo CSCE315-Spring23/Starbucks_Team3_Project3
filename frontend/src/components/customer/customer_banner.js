@@ -15,6 +15,11 @@ function CustomerBanner({ setSection }) {
     }
   };
 
+  const loginWithGoogle = () => {
+    console.log("login with google")
+    window.location.replace("http://localhost:5000/login");
+  }
+
     // const [value, setValue] = useState([]);
     // useEffect(() => {
     //   fetch("http://localhost:5000/weather/77840")
@@ -30,7 +35,7 @@ function CustomerBanner({ setSection }) {
 
       <button className='button'> Show Full Menu </button>
 
-      <button className='button' onClick={() => navigate("/login")}> Login Button </button>
+      <button className='button' onClick={() => loginWithGoogle()}> Login Button </button>
 
       <button className='button' onClick={HandleTranslateClick}> Change Language </button>
       {showTranslate && (
