@@ -1,4 +1,4 @@
-import "../App.css"
+import "../css/server.css"
 import { useEffect, useState } from 'react';
 
 function Server() {
@@ -47,47 +47,75 @@ function Server() {
   }
 
   return (
-    <div className="App">
-      <div className="current-order-list">
-        <h2>Current Order List</h2>
-            <table className='order-list-table'>
-              <thead>
-                <tr>
-                  <td>Name</td>
-                  <td>Category</td>
-                  <td>Price</td>
-                </tr>
-              </thead>
-              <tbody>
-                { orderList ? orderList.map((item, key) => <tr key={key}>
-                  <td>{item.name}</td>
-                  <td>{item.category}</td>
-                  <td>{item.price}</td>
-                  <td>
-                    <button className='button-5' onClick={() => removeItem(item)}>Remove</button>
-                  </td>
+    <div>
 
-                </tr>)
-
-                : 'No Item in Cart'}
-              </tbody>
-            </table>
+      <div className='server-banner'>
+        <div className='weather-time'>
+          add weather api here
+        </div>
+        <button className='button-5'>
+          go to manager page
+        </button>
+        <div className="server-input-employee">
+          Employee ----
+          <input
+            type="text"
+            onChange={(e) => setEmployee(e.target.value)}
+          />
+          <button className="button-5" onClick={() => processOrder()}>Submit Order</button>
+        </div>
       </div>
 
-      <div className="server-input-employee">
-        Employee ----
-        <input
-        type="text"
-        onChange={(e) => setEmployee(e.target.value)}
-        />
-        <button className="button-5" onClick={() => processOrder()}>Submit Order</button>
+      <div className='server-body-container'>
+        <div className="current-order-list">
+          <h2>Current Order List</h2>
+          <table className='order-list-table'>
+            <thead>
+            <tr>
+              <td>Name</td>
+              <td>Category</td>
+              <td>Price</td>
+            </tr>
+            </thead>
+            <tbody>
+            { orderList ? orderList.map((item, key) => <tr key={key}>
+                <td>{item.name}</td>
+                <td>{item.category}</td>
+                <td>{item.price}</td>
+                <td>
+                  <button className='button-5' onClick={() => removeItem(item)}>Remove</button>
+                </td>
+
+              </tr>)
+
+              : 'No Item in Cart'}
+            </tbody>
+          </table>
+        </div>
+
+        <div className='server-body-container-right'>
+          <button className='server-category-bar'>
+            add categories here
+          </button>
+
+          <div className='server-container-below-categories'>
+            <div className="menu-item-buttons">
+              {menuItems.map((item, key) =>
+                <button key={key} className="button-6" onClick={() => addItemToOrder(item)}>{item.name}</button>
+              )}
+            </div>
+          </div>
+
+        </div>
+
+        <div className='server-addons'>
+          add add-on items here
+        </div>
+
       </div>
+
       
-      <div className="menu-item-buttons">
-        {menuItems.map((item, key) =>
-          <button key={key} className="button-6" onClick={() => addItemToOrder(item)}>{item.name}</button>
-        )}
-      </div>
+
 
 
     </div>
