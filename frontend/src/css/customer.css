@@ -5,6 +5,7 @@
     --hover-box-button-bg-color: grey;
     --text-color: black;
     --hover-text-color: white;
+    font-family: "Atkinson-Regular";
 }
 
 
@@ -16,6 +17,7 @@
     min-width: 200px;
     text-align: center;
     font-size: 24px;
+    font-family: "Atkinson-Regular";
 }
 
 .button:hover {
@@ -40,6 +42,7 @@
     width: 100px;
     text-align: center;
     font-size: 24px;
+    
 }
 
 .weather-time {
@@ -94,6 +97,7 @@
     min-width: 200px;
     text-align: center;
     font-size: 24px;
+    font-family: "Atkinson-Regular";
 }
 
 .body-button:hover {

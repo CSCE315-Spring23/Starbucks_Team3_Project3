@@ -1,4 +1,9 @@
 import './App.css';
+import './fonts/TTF/Atkinson-Hyperlegible-Bold-102.ttf'
+import './fonts/TTF/Atkinson-Hyperlegible-BoldItalic-102.ttf'
+import './fonts/TTF/Atkinson-Hyperlegible-Italic-102.ttf'
+import './fonts/TTF/Atkinson-Hyperlegible-Regular-102.ttf'
+
 import {
   BrowserRouter as Router,
   Routes,
