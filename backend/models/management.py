@@ -14,16 +14,26 @@ def getAllSales():
     :rtype: list[Tuple[dateTime, boolean, integer, float, boolean]]
     """
     conn = db.DBConnection()
-    res = conn.query('SELECT * FROM sales ORDER BY sales_date DESC')
-    json = {}
-    for i in range(len(res)):
-        json[i] = {
-            'date': res[i][0],
-            'game_day': res[i][1],
-            'total_orders': res[i][2],
-            'total_sales': res[i][3]
-        }
-    return json
+    # res = conn.query('SELECT * FROM sales ORDER BY sales_date DESC')
+    # json = {}
+    # for i in range(len(res)):
+    #     json[i] = {
+    #         'date': res[i][0],
+    #         'game_day': res[i][1],
+    #         'total_orders': res[i][2],
+    #         'total_sales': res[i][3]
+    #     }
+    # return json
+    results = conn.query("""
+            SELECT json_agg(json_build_object(
+                'date', sales_date,
+                'game_day', game_day,
+                'total_orders', total_orders,
+                'total_sales', total_sales
+            )) AS listings
+            FROM sales
+        """)
+    return results[0][0]
 
 
 def matchItemToCategoryAndPrice() -> dict:
@@ -110,29 +120,56 @@ def viewTransactions(startDate=None, endDate=None):
     transactions = None
     if startDate == None and endDate == None:
         # Bypass our custom class to execute a custom command to only grab first 500
-        conn.cur.execute("SELECT * FROM transactions ORDER BY transaction_id DESC")
-        transactions = conn.cur.fetchmany(500)
+        # conn.cur.execute("SELECT * FROM transactions ORDER BY transaction_id DESC")
+        # transactions = conn.cur.fetchmany(500)
+        results = conn.query("""
+                SELECT json_build_object(
+                    'id', transaction_id,
+                    'date', transaction_date,
+                    'count', order_size,
+                    'items', order_list,
+                    'employee', employee,
+                    'game_day', game_day,
+                    'total', order_total
+                ) AS listings
+                FROM transactions GROUP BY transaction_id ORDER BY transaction_id DESC LIMIT 500
+            """)
     else:
         formattedStart = startDate
         formattedEnd = endDate
         if isinstance(startDate, str):
             formattedStart = datetime.datetime.strptime(startDate, '%Y-%m-%d').date()
             formattedEnd = datetime.datetime.strptime(endDate, '%Y-%m-%d').date()
-        transactions = conn.query(
-            'SELECT * FROM transactions WHERE transaction_date >= %s AND transaction_date <= %s ORDER BY transaction_id ',
-            params=(formattedStart, formattedEnd))
-    json = {}
-    for i in range(len(transactions)):
-        json[i] = {
-            'id': transactions[i][0],
-            'date': transactions[i][1],
-            'count': transactions[i][2],
-            'items': transactions[i][3],
-            'employee': transactions[i][4],
-            'game_day': transactions[i][5],
-            'total': transactions[i][6]
-        }
-    return json
+        # transactions = conn.query(
+        #     'SELECT * FROM transactions WHERE transaction_date >= %s AND transaction_date <= %s ORDER BY transaction_id DESC',
+        #     params=(formattedStart, formattedEnd))
+        results = conn.query("""
+                SELECT json_agg(json_build_object(
+                    'id', transaction_id,
+                    'date', transaction_date,
+                    'count', order_size,
+                    'items', order_list,
+                    'employee', employee,
+                    'game_day', game_day,
+                    'total', order_total
+                )) AS listings
+                FROM transactions WHERE transaction_date >= %s AND transaction_date <= %s GROUP BY transaction_id ORDER BY transaction_id DESC
+            """)
+    # json = {}
+    # for i in range(len(transactions)):
+    #     json[i] = {
+    #         'id': transactions[i][0],
+    #         'date': transactions[i][1],
+    #         'count': transactions[i][2],
+    #         'items': transactions[i][3],
+    #         'employee': transactions[i][4],
+    #         'game_day': transactions[i][5],
+    #         'total': transactions[i][6]
+    #     }
+    # return json
+    return [x[0] for x in results]
+
+
 
 
 def adjustPrice(identifier, price: float):

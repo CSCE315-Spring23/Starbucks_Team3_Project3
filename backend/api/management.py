@@ -138,7 +138,7 @@ def restockInventory():
 
 
 @app.route("/management/voiditem", methods=["POST"])
-def restockInventory():
+def voidInventoryItem():
     """
     Attempts to void the given inventory item listed by the given amount
     {inventory_name, amount}
