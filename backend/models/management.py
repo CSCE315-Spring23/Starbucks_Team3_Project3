@@ -632,11 +632,11 @@ def addEmployee(name, email, management=False):
     #     return False, 'Email already in use'
     try:
         if management:
-            nextId = conn.query("SELECT max(employee_id) FROM employees WHERE employee_id >= 2000")[0][0] + 1
+            nextId = conn.query("SELECT max(employee_id) FROM employees WHERE employee_id < 2000")[0][0] + 1
             conn.query("INSERT INTO employees (employee_id, employee_name, employee_role, access_mgmt, email) VALUES "
                        "(%s, %s, 'manager', true, %s)", False, (nextId, name, email))
         else:
-            nextId = conn.query("SELECT max(employee_id) FROM employees WHERE employee_id < 2000")[0][0] + 1
+            nextId = conn.query("SELECT max(employee_id) FROM employees WHERE employee_id >= 2000")[0][0] + 1
             conn.query("INSERT INTO employees (employee_id, employee_name, employee_role, access_mgmt, email) VALUES "
                        "(%s, %s, 'server', false, %s)", False, (nextId, name, email))
         return True, f'Employee added with id {nextId}'
