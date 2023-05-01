@@ -175,3 +175,13 @@ def getAndUpdateEmployees():
         else:
             man.removeEmployee(data['email'])
         return f'Employee has been removed', 200
+
+
+@app.route("/management/lowstock", methods=["GET", "POST"])
+def lowStock():
+    if request.method == 'GET':
+        return man.getLowStock(), 200
+    else:
+        data = request.get_json()
+        man.changeLowStockThreshold(data['inventory_name'], data['threshold'])
+        return "Threshold has been changed", 200

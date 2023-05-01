@@ -494,18 +494,29 @@ def getLowStock():
     :return: Table of all low stock items and all columns from the database
     """
     conn = db.DBConnection()
-    table = conn.query('SELECT * FROM inventory WHERE quantity < minimum_quantity')
-    listings = {}
-    for i in range(len(table)):
-        listings[i] = {
-            'inventory_id': table[i][0],
-            'inventory_name': table[i][1],
-            'quantity': table[i][2],
-            'cost': table[i][3],
-            'threshold': table[i][4],
-            'restockedOn': table[i][5]
-        }
-    return listings
+    # table = conn.query('SELECT * FROM inventory WHERE quantity < minimum_quantity')
+    # listings = {}
+    # for i in range(len(table)):
+    #     listings[i] = {
+    #         'inventory_id': table[i][0],
+    #         'inventory_name': table[i][1],
+    #         'quantity': table[i][2],
+    #         'cost': table[i][3],
+    #         'threshold': table[i][4],
+    #         'restockedOn': table[i][5]
+    #     }
+    results = conn.query("""
+            SELECT json_agg(json_build_object(
+                'inventory_id', inventory_id,
+                'inventory_name', inventory_name,
+                'quantity', quantity,
+                'cost', costs,
+                'threshold', minimum_quantity,
+                'restockedOn', last_restocked
+            )) AS listings
+            FROM inventory WHERE quantity < minimum_quantity
+        """)
+    return results[0][0]
 
 
 def removeIngredient(identifier, deleteIfStockLeft: bool = False, deleteIfInMenu: bool = False):
