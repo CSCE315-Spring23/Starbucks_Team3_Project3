@@ -68,4 +68,28 @@ body {
     font-size: 24px;
     display: inline-block;
     margin: 10px;
+    border: solid;
 }
+
+.back:hover {
+    transition-duration: 0.1s;
+    background-color: grey;
+    color: white;
+}
+
+.starbucks-logo {
+    height: 100px;
+    width: 100px;
+    text-align: center;
+    font-size: 50px;
+    display: inline-block;
+    margin: 20px;
+}
+
+.starbucks-banner {
+    margin: 20px;
+    min-width: 1250px;
+    width: 97vw;
+    background: linear-gradient(90deg, #00704A, #22926C, #ffffff, #ffffff, #22926C, #00704A);
+}
+
