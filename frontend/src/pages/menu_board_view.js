@@ -1,15 +1,15 @@
-import React from 'react'
-
+import React, {useEffect, useState} from 'react'
 import "../css/full_menu.css"
 
 function MenuBoard() {
+ 
   return (
 
-      <div className='background'>
-        <div>
-          <h1>Menu Board</h1>
-        </div>
-        <div>
+    <div className='background'>
+      <div>
+        <h1>Menu Board</h1>
+      </div>
+      <div>
         <body>
           <div className='menu-items'>
             <h2>Hot and Iced Coffees:</h2>
@@ -184,8 +184,8 @@ function MenuBoard() {
             <p>$2.95</p>
           </div>
         </body>
-        </div>
       </div>
+    </div>
   )
 }
 
