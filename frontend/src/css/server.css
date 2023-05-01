@@ -132,7 +132,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    width: 1120px;
+    width: 1025px;
 }
 
 .server-category-bar {
@@ -159,7 +159,7 @@
 .server-addons {
     background-color: yellow;
     display: flex;
-    width: 350px;
+    width: 445px;
     min-height: 600px;
     text-align: center;
     align-items: center;
