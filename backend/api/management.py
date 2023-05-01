@@ -137,6 +137,21 @@ def restockInventory():
         return e, 400
 
 
+@app.route("/management/voiditem", methods=["POST"])
+def restockInventory():
+    """
+    Attempts to void the given inventory item listed by the given amount
+    {inventory_name, amount}
+    :return: 204 on success and 400 on fail
+    """
+    try:
+        data = request.get_json()
+        man.voidItem(data['inventory_name'], data['amount'])
+        return "", 204
+    except Exception as e:
+        return e, 400
+
+
 @app.route("/management/transactions", methods=["POST", "GET"])
 def viewTransactions():
     """
