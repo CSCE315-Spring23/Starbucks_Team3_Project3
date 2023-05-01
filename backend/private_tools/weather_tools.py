@@ -3,6 +3,13 @@ import configparser
 import requests
 import json
 def apiKey():
+    """
+    Retrieves the API key for the Openweathermap API
+    :param x: None
+    :type x: None
+    :return: API Key
+    :rtype: string
+    """
     # configurator = configparser.ConfigParser()
     # configurator.read('config.ini')
     # return configurator['openweathermap']['api']
@@ -11,6 +18,13 @@ def apiKey():
         return api
 
 def getWeather(zipCode):
+    """
+    Makes an API call to openweathermap and returns various weather data for that inputted zip code..
+    :param x: The zip code of place we wish to get the information for.
+    :type x: int
+    :return: Weather information
+    :rtype: JSON
+    """
     returnJSON = {}
     headers = {'Accept': 'application/json'}
     url = "https://api.openweathermap.org/data/2.5/weather?zip={}&units=imperial&appid={}".format(zipCode, apiKey())
@@ -23,4 +37,4 @@ def getWeather(zipCode):
 
 
 #Uncomment to test results for API, can change zipcodes
-print(getWeather(77840))
+#print(getWeather(77840))
