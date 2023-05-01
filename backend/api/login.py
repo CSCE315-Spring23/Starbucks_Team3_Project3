@@ -18,6 +18,13 @@ flow = Flow.from_client_secrets_file(
 )
 
 def login_is_required(function):
+    """
+    Verifies the login attempt. Provides error if not a google_id
+    :param x: function
+    :type x: any
+    :return: Will return the error message or  function
+    :rtype: any
+    """
     def wrapper(*args, **kwargs):
         if "google_id" not in session:
             return abort(401)  # Authorization required
@@ -29,6 +36,13 @@ def login_is_required(function):
 
 @app.route("/login")
 def login():
+    """
+    Takes you to the OAuth login screen
+    :param x: None
+    :type x: None
+    :return: Redirects user to the login page
+    :rtype: function
+    """
     authorization_url, state = flow.authorization_url()
     session["state"] = state
     return redirect(authorization_url)
@@ -36,6 +50,13 @@ def login():
 
 @app.route("/callback")
 def callback():
+    """
+    Takes you to the callback page after failed login
+    :param x: authorization request
+    :type x: string
+    :return: Redirects user to protected_area
+    :rtype: function
+    """
     flow.fetch_token(authorization_response=request.url)
 
     if not session["state"] == request.args["state"]:
@@ -59,18 +80,39 @@ def callback():
 
 @app.route("/logout")
 def logout():
+    """
+    Logs the user out
+    :param x: Noe
+    :type x: None
+    :return: Redirects user to the home page
+    :rtype: function
+    """
     session.clear()
     return redirect("/")
 
 
 @app.route("/")
 def index():
+    """
+    This function creates the login button
+    :param x: None
+    :type x: None
+    :return: Returns html code for login button
+    :rtype: String
+    """
     return "Login <a href='/login'><button>Login</button></a>"
 
 
 @app.route("/protected_area")
 @login_is_required
 def protected_area():
+    """
+    User enters session
+    :param x: None
+    :type x: None
+    :return: Returns a welcome message and logout button
+    :rtype: string
+    """
     return f"Hello {session['name']}! <br/> <a href='/logout'><button>Logout</button></a>"
 
 
