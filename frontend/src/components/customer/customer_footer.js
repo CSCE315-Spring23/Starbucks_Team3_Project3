@@ -30,7 +30,7 @@ function CustomerFooter({ orderList, totalPrice, setSection }) {
   }
 
   return (
-        <div className="banner">
+        <div className="footer">
 
           <button className="button" onClick={handleHCToggle}> Toggle High Contrast </button>
 
