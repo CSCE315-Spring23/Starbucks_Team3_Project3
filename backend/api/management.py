@@ -151,3 +151,27 @@ def viewTransactions():
         start = dateJson['start']
         end = dateJson['end']
         return man.viewTransactions(start, end), 200
+
+
+@app.route("/management/employees", methods=["GET", "POST", "DELETE"])
+def getAndUpdateEmployees():
+    """
+    Modifies the employee list or retrieves it according to the request method:
+    GET retrieves all entries
+    POST adds a new employee
+    DELETE removes an employee
+    :return: 200 on success, 400 on failure
+    """
+    if request.method == 'GET':
+        return man.getEmployees(), 200
+    elif request.method == 'POST':
+        data = request.get_json()
+        resp = man.addEmployee(data['name'], data['email'], data['management'])
+        return resp[1], 200 if resp[0] else 400
+    else:
+        data = request.get_json()
+        if 'id' in data:
+            man.removeEmployee(data['id'])
+        else:
+            man.removeEmployee(data['email'])
+        return f'Employee has been removed', 200

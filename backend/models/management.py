@@ -1,6 +1,10 @@
 import datetime
+
+import psycopg2.errors
+
 import private_tools.db_connection as db
 from psycopg2.extras import execute_values
+import re
 
 def getAllSales():
     """
@@ -204,10 +208,17 @@ def getMenuItems():
     ) items
     GROUP BY item_id, item_name, display_name, category, size, price
     """)
+
+    table = [x[0] for x in table]
     return table
 
 
 def getInventory():
+    """
+    Returns JSON formatted list of inventory items
+    :return: JSON formatted list of inventory items
+    :rtype: list[dict, ...]
+    """
     conn = db.DBConnection()
     # table = conn.query("SELECT * FROM inventory ORDER BY inventory_name")
     # listings = {}
@@ -293,28 +304,28 @@ def removeMenuItem(identifier):
     conn = db.DBConnection()
     size = None
     if isinstance(identifier, str):
-        size, identifier = conn.query("SELECT size,item_id FROM menu_items WHERE item_name=%s", params=identifier)
+        size, identifier = conn.query("SELECT size,item_id FROM menu_items WHERE item_name=%s", params=(identifier,))
 
     elif isinstance(identifier, int):
-        size = conn.query("SELECT size FROM menu_items WHERE item_id=%s", params=identifier)
+        size = conn.query("SELECT size FROM menu_items WHERE item_id=%s", params=(identifier,))
 
     else:
         raise TypeError("identifier is not a string or int")
 
     if size == 'NA':
-        conn.query("DELETE FROM menu_items WHERE item_id=%s", False, identifier)
+        conn.query("DELETE FROM menu_items WHERE item_id=%s", False, (identifier,))
     elif size == 'tall':
-        conn.query("DELETE FROM menu_items WHERE item_id=%s", False, identifier)
-        conn.query("DELETE FROM menu_items WHERE item_id=%s", False, identifier + 1)
-        conn.query("DELETE FROM menu_items WHERE item_id=%s", False, identifier + 2)
+        conn.query("DELETE FROM menu_items WHERE item_id=%s", False, (identifier,))
+        conn.query("DELETE FROM menu_items WHERE item_id=%s", False, (identifier + 1,))
+        conn.query("DELETE FROM menu_items WHERE item_id=%s", False, (identifier + 2,))
     elif size == 'grande':
-        conn.query("DELETE FROM menu_items WHERE item_id=%s", False, identifier - 1)
-        conn.query("DELETE FROM menu_items WHERE item_id=%s", False, identifier)
-        conn.query("DELETE FROM menu_items WHERE item_id=%s", False, identifier + 1)
+        conn.query("DELETE FROM menu_items WHERE item_id=%s", False, (identifier - 1,))
+        conn.query("DELETE FROM menu_items WHERE item_id=%s", False, (identifier,))
+        conn.query("DELETE FROM menu_items WHERE item_id=%s", False, (identifier + 1,))
     else:
-        conn.query("DELETE FROM menu_items WHERE item_id=%s", False, identifier - 2)
-        conn.query("DELETE FROM menu_items WHERE item_id=%s", False, identifier - 1)
-        conn.query("DELETE FROM menu_items WHERE item_id=%s", False, identifier)
+        conn.query("DELETE FROM menu_items WHERE item_id=%s", False, (identifier - 2,))
+        conn.query("DELETE FROM menu_items WHERE item_id=%s", False, (identifier - 1,))
+        conn.query("DELETE FROM menu_items WHERE item_id=%s", False, (identifier,))
 
 
 def updateMenuIngredients(id, newIngredients, sized):
@@ -329,7 +340,7 @@ def updateMenuIngredients(id, newIngredients, sized):
         conn.query("UPDATE menu_items SET ingredients = %s, amounts = %s WHERE item_id = %s", False,
                    (newIngredients[:][0], newIngredients[:][1], id))
     else:
-        size = conn.query("SELECT size FROM menu_items WHERE item_id=%s", True, id)[0][0]
+        size = conn.query("SELECT size FROM menu_items WHERE item_id=%s", True, (id,))[0][0]
         if size == 'tall':
             conn.query("UPDATE menu_items SET ingredients = %s, amounts = %s WHERE item_id = %s", False,
                        (newIngredients[0][:][0], newIngredients[0][:][1], id))
@@ -432,7 +443,7 @@ def addInventoryItem(name: str, initialAmount: int, cost: float, lowStockThresho
     if initialAmount < 0:
         raise ValueError('initialAmount cannot be less than 0')
     conn = db.DBConnection()
-    if len(conn.query("SELECT inventory_id FROM inventory WHERE inventory_name=%s", True, name)) > 0:
+    if len(conn.query("SELECT inventory_id FROM inventory WHERE inventory_name=%s", True, (name,))) > 0:
         raise ValueError('Item already exists')
     nextId = conn.query("SELECT MAX(inventory_id) FROM inventory")[0][0] + 1
     conn.query('INSERT INTO inventory (inventory_id, inventory_name, quantity, costs, minimum_quantity, last_restocked) VALUES (%s, %s, %s, %s, %s, %s)', False, (nextId, name, initialAmount, cost, lowStockThreshold, datetime.date.today()))
@@ -513,26 +524,26 @@ def removeIngredient(identifier, deleteIfStockLeft: bool = False, deleteIfInMenu
     name = None
     if isinstance(identifier, str):
         name = identifier
-        identifier = conn.query('SELECT inventory_id FROM inventory WHERE inventory_name= %s', True, identifier)[0][0]
+        identifier = conn.query('SELECT inventory_id FROM inventory WHERE inventory_name= %s', True, (identifier,))[0][0]
     elif isinstance(identifier, int):
-        name = conn.query('SELECT inventory_name FROM inventory WHERE inventory_id= %s', True, identifier)[0][0]
+        name = conn.query('SELECT inventory_name FROM inventory WHERE inventory_id= %s', True, (identifier,))[0][0]
     else:
         raise TypeError("identifier is neither string or int")
-    stockLeft = conn.query("SELECT quantity FROM inventory WHERE inventory_id = %s", True, identifier)[0][0]
+    stockLeft = conn.query("SELECT quantity FROM inventory WHERE inventory_id = %s", True, (identifier,))[0][0]
     if (not deleteIfStockLeft) and stockLeft > 0:
         return False, "Item not removed: Stock is left"
     # Potentially move this into if statement if not needed to show manager
     itemsUsingIngredient = conn.query('SELECT item_name FROM menu_items WHERE %s = ANY(ingredients)')[0][:]
     if (not deleteIfInMenu) and len(itemsUsingIngredient) > 0:
         return False, "Item not removed: menu items use this ingredient"
-    conn.query("DELETE FROM inventory WHERE inventory_id= %s", False, identifier)
+    conn.query("DELETE FROM inventory WHERE inventory_id= %s", False, (identifier,))
     if stockLeft > 0 and len(itemsUsingIngredient) > 0:
-        execute_values(conn.cur, "DELETE FROM menu_items WHERE item_name= %s", itemsUsingIngredient)
+        execute_values(conn.cur, "DELETE FROM menu_items WHERE item_name= %s", (itemsUsingIngredient,))
         return True, f"Item removed: Stock Left: {stockLeft}, Items Deleted: {itemsUsingIngredient}"
     elif stockLeft > 0:
         return True, f"Item removed: lost {stockLeft} items"
     elif len(itemsUsingIngredient) > 0:
-        execute_values(conn.cur, "DELETE FROM menu_items WHERE item_name= %s", itemsUsingIngredient)
+        execute_values(conn.cur, "DELETE FROM menu_items WHERE item_name= %s", (itemsUsingIngredient,))
         return True, f"Item removed: Items Deleted: {itemsUsingIngredient}"
 
 
@@ -548,7 +559,7 @@ def voidItem(identifier, amount):
         raise ValueError("cannot have a negative amount")
     conn = db.DBConnection()
     if isinstance(identifier, str):
-        if conn.query("SELECT quantity FROM inventory WHERE inventory_name=%s", True, identifier)[0][0] < amount:
+        if conn.query("SELECT quantity FROM inventory WHERE inventory_name=%s", True, (identifier,))[0][0] < amount:
             raise ValueError("amount to void is greater than available inventory in database")
         conn.query(f'UPDATE inventory SET last_restocked = %s, quantity=quantity+%s WHERE inventory_name=%s', False, (datetime.datetime.now().date(), amount, identifier))
 
@@ -568,9 +579,81 @@ def getAmountOfInventroy(identifier):
     """
     conn = db.DBConnection()
     if isinstance(identifier, str):
-        return conn.query(f'SELECT quantity FROM inventory WHERE inventory_name=%s', True, identifier)[0][0]
+        return conn.query(f'SELECT quantity FROM inventory WHERE inventory_name=%s', True, (identifier,))[0][0]
 
     elif isinstance(identifier, int):
-        return conn.query(f'SELECT quantity FROM inventory WHERE inventory_id=%s', True, identifier)[0][0]
+        return conn.query(f'SELECT quantity FROM inventory WHERE inventory_id=%s', True, (identifier,))[0][0]
     else:
         raise TypeError("identifier is neither string or int")
+
+
+def getEmployees():
+    """
+    Retrieves all the employees to be listed in the table
+    :return: JSON formatted list of employees
+    """
+    conn = db.DBConnection()
+    results = conn.query("""
+                SELECT json_agg(json_build_object(
+                    'employee_id', employee_id,
+                    'employee_name', employee_name,
+                    'employee_role', employee_role,
+                    'management', access_mgmt,
+                    'pin', employee_pin,
+                    'email', email
+                )) AS listings
+                FROM employees
+            """)
+
+    return results[0][0]
+
+
+def addEmployee(name, email, management=False):
+    """
+    Adds employee into the database
+    :param name: Name of the employee
+    :type name: str
+    :param management: boolean representing if the employee is management
+    :type management: bool
+    :param email: email of the employee to be used with OAuth
+    :type email: str
+    :return: boolean representing if successfully added and message
+    :rtype tuple[bool,str]
+    """
+    conn = db.DBConnection()
+    # Below is regex for email checking
+    # allows one or more alphanumeric plus . _ % + and - followed by @ then
+    # one or more alphanumeric plus . and -, followed by . then 2 or more alphanumerics.
+    # ^ and $ anchor the regex so that it must match the whole string
+    pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+    if not re.match(pattern, email):
+        return False, 'Email not in proper form'
+    # if email in [x[0] for x in conn.query("SELECT email FROM employees")]:
+    #     return False, 'Email already in use'
+    try:
+        if management:
+            nextId = conn.query("SELECT max(employee_id) FROM employees WHERE employee_id >= 2000")[0][0] + 1
+            conn.query("INSERT INTO employees (employee_id, employee_name, employee_role, access_mgmt, email) VALUES "
+                       "(%s, %s, 'manager', true, %s)", False, (nextId, name, email))
+        else:
+            nextId = conn.query("SELECT max(employee_id) FROM employees WHERE employee_id < 2000")[0][0] + 1
+            conn.query("INSERT INTO employees (employee_id, employee_name, employee_role, access_mgmt, email) VALUES "
+                       "(%s, %s, 'server', false, %s)", False, (nextId, name, email))
+        return True, f'Employee added with id {nextId}'
+    except psycopg2.errors.UniqueViolation as exc:
+        return False, "Email already in use"
+
+
+def removeEmployee(identifier):
+    """
+    Using the employee email or id, which is unique to each employee, removes the given employee
+    :param identifier: Either the email or id to find the employee by
+    :type identifier: int or str
+    """
+    conn = db.DBConnection()
+    if isinstance(identifier, int):
+        conn.query("DELETE FROM employees WHERE employee_id = %s", False, (identifier,))
+    elif isinstance(identifier, str):
+        conn.query("DELETE FROM employees WHERE email = %s", False, (identifier,))
+    else:
+        raise TypeError("identifier is not int or str")
