@@ -59,7 +59,7 @@ function Server() {
         <div className='server-weather-time'>
           add weather api here
         </div>
-        <button className='button-5'>
+        <button className='button-5' onClick={() => navigate("/manager")}>
           go to manager page
         </button>
         <div className="server-input-employee">

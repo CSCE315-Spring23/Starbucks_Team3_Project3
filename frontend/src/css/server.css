@@ -129,8 +129,8 @@
 }
 
 .server-weather-time {
-    background-color: grey;
-    color: black;
+    background-color: #00704A;
+    color: #00704A;
     line-height: 80px;
     width: 500px;
     text-align: center;

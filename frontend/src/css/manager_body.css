@@ -89,6 +89,15 @@
     width: 100%;
 }
 
+.manager-weather-time {
+    background-color: #00704A;
+    color: #00704A;
+    line-height: 80px;
+    width: 500px;
+    text-align: center;
+    font-size: 24px;
+}
+
 .show-selected {
     font-size: 28px;
 }
