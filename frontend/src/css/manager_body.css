@@ -72,3 +72,26 @@
     color: var(--hover-text-color);
     transform: scale(1.1);
 }
+
+.manager-table {
+    background-color: white;
+}
+
+.sortable {
+    background-color: white;
+    color: black;
+    height: auto;
+    width: auto;
+}
+
+.sortable:hover {
+    background-color: gray;
+    color: white;
+}
+
+.non-sortable {
+    background-color: white;
+    color: black;
+    height: auto;
+    width: auto;
+}

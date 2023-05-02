@@ -44,24 +44,24 @@ function MenuManage({setSection}){
     }, []);
 
     return (
-        <div className='body'>
+        <div className='bodymanager'>
             <div className='managing-buttons'>
                 <button className='manage-button'>Add Menu Item</button>
                 <button className='manage-button'>Remove Menu Item</button>
                 <button className='manage-button'>Modify Menu Item</button>
                 <div className='show-selected'>{selectedItem !== "None" ? selectedItem.item_name : "No item selected"}</div>
             </div>
-            <div className='table'>
+            <div className='manager-table'>
                 <table className='menu-table'>
                     <thead>
                     <tr>
-                        <td onClick={() => handleSort('item_id')}>ID</td>
-                        <td onClick={() => handleSort('item_name')}>Name</td>
-                        <td onClick={() => handleSort('display_name')}>Display Name</td>
-                        <td onClick={() => handleSort('category')}>Category</td>
-                        <td>Size</td>
-                        <td>Ingredients</td>
-                        <td onClick={() => handleSort('price')}>Price</td>
+                        <td className='sortable' onClick={() => handleSort('item_id')}>ID</td>
+                        <td className='sortable' onClick={() => handleSort('item_name')}>Name</td>
+                        <td className='sortable' onClick={() => handleSort('display_name')}>Display Name</td>
+                        <td className='sortable' onClick={() => handleSort('category')}>Category</td>
+                        <td className='non-sortable'>Size</td>
+                        <td className='non-sortable'>Ingredients</td>
+                        <td className='sortable' onClick={() => handleSort('price')}>Price</td>
                     </tr>
                     </thead>
                     <tbody>
