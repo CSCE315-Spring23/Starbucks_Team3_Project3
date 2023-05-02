@@ -1,16 +1,16 @@
 import React, {useEffect, useState} from 'react'
 
-import "../css/customer_view.css"
-
 import CustomerBanner from "../components/customer/customer_banner.js"
 import CustomerBody from "../components/customer/customer_body.js"
 import CustomerFooter from "../components/customer/customer_footer"
 import FinalizeOrder from '../components/customer/finalize_order'
 import ThankYou from '../components/customer/thank_you'
 
+import '../css/customer.css'
+
 function Customer() {
   const [orderList, setOrderList] = useState([]);
-  // const [discountList, setDiscountList] = useState([])
+  // const [discountList, setDiscountList] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0.0)
   const [currSection, setSection] = useState(0)
   const [customerName, setCustomerName] = useState("Customer")
@@ -39,7 +39,7 @@ function Customer() {
         </>
       ) : currSection === 4 ? (
         <div className='finalize-order'>
-          <FinalizeOrder orderList={orderList} setOrderList={setOrderList} setCustomerName={setCustomerName} setTransactionID={setTransactionID} setSection={setSection}/>
+          <FinalizeOrder orderList={orderList} totalPrice={totalPrice} setOrderList={setOrderList} setCustomerName={setCustomerName} setTransactionID={setTransactionID} setSection={setSection}/>
         </div>
       ) : currSection === 5 ? (
         <div className='thank-you'>

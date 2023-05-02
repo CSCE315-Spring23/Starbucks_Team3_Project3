@@ -2,7 +2,7 @@ import React from 'react'
 
 function ChooseAddons() {
   return (
-    <div>ChooseAddons</div>
+    <div className="body-info-box">ChooseAddons</div>
   )
 }
 

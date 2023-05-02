@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
 
 function ChooseCategory({ order, setSection }) {
-  const [categoryList, setCategoryList] = useState([{"name": "hot-coffee", "display": "Hot Coffee"}, {"name": "iced-coffee", "display": "Iced Coffee"}]);
+  const [categoryList, setCategoryList] = useState([{"name": "hot-coffee", "display": "Hot Coffee"}, {"name": "iced-coffee", "display": "Iced Coffee"},
+    {"name": "coffee-alternative", "display": "Coffee Alternatives"}]);
 
   // useEffect(() => {
   //   fetch("http://localhost:5000/all-categories")
@@ -17,7 +18,7 @@ function ChooseCategory({ order, setSection }) {
   return (
     <>
     {categoryList.map((category, key) =>
-      <button key={key} className="category-button" onClick={() => setCategory(category)}>{category.display}</button>
+      <button key={key} className="body-button" onClick={() => setCategory(category)}>{category.display}</button>
     )}
     </>
   )

@@ -2,9 +2,9 @@ import React from 'react'
 
 function ThankYou({ customerName, transactionID, setSection }) {
   return (
-    <div>
-      Thank You {customerName}, your orderID is {transactionID}
-      <div className='customer-view-button' onClick={() => setSection(0)}>Back to Menu</div>
+    <div className="thanks">
+      <div className="text-box">Thank You {customerName}, your orderID is {transactionID}</div>
+      <button className='customer-view-button' onClick={() => setSection(0)}>Back to Menu</button>
     </div>
   )
 }

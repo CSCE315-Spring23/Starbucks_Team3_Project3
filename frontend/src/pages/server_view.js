@@ -1,4 +1,8 @@
-import { useEffect, useState } from 'react';
+import "../css/server.css"
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from "react-router-dom";
+
+import image from "../pictures/starbucks-logo-png-25.png"
 
 function Server() {
   const [orderList, setOrderList] = useState([])
@@ -61,22 +65,44 @@ function Server() {
     setOrderList([])
   }
 
+  const navigate = useNavigate();
+
   return (
     <div>
-      <div>
-        <h2>Current Order List</h2>
-            <table>
+
+      <div className='server-banner'>
+        <div className="starbucks-logo" style={{ backgroundImage: `url(${image}` }}></div>
+        <div className='server-weather-time'>
+          add weather api here
+        </div>
+        <button className='button-5'>
+          go to manager page
+        </button>
+        <div className="server-input-employee">
+          Employee ----
+          <input
+            type="text"
+            onChange={(e) => setEmployee(e.target.value)}
+          />
+          <button className="button-5" onClick={() => processOrder()}>Submit Order</button>
+        </div>
+      </div>
+
+      <div className='server-body-container'>
+
+        <div className='server-body-container-left'>
+          <div className="current-order-list">
+            <h2 className='rainbow_text_animated'>Current Order List</h2>
+            <table className='order-list-table'>
               <thead>
-                <tr>
-                  <td>Name</td>
-                  <td>Category</td>
-                  <td>Price</td>
-                </tr>
+              <tr>
+                <td>Name</td>
+                <td>Price</td>
+              </tr>
               </thead>
               <tbody>
-                { orderList ? orderList.map((item, key) => <tr key={key}>
+              { orderList ? orderList.map((item, key) => <tr key={key}>
                   <td>{item.name}</td>
-                  <td>{item.category}</td>
                   <td>{item.price}</td>
                   <td>
                     <button onClick={() => removeItem(item)}>Remove</button>
@@ -87,7 +113,8 @@ function Server() {
                 : 'No Item in Cart'}
               </tbody>
             </table>
-      </div>
+          </div>
+        </div>
 
       <div>
         Employee ----

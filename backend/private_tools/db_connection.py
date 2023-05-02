@@ -15,13 +15,23 @@ class DBConnection():
         except (Exception, Error) as error:
             print("Error while connecting to PostgreSQL", error)
 
-    def query(self, query, allowFetch = True):
-        self.cur.execute(query)
+    #OLD VER WITHOUT PARAMS
+    # def query(self, query, allowFetch = True):
+    #     self.cur.execute(query)
+    #     self.conn.commit()
+    #     if allowFetch:
+    #         return self.cur.fetchall()
+    #     return 1
+
+    def query(self, query, allowFetch = True, params=None):
+        if params is not None:
+            self.cur.execute(query, params)
+        else:
+            self.cur.execute(query)
         self.conn.commit()
         if allowFetch:
             return self.cur.fetchall()
         return 1
-
     def close(self):
         self.cur.close()
         self.conn.close()
