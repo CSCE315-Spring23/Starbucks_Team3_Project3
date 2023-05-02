@@ -121,7 +121,7 @@ function Server() {
         </div>
 
         <div className='server-addons'>
-          <h3 className='rainbow_text_animated'>add add-on items here</h3>
+          <h3 className='rainbow_text_animated'>Add-Ons</h3>
         </div>
 
       </div>

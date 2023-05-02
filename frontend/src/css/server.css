@@ -7,7 +7,7 @@
     background-color: bisque;
     text-align: center;
     align-items: center;
-    width: 443px;
+    width: 400px;
     min-height: 976px;
     border: 3px solid;
 }
@@ -79,7 +79,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    width: 448px;
+    width: 405px;
     min-height: 980px;
     position: fixed;
     left: 0;
@@ -90,10 +90,10 @@
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    width: 1025px;
+    width: 1035px;
     min-height: 980px;
     position: relative;
-    left: 448px;
+    left: 405px;
 }
 
 .server-category-bar {
@@ -104,7 +104,7 @@
     justify-content: space-around;
     text-align: center;
     font-size: 24px;
-    min-width: 1019px;
+    min-width: 1029px;
     height: 96px;
     border: 3px solid;
     position: fixed;
@@ -123,7 +123,7 @@
 .server-addons {
     background-color: bisque;
     display: flex;
-    width: 441px;
+    width: 474px;
     min-height: 976px;
     justify-content: space-around;
     font-size: 24px;
