@@ -44,15 +44,19 @@ function MenuManage({setSection}){
     }, []);
 
     return (
-        <div className='bodymanager'>
-            <div className='managing-buttons'>
-                <button className='manage-button'>Add Menu Item</button>
-                <button className='manage-button'>Remove Menu Item</button>
-                <button className='manage-button'>Modify Menu Item</button>
+        <div>
+
+            <div className='manager-action-bar'>
+                <div className='managing-buttons'>
+                    <button className='manage-button'>Add Menu Item</button>
+                    <button className='manage-button'>Remove Menu Item</button>
+                    <button className='manage-button'>Modify Menu Item</button>
+                </div>
                 <div className='show-selected'>{selectedItem !== "None" ? selectedItem.item_name : "No item selected"}</div>
             </div>
+
             <div className='manager-table'>
-                <table className='menu-table'>
+                <table className='menu-table' border='1'>
                     <thead>
                     <tr>
                         <td className='sortable' onClick={() => handleSort('item_id')}>ID</td>
