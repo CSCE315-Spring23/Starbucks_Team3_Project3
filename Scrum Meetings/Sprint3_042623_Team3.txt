@@ -1,0 +1,67 @@
+SCRUM Meeting 2 for Project 3
+Prepared by: Sam Hirvilampi
+Meeting Date: 4/26/2023
+
+Meeting Attendees
+David Liu
+Devon Kelly
+Yvan Tonthat
+Max Moody
+Sam Hirvilampi
+
+Meeting Agenda Items
+ Discuss tasks that were assigned from last meeting
+Talk about next steps to continue progressing
+
+Status Update Since Last Meeting
+Accomplishments:
+ An existent Menu Board
+APIs integrated into the front end
+Back end functionality working for manager
+Customer view has more functionality like high contrast weather etc.
+Server view improved
+
+Tasks Completed:
+Task Description
+Assigned to
+Completed? (yes/no)
+Create Menu Board
+Max Moody
+yes
+Try to finish up server view functionality and work on front end of it
+David  Liu
+yes
+Finish backend functionality for Manager View
+Devon Kelly
+yes
+Get the APIs to work on front end
+Sam Hirvilampi
+yes
+Get high contrast working for Customer View
+Yvan Tonthat
+yes
+
+Before The Next Meeting
+Plans:
+ Get a front end for the manager - High Priority
+Add more menu items to the customer and server views
+Make the menu board auto scroll and make it more visually appealing
+Fix up order creation
+Add hyper legible fonts work on slides improve translate button on customer view
+
+Task Assignments:
+Task Description
+Assigned to
+Create a front end for manager
+Devon
+Fix order creation
+David
+Add hyper legible fonts, create presentation slides, make google translate work better with translate button
+Sam
+Add menu items to customer view
+Yvan
+Polish and improve Menu Board
+Max
+
+Minutes from Previous Meeting
+Last meeting we were discussing how behind we were as a group. We were stressed that we didn’t have a front end for the manager view though we do have the  backend ready. We talked about the need for a menu board since that was not done and talked about implementing accessibility features that were required. We also discussed ways to make our server and customer front ends look better.
