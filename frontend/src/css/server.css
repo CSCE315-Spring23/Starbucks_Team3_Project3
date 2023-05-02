@@ -4,14 +4,129 @@
 }
 
 .current-order-list {
-    background-color: #ff3355;
+    background-color: bisque;
     text-align: center;
     align-items: center;
-    width: 450px;
+    width: 443px;
+    min-height: 976px;
+    border: 3px solid;
+}
+
+#shadowbox {
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.2);
+    border: 3px solid;
+}
+
+.current-order-list h2 {
+    font-size: 24px;
+}
+
+.rainbow {
+    text-align: center;
+    text-decoration: underline;
+    font-size: 32px;
+    font-family: monospace;
+    letter-spacing: 5px;
+}
+
+.rainbow_text_animated {
+    background: linear-gradient(to right, #6666ff, #0099ff , #00ff00, #ff3399, #6666ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: rainbow_animation 6s ease-in-out infinite;
+    background-size: 400% 100%;
+}
+
+
+@keyframes rainbow_animation {
+    0%,100% {
+        background-position: 0 0;
+    }
+
+    50% {
+        background-position: 100% 0;
+    }
+}
+
+.server-banner {
+    background-color: #00704A;
+    height: 120px;
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.server-body-container {
+    background-color: violet;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    height: 820px;
+}
+
+.server-body-container-right {
+    background-color: bisque;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 1025px;
+    min-height: 980px;
+}
+
+.server-category-bar {
+    background-color: bisque;
+    outline: black;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    text-align: center;
+    font-size: 24px;
+    min-width: 796px;
+    height: 96px;
+    border: 3px solid;
+}
+
+.server-container-below-categories {
+    background-color: lightcoral;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    min-height: 880px;
+}
+
+.server-addons {
+    background-color: bisque;
+    display: flex;
+    width: 440px;
+    min-height: 976px;
+    text-align: center;
+    align-items: center;
+    justify-content: space-around;
+    font-size: 24px;
+    border: 3px solid;
+}
+
+.server-weather-time {
+    background-color: grey;
+    color: black;
+    line-height: 80px;
+    width: 500px;
+    text-align: center;
+    font-size: 24px;
+}
+
+.server-input-employee {
+    color: white;
 }
 
 .menu-item-buttons {
-    height: 500px;
+    height: 876px;
+    border: 3px solid;
+    min-width: 796px;
 }
 
 /* CSS */
@@ -32,7 +147,7 @@
     line-height: 1.25;
     margin: 0;
     min-height: 3rem;
-    min-width: 16rem;
+    min-width: 15rem;
     padding: calc(.875rem - 1px) calc(1.5rem - 1px);
     position: relative;
     text-decoration: none;
@@ -109,73 +224,3 @@
     transform: translateY(0);
 }
 
-.server-banner {
-    background-color: #00704A;
-    line-height: 100px;
-    display: flex;
-    flex-direction: row;
-    text-align: center;
-    justify-content: space-around;
-    align-items: center;
-}
-
-.server-body-container {
-    background-color: violet;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    height: 820px;
-}
-
-.server-body-container-right {
-    background-color: bisque;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    width: 1025px;
-}
-
-.server-category-bar {
-    background-color: cornflowerblue;
-    outline: black;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    text-align: center;
-    font-size: 24px;
-    min-width: 800px;
-    line-height: 100px;
-}
-
-.server-container-below-categories {
-    background-color: lightcoral;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-    height: 720px;
-}
-
-.server-addons {
-    background-color: yellow;
-    display: flex;
-    width: 445px;
-    min-height: 600px;
-    text-align: center;
-    align-items: center;
-    justify-content: space-around;
-    font-size: 24px;
-}
-
-.server-weather-time {
-    background-color: grey;
-    color: black;
-    line-height: 80px;
-    width: 500px;
-    text-align: center;
-    font-size: 24px;
-}
-
-.server-input-employee {
-    color: white;
-}
