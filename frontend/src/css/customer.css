@@ -134,7 +134,7 @@
 
 
 /*Finalize*/
-.background {
+.finalize-background {
     background-color: var(--body-bg-color);
     display: flex;
     flex-direction: row;

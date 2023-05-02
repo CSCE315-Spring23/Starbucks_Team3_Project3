@@ -1,4 +1,4 @@
-.background {
+.menu-background {
     background: repeating-linear-gradient(45deg, #000000, #000000 50px, #151515 50px, #151515 100px);
     height: 100%;
     min-width: 1250px;
@@ -51,7 +51,7 @@ body {
 .weather-time {
     background-color: white;
     color: black;
-    line-height: 150px;
+    line-height: 100px;
     width: 600px;
     text-align: center;
     font-size: 24px;

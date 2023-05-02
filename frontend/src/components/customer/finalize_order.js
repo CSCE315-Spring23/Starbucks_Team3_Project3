@@ -14,7 +14,7 @@ function FinalizeOrder({ orderList, totalPrice, setOrderList, setCustomerName, s
   }
 
   return (
-    <div className="background">
+    <div className="finalize-background">
 
       <div className="order-container">
         <div className="order">
