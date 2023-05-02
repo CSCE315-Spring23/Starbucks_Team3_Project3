@@ -1,16 +1,46 @@
 import React, { useState, useEffect } from 'react'
 
-import "../../../css/customer_body.css"
+// import "../../../css/customer_body.css"
+// import BootstrapTable from 'react-bootstrap-table-next';
+// import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
+
 
 function MenuManage({setSection}){
     const [menuTable, setMenuTable] = useState([])
-    const [selectedItem, setSelectedItem] = useState()
+    const [selectedItem, setSelectedItem] = useState("None")
+
+
+        // ID    // const columns = [
+    //     //     { dataField: 'item_id', text: 'ID'},
+    //     //     { dataField: 'item_name', text: 'Name'},
+    //     //     { dataField: 'display_name', text: 'Display Name'},
+    //     //     { dataField: 'category', text: 'Category'},
+    //     //     { dataField: 'size', text: 'Size'},
+    //     //     { dataField: 'ingredients', text: 'Ingredients'},
+    //     //     { dataField: 'price', text: 'Price'},
+    //     // ]
+        //             <td>Name</td>
+        //             <td>Display Name</td>
+        //             <td>Category</td>
+        //             <td>Size</td>
+        //             <td>Ingredients</td>
+        // <td>Price</td>
 
     useEffect(() => {
         fetch("http://localhost:5000/management/menuitems")
             .then(response => response.json())
             .then(result => setMenuTable(result));
     }, []);
+
+    // const data = menuTable.map(item => ({
+    //     item_id: item.item_id,
+    //     item_name: item.item_name,
+    //     display_name: item.display_name,
+    //     category: item.category,
+    //     size: item.size,
+    //     ingredients: item.ingredients.map(entry => `${entry.amount} ${entry.inventory_name}`).join(', '),
+    //     price: item.price
+    // }));
     // TODO: Add functionality to buttons such that they use the selected table item
     return (
         <div className='body'>
@@ -18,7 +48,7 @@ function MenuManage({setSection}){
                 <button className='manage-button'>Add Menu Item</button>
                 <button className='manage-button'>Remove Menu Item</button>
                 <button className='manage-button'>Modify Menu Item</button>
-                <div className='show-selected'>{selectedItem.item_name}</div>
+                <div className='show-selected'>{selectedItem !== "None" ? selectedItem.item_name : "No item selected"}</div>
             </div>
             <div className='table'>
                 <table className='menu-table'>
@@ -50,6 +80,7 @@ function MenuManage({setSection}){
                         }
                     </tbody>
                 </table>
+                {/*<BootstrapTable keyField='item_id' data={data} columns={columns} />*/}
             </div>
         </div>
     )

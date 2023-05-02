@@ -1,11 +1,11 @@
 import React from 'react'
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 // Uncomment below when implemented
 // import "../../css/manager_navbar.css"
 
 function ManagerNavbar({ setSection }) {
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     /*maybe unused*/
     /*<div className='button'>Inventory History</div>*/
