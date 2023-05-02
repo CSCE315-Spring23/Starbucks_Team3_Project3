@@ -1,16 +1,27 @@
-import "../App.css"
 import { useEffect, useState } from 'react';
 
 function Server() {
   const [orderList, setOrderList] = useState([])
+  const [categories, setCategories] = useState([])
+  const [addons, setAddons] = useState([])
+  const [allMenuItems, setAllMenuItems] = useState([])
   const [menuItems, setMenuItems] = useState([])
+  const [currentCategory, setCurrentCategory] = useState([])
   const [employee, setEmployee] = useState('')
 
   useEffect(() => {
-    fetch("http://localhost:5000/menu-items")
+    fetch("http://ancient-headland-07012.herokuapp.com/menu-items")
       .then(response => response.json())
-      .then(result => setMenuItems(result));
+      .then(result => setAllMenuItems(result));
+    fetch("https://ancient-headland-07012.herokuapp.com/menu-items/all-categories")
+      .then(response => response.json())
+      .then(result => setCategories(result));
+    setAddons(allMenuItems.filter(item => item.category === 'add-on'))
   }, []);
+
+  useEffect(() => {
+    setMenuItems(allMenuItems.filter(item => item.category === currentCategory))
+  }, [currentCategory])
 
   const addItemToOrder = async(item) => {
     let newItem = {
@@ -21,6 +32,10 @@ function Server() {
     }
     setOrderList([...orderList, newItem]);
     console.log("Added new item")
+  }
+
+  function changeCategory(category) {
+    setCurrentCategory(category.name)
   }
 
   const removeItem = async (item) => {
@@ -47,10 +62,10 @@ function Server() {
   }
 
   return (
-    <div className="App">
-      <div className="current-order-list">
+    <div>
+      <div>
         <h2>Current Order List</h2>
-            <table className='order-list-table'>
+            <table>
               <thead>
                 <tr>
                   <td>Name</td>
@@ -64,7 +79,7 @@ function Server() {
                   <td>{item.category}</td>
                   <td>{item.price}</td>
                   <td>
-                    <button className='button-5' onClick={() => removeItem(item)}>Remove</button>
+                    <button onClick={() => removeItem(item)}>Remove</button>
                   </td>
 
                 </tr>)
@@ -74,18 +89,35 @@ function Server() {
             </table>
       </div>
 
-      <div className="server-input-employee">
+      <div>
         Employee ----
         <input
         type="text"
         onChange={(e) => setEmployee(e.target.value)}
         />
-        <button className="button-5" onClick={() => processOrder()}>Submit Order</button>
+        <button onClick={() => processOrder()}>Submit Order</button>
+      </div>
+
+
+      <div>
+        Category:
+        {categories.map((cat, key) =>
+          <button key={key} onClick={() => changeCategory(cat)}>{cat.name}</button>
+        )}
       </div>
       
-      <div className="menu-item-buttons">
+      <div>
+        Items:
         {menuItems.map((item, key) =>
-          <button key={key} className="button-6" onClick={() => addItemToOrder(item)}>{item.name}</button>
+          <button key={key} onClick={() => addItemToOrder(item)}>{item.name}</button>
+        )}
+      </div>
+
+      
+      <div>
+        Addons:
+        {addons.map((item, key) =>
+          <button key={key} onClick={() => addItemToOrder(item)}>{item.name}</button>
         )}
       </div>
 
