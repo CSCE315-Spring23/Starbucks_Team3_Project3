@@ -53,7 +53,7 @@ function Server() {
     <div>
 
       <div className='server-banner'>
-        <div className='weather-time'>
+        <div className='server-weather-time'>
           add weather api here
         </div>
         <button className='button-5'>
