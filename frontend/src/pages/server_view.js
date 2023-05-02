@@ -1,6 +1,5 @@
 import "../css/server.css"
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from "react-router-dom";
 
 import image from "../pictures/starbucks-logo-png-25.png"
 
@@ -14,7 +13,7 @@ function Server() {
   const [employee, setEmployee] = useState('')
 
   useEffect(() => {
-    fetch("http://ancient-headland-07012.herokuapp.com/menu-items")
+    fetch("https://ancient-headland-07012.herokuapp.com/menu-items")
       .then(response => response.json())
       .then(result => setAllMenuItems(result));
     fetch("https://ancient-headland-07012.herokuapp.com/menu-items/all-categories")
@@ -27,7 +26,7 @@ function Server() {
     setMenuItems(allMenuItems.filter(item => item.category === currentCategory))
   }, [currentCategory])
 
-  const addItemToOrder = async(item) => {
+  const addItemToOrder = async (item) => {
     let newItem = {
       'name' : item.name,
       'addons' : [],
@@ -65,11 +64,8 @@ function Server() {
     setOrderList([])
   }
 
-  const navigate = useNavigate();
-
   return (
     <div>
-
       <div className='server-banner'>
         <div className="starbucks-logo" style={{ backgroundImage: `url(${image}` }}></div>
         <div className='server-weather-time'>
@@ -115,6 +111,7 @@ function Server() {
             </table>
           </div>
         </div>
+      </div>
 
       <div>
         Employee ----
