@@ -81,7 +81,7 @@ function MenuBoard() {
         <div className='starbucks-banner'>
           <div className="starbucks-logo" style={{ backgroundImage: `url(${image}` }}></div>
         </div>
-        <div className='background'>
+        <div className='menu-background'>
           <div className='center'>
             <div>
 
