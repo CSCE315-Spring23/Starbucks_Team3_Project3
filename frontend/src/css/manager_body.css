@@ -1,51 +1,67 @@
-.body {
-    background-color: bisque;
+:root {
+    --banner-bg-color: #00704A;
+    --body-bg-color: bisque;
+    --box-button-bg-color: white;
+    --hover-box-button-bg-color: grey;
+    --text-color: black;
+    --hover-text-color: white;
+    font-family: "Atkinson-Regular";
+}
+
+.manager-banner {
+    background-color: var(--banner-bg-color);
     display: flex;
     flex-direction: row;
-    gap: 10px;
     justify-content: space-around;
     align-items: center;
-    height: 840px;
+    position: fixed;
+    top: 0;
+    height: 120px;
     width: 1920px;
+    z-index: 100 !important;
 }
 
-.body-info-box {
-    background-color: white;
-    color: black;
-    line-height: 150px;
-    width: 200px;
-    text-align: center;
+.manager-body-container {
+    display: flex;
+    background-color: var(--body-bg-color);
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    min-height: 960px;
+    position: relative;
+    top: 120px;
+}
+
+.manager-navbar-container {
+    display: flex;
+    background-color: #00704A;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    position: fixed;
+    left: 0;
+    top: 120px;
+    min-height: 960px;
+    width: 240px;
+}
+
+.manager-navbar-container h3 {
     font-size: 24px;
 }
 
-.body-button {
-    background-color: white;
-    color: black;
-    line-height: 150px;
-    min-width: 200px;
+.manager-navbar-button {
+    background-color: var(--box-button-bg-color);
+    color: var(--text-color);
+    line-height: 70px;
+    min-width: 150px;
     text-align: center;
     font-size: 24px;
+    font-family: "Atkinson-Regular";
 }
 
-.body-button:hover {
+.manager-navbar-button:hover {
     transition-duration: 0.1s;
-    background-color: grey;
-    color: white;
-}
-
-.blink {
-    animation: blink 1s ease-in-out;
-}
-
-.menu-table {
-    overflow-x: auto;
-}
-
-@keyframes blink {
-    0%, 100% {
-        background-color: bisque;
-    }
-    25%, 50% {
-        background-color: #ffd96c;
-    }
+    background-color: var(--hover-box-button-bg-color);
+    color: var(--hover-text-color);
+    transform: scale(1.1);
 }

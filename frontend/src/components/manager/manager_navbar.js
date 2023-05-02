@@ -10,14 +10,14 @@ function ManagerNavbar({ setSection }) {
     /*maybe unused*/
     /*<div className='button'>Inventory History</div>*/
     return (
-        <div className='banner'>
-            <div className='navbarTitle'>Manager Functions</div>
-            <div className='button' onClick={() => setSection(1)}>Menu</div>
-            <div className='button' onClick={() => setSection(2)}>Inventory</div>
-            <div className='button' onClick={() => setSection(3)}>Sales</div>
-            <div className='button' onClick={() => setSection(4)}>Reports</div>
-            <div className='button' onClick={() => setSection(5)}>Transaction</div>
-            <div className='button' onClick={() => setSection(6)}>Employees</div>
+        <div className='manager-navbar-container'>
+            <h3 className='rainbow_text_animated'>Manager Functions</h3>
+            <button className='manager-navbar-button' onClick={() => setSection(1)}>Menu</button>
+            <button className='manager-navbar-button' onClick={() => setSection(2)}>Inventory</button>
+            <button className='manager-navbar-button' onClick={() => setSection(3)}>Sales</button>
+            <button className='manager-navbar-button' onClick={() => setSection(4)}>Reports</button>
+            <button className='manager-navbar-button' onClick={() => setSection(5)}>Transaction</button>
+            <button className='manager-navbar-button' onClick={() => setSection(6)}>Employees</button>
 
 
         </div>

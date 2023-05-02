@@ -4,6 +4,8 @@ import ManagerBanner from "../components/manager/manager_banner";
 import ManagerNavbar from "../components/manager/manager_navbar";
 import MenuManage from "../components/manager/body/menu_manage";
 
+import "../css/manager_body.css"
+
 function Manager() {
 
   const [currSection, setSection] = useState(0)
@@ -13,37 +15,41 @@ function Manager() {
         <div className="manager-banner">
           <ManagerBanner setSection={setSection}/>
         </div>
-        <div className='navbar'>
-          <ManagerNavbar setSection={setSection}/>
-        </div>
-        <div className='body'>
+
+        <div className='manager-body-container'>
+          <div className='body'>
             {currSection === 1 ? (
-                <div className='menu-manage-body'>
-                  <MenuManage setSection={setSection}/>
-                </div>
+              <div className='menu-manage-body'>
+                <MenuManage setSection={setSection}/>
+              </div>
             ) : currSection === 2 ? (
-                <div className='inventory-body'>
-                  {/* insert next nav here */}
-                </div>
+              <div className='inventory-body'>
+                {/* insert next nav here */}
+              </div>
             ) : currSection === 3 ? (
-                <div className='sales-body'>
-                  {/* insert next nav here */}
-                </div>
+              <div className='sales-body'>
+                {/* insert next nav here */}
+              </div>
             ) : currSection === 4 ? (
-                <div className='reports-body'>
-                  {/* insert next nav here */}
-                </div>
+              <div className='reports-body'>
+                {/* insert next nav here */}
+              </div>
             ) : currSection === 5 ? (
-                <div className='transaction-body'>
-                  {/* insert next nav here */}
-                </div>
+              <div className='transaction-body'>
+                {/* insert next nav here */}
+              </div>
             ) : currSection === 6 ? (
-                <div className='employee-body'>
-                  {/* insert next nav here */}
-                </div>
+              <div className='employee-body'>
+                {/* insert next nav here */}
+              </div>
             ) : (
-                <div className='splash-screen'>Choose a menu to from the navbar</div>
+              <div className='splash-screen'>Choose a menu to from the navbar</div>
             )}
+          </div>
+
+          <div className='manager-navbar-container'>
+            <ManagerNavbar setSection={setSection}/>
+          </div>
         </div>
 
       </div>
