@@ -1,5 +1,5 @@
 .order-list-table {
-    border:1px solid #EEEEEE;
+    border:1px solid;
     width: 100%;
 }
 
@@ -53,11 +53,15 @@
 .server-banner {
     background-color: #00704A;
     height: 120px;
+    width: 100%;
     display: flex;
     flex-direction: row;
     text-align: center;
     justify-content: space-around;
     align-items: center;
+    position: fixed;
+    top: 0;
+    z-index: 150;
 }
 
 .server-body-container {
@@ -66,6 +70,19 @@
     flex-direction: row;
     justify-content: space-around;
     height: 820px;
+    position: relative;
+    top: 120px;
+}
+
+.server-body-container-left {
+    background-color: bisque;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 448px;
+    min-height: 980px;
+    position: fixed;
+    left: 0;
 }
 
 .server-body-container-right {
@@ -75,6 +92,8 @@
     justify-content: space-around;
     width: 1025px;
     min-height: 980px;
+    position: relative;
+    left: 448px;
 }
 
 .server-category-bar {
@@ -85,9 +104,12 @@
     justify-content: space-around;
     text-align: center;
     font-size: 24px;
-    min-width: 796px;
+    min-width: 1019px;
     height: 96px;
     border: 3px solid;
+    position: fixed;
+    top: 120px;
+    z-index: 100 !important;
 }
 
 .server-container-below-categories {
@@ -95,19 +117,19 @@
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    min-height: 880px;
+    min-height: 960px;
 }
 
 .server-addons {
     background-color: bisque;
     display: flex;
-    width: 440px;
+    width: 441px;
     min-height: 976px;
-    text-align: center;
-    align-items: center;
     justify-content: space-around;
     font-size: 24px;
     border: 3px solid;
+    position: fixed;
+    right: 0;
 }
 
 .server-weather-time {
@@ -124,9 +146,13 @@
 }
 
 .menu-item-buttons {
+    background-color: bisque;
     height: 876px;
     border: 3px solid;
     min-width: 796px;
+    min-height: 2400px;
+    position: relative;
+    top: 100px;
 }
 
 /* CSS */
@@ -147,7 +173,7 @@
     line-height: 1.25;
     margin: 0;
     min-height: 3rem;
-    min-width: 15rem;
+    min-width: 16rem;
     padding: calc(.875rem - 1px) calc(1.5rem - 1px);
     position: relative;
     text-decoration: none;

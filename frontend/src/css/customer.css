@@ -88,11 +88,15 @@
     background-color: var(--body-bg-color);
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     gap: 10px;
     justify-content: space-around;
     align-items: center;
     min-height: 840px;
     width: 1920px;
+    position: relative;
+    top: 120px;
+    bottom: 120px;
 }
 .body-info-box {
     background-color: var(--box-button-bg-color);

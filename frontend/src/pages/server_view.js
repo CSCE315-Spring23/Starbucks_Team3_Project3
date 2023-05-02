@@ -73,30 +73,31 @@ function Server() {
       </div>
 
       <div className='server-body-container'>
-        <div className="current-order-list">
-          <h2 className='rainbow_text_animated'>Current Order List</h2>
-          <table className='order-list-table'>
-            <thead>
-            <tr>
-              <td>Name</td>
-              <td>Category</td>
-              <td>Price</td>
-            </tr>
-            </thead>
-            <tbody>
-            { orderList ? orderList.map((item, key) => <tr key={key}>
-                <td>{item.name}</td>
-                <td>{item.category}</td>
-                <td>{item.price}</td>
-                <td>
-                  <button className='button-5' onClick={() => removeItem(item)}>Remove</button>
-                </td>
 
-              </tr>)
+        <div className='server-body-container-left'>
+          <div className="current-order-list">
+            <h2 className='rainbow_text_animated'>Current Order List</h2>
+            <table className='order-list-table'>
+              <thead>
+              <tr>
+                <td>Name</td>
+                <td>Price</td>
+              </tr>
+              </thead>
+              <tbody>
+              { orderList ? orderList.map((item, key) => <tr key={key}>
+                  <td>{item.name}</td>
+                  <td>{item.price}</td>
+                  <td>
+                    <button className='button-5' onClick={() => removeItem(item)}>Remove</button>
+                  </td>
 
-              : 'No Item in Cart'}
-            </tbody>
-          </table>
+                </tr>)
+
+                : 'No Item in Cart'}
+              </tbody>
+            </table>
+          </div>
         </div>
 
         <div className='server-body-container-right'>
