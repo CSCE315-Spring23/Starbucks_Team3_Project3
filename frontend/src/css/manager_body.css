@@ -40,7 +40,7 @@
     align-items: center;
     position: fixed;
     left: 0;
-    /*top: 120px;*/
+    top: 120px;
     min-height: 960px;
     width: 240px;
     z-index: 100 !important;
