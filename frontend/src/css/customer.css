@@ -1,0 +1,252 @@
+:root {
+    --banner-bg-color: #00704A;
+    --body-bg-color: bisque;
+    --box-button-bg-color: white;
+    --hover-box-button-bg-color: grey;
+    --text-color: black;
+    --hover-text-color: white;
+    font-family: "Atkinson-Regular";
+}
+
+
+/*General Stuff*/
+.button {
+    background-color: var(--box-button-bg-color);
+    color: var(--text-color);
+    line-height: 100px;
+    min-width: 200px;
+    text-align: center;
+    font-size: 24px;
+    font-family: "Atkinson-Regular";
+}
+
+.button:hover {
+    transition-duration: 0.1s;
+    background-color: var(--hover-box-button-bg-color);
+    color: var(--hover-text-color);
+}
+
+/*Banner and Footer*/
+.banner {
+    background-color: var(--banner-bg-color);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    height: 120px;
+    width: 1920px;
+}
+
+.footer {
+    background-color: var(--banner-bg-color);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    height: 120px;
+    width: 1920px;
+}
+
+.starbucks-logo {
+    height: 100px;
+    width: 100px;
+    text-align: center;
+    font-size: 24px;
+    
+}
+
+.weather-time {
+    background-color: var(--box-button-bg-color);
+    color: var(--text-color);
+    line-height: 100px;
+    width: 600px;
+    text-align: center;
+    font-size: 24px;
+}
+
+.banner-info-box {
+    background-color: var(--box-button-bg-color);
+    color: var(--text-color);
+    line-height: 100px;
+    min-width: 200px;
+    text-align: center;
+    font-size: 24px;
+}
+
+.google-translate {  /*Doesn't work*/
+    position: relative !important;
+    top: 10px !important;
+    right: 10px !important;
+}
+
+/*Body*/
+.body {
+    background-color: var(--body-bg-color);
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: space-around;
+    align-items: center;
+    min-height: 840px;
+    width: 1920px;
+}
+.body-info-box {
+    background-color: var(--box-button-bg-color);
+    color: var(--text-color);
+    line-height: 150px;
+    min-width: 200px;
+    text-align: center;
+    font-size: 24px;
+}
+
+.body-button {
+    background-color: var(--box-button-bg-color);
+    color: var(--text-color);
+    line-height: 150px;
+    min-width: 200px;
+    text-align: center;
+    font-size: 24px;
+    font-family: "Atkinson-Regular";
+}
+
+.body-button:hover {
+    transition-duration: 0.1s;
+    background-color: var(--hover-box-button-bg-color);
+    color: var(--hover-text-color);
+}
+
+.blink {
+    animation: blink 1s ease-in-out;
+}
+
+@keyframes blink {
+    0%, 100% {
+        background-color: bisque;
+    }
+    25%, 50% {
+        background-color: #ffd96c;
+    }
+}
+
+
+/*Finalize*/
+.background {
+    background-color: var(--body-bg-color);
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: space-around;
+    align-items: center;
+    min-height: 960px;
+    width: 1920px;
+}
+
+.order-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    justify-content: space-around;
+    align-items: center;
+    min-height: 620px;
+    width: 400px;
+}
+
+.order {
+    background-color: var(--box-button-bg-color);
+    color: var(--text-color);
+    min-height: 500px;
+    width: 400px;
+}
+
+.final-info-box-container {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    justify-content: space-around;
+    align-items: center;
+    height: 120px;
+    width: 400px;
+}
+
+.final-info-box {
+    background-color: var(--box-button-bg-color);
+    color: var(--text-color);
+    line-height: 90px;
+    width: 200px;
+    text-align: center;
+    font-size: 16px;
+}
+
+.buffer {
+    height: 50px;
+}
+
+
+/*Thank You*/
+.thanks {
+    background-color: var(--body-bg-color);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: space-around;
+    align-items: center;
+    height: 960px;
+    width: 1920px;
+}
+
+.text-box {
+    background-color: var(--box-button-bg-color);
+    color: var(--text-color);
+    line-height: 150px;
+    width: 1000px;
+    text-align: center;
+    font-size: 24px;
+}
+
+.customer-view-button {
+    background-color: var(--box-button-bg-color);
+    color: var(--text-color);
+    line-height: 150px;
+    width: 1000px;
+    text-align: center;
+    font-size: 24px;
+}
+
+.customer-view-button:hover {
+    transition-duration: 0.1s;
+    background-color: var(--hover-box-button-bg-color);
+    color: var(--hover-text-color);
+}
+
+
+/*Something else*/
+.google-translate {
+    display: inline-block;
+}
+
+#google_translate_element select{
+    background-color:#f6edfd;
+    color:#383ffa;
+    border: none;
+    border-radius:3px;
+    padding:6px 8px
+  }
+
+.goog-te-banner-frame{
+    display:none !important;
+}
+
+
+#goog-gt-tt, .goog-te-balloon-frame
+{
+    display: none !important;
+}
+.goog-text-highlight 
+{ 
+    background: none !important;
+    box-shadow: none !important;
+}

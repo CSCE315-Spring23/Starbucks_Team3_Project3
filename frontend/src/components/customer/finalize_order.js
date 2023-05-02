@@ -1,5 +1,3 @@
-import "../../css/finalize_order.css"
-
 function FinalizeOrder({ orderList, totalPrice, setOrderList, setCustomerName, setTransactionID, setSection}) {
   const returnToCategory = () => {
     setSection(0)
@@ -32,9 +30,9 @@ function FinalizeOrder({ orderList, totalPrice, setOrderList, setCustomerName, s
             : 'No Item in Cart'}
         </div>
 
-        <div className="info-box-container">
-          <div className="info-box">Total Items: {orderList.length}</div>
-          <div className="info-box">Total Price: ${totalPrice}</div>
+        <div className="final-info-box-container">
+          <div className="final-info-box">Total Items: {orderList.length}</div>
+          <div className="final-info-box">Total Price: ${totalPrice}</div>
         </div>
       </div>
 
@@ -49,15 +47,15 @@ function FinalizeOrder({ orderList, totalPrice, setOrderList, setCustomerName, s
 
         <div className="buffer"></div>
 
-        <div className='back-button' onClick={() => returnToCategory()}>
+        <button className='button' onClick={() => returnToCategory()}>
           Back to Ordering
-        </div>
+        </button>
 
         <div className="buffer"></div>
 
-        <div className='confirm-order-button' onClick={() => submitOrder()}>
+        <button className='button' onClick={() => submitOrder()}>
           Confirm Order
-        </div>
+        </button>
       </div>
     </div>
   );
