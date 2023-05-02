@@ -1,0 +1,63 @@
+SCRUM Meeting 3 for Project 3
+Prepared by: Sam Hirvilampi
+Meeting Date: 4/30/23
+
+Meeting Attendees
+Sam Hirvilampi
+Max Moody
+Devon Kelly
+Yvan Tonthat
+David Liu 
+
+Meeting Agenda Items
+ Discuss final steps to finish project
+Look over features to  make sure we meet requirements
+Talk about any final roadblocks
+
+Status Update Since Last Meeting
+Accomplishments:
+ Accessibility Features are finished
+Menu board finished
+Front end features are there just need polishing
+
+Tasks Completed:
+Task Description
+Assigned to
+Completed? (yes/no)
+Create a front end for manager
+Devon
+yes
+Fix order creation
+David
+yes
+Add hyper legible fonts, create presentation slides, make google translate work better with translate button
+Sam
+yes
+Add menu items to customer view
+Yvan
+yes
+Polish and improve Menu Board
+Max
+yes
+
+Before The Next Meeting
+Plans:
+ No more scrum meetings but will hold additional meetings to work together
+Submit project
+
+Task Assignments:
+Task Description
+Assigned to
+Finish up manager front end
+Devon
+Add CSS to all front end views
+Yvan
+Finish presentation slides/Help with any final touches
+Sam
+Fix up anything that may need fixing in server view and customer
+David
+Help with anything that may be needed
+Max
+
+Minutes from Previous Meeting
+In the last meeting we talked about how we have to get the front end for the manager done, and how the order processing isnt working fully. We talked about the final things we had to complete and we went through the project requirements making sure we weren’t missing anything that is required. We discussed that we will probably have to put in a lot of time outside of the class to finish up the project over the weekend on Monday and Tuesday.

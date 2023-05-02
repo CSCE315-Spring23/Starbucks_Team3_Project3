@@ -1,0 +1,65 @@
+SCRUM Meeting 1 for Project 3
+Prepared by: Sam Hirvilampi
+Meeting Date: 4/22/23
+
+Meeting Attendees
+ Sam Hirvilampi
+ David Liu
+ Devon Kelly
+ Max Moody
+Yvan Tonthat
+
+Meeting Agenda Items
+ Talk about customer and server views
+Talk about weather API
+Talk about our progress
+
+Status Update Since Last Meeting
+Accomplishments:
+ Customer view has been improved to look better, have more buttons, etc.
+Weather API backend completed
+Manager backend significant progress
+
+Tasks Completed:
+Task Description
+Assigned to
+Completed? (yes/no)
+Work more on customer view front end
+Yvan
+yes
+Continue progress on  backend for manager view
+Devon
+yes
+Weather API
+Sam
+Yes
+Continue to improve server view
+David
+yes
+Implement front end functionality and CSS for manager view
+Max
+n0
+
+Before The Next Meeting
+Plans:
+ Finish the backend functionality for Manager
+Start implementing customer view functionalities
+Get the menu board done
+Finish server view backend and improve front end
+
+Task Assignments:
+Task Description
+Assigned to
+Create Menu Board
+Max Moody
+Try to finish up server view functionality and work on front end of it
+David  Liu
+Finish backend functionality for Manager View
+Devon Kelly
+Get the APIs to work on front end
+Sam Hirvilampi
+Get high contrast working for Customer View
+Yvan Tonthat
+
+Minutes from Previous Meeting
+In the last meeting we talked about getting our Sprint 2 MVP completed. We realized we were not where we wanted to be at the time. Didn’t have everything we wanted to have for this MVP. Talked about the manager front end being non-existent, and talked about issues the team was having getting this stuff done. We talked about getting the Manager View front end done as soon as possible before the next meeting and finishing weather API, and continuing to improve customer and server front ends.

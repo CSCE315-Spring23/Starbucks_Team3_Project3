@@ -1,3 +1,8 @@
+@font-face {
+  font-family: "Atkinson-Regular";
+  src: local("Atkinson-Hyperlegible"),
+    url("./fonts/TTF/Atkinson-Hyperlegible-Regular-102.ttf") format("truetype");
+}
 .App {
   text-align: center;
   
@@ -54,7 +59,8 @@
   color: rgba(0, 0, 0, 0.85);
   cursor: pointer;
   display: inline-flex;
-  font-family: system-ui,-apple-system,system-ui,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-family: "Atkinson-Regular";
+  /* font-family: system-ui,-apple-system,system-ui,"Helvetica Neue",Helvetica,Arial,sans-serif; */
   font-size: 16px;
   font-weight: 600;
   justify-content: center;
@@ -104,7 +110,8 @@
   color: #fff;
   cursor: pointer;
   display: inline-flex;
-  font-family: system-ui,-apple-system,system-ui,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-family: "Atkinson-Regular";
+  /* font-family: system-ui,-apple-system,system-ui,"Helvetica Neue",Helvetica,Arial,sans-serif; */
   font-size: 16px;
   font-weight: 600;
   justify-content: center;
@@ -137,7 +144,3 @@
   box-shadow: rgba(0, 0, 0, .06) 0 2px 4px;
   transform: translateY(0);
 }
-
-/* .server-input-employee {
-  
-} */
