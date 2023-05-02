@@ -4,16 +4,48 @@ import image from "../pictures/starbucks-logo-png-25.png"
 import {useNavigate} from "react-router-dom";
 import {wait} from "@testing-library/user-event/dist/utils";
 
+/**
+ * Scrolls down by the number of pixels specified by top
+ */
 function scrollDown() {
   window.scrollBy({top:2, behavior:"smooth"});
 }
+/**
+ * Scrolls up by the number of pixels specified by top
+ */
 function scrollUp() {
-  window.scrollBy({top:-1, behavior:"smooth"});
+  window.scrollBy({top:-2, behavior:"smooth"});
 }
 
+/**
+ * Automatically scrolls up and down the page,
+ * with a 5-second pause upon reaching the top or bottom,
+ * before the scroll reverses.
+ */
 function autoscroll() {
   let downtimer = 0;
   let uptimer = 0;
+
+  // Begins automatic scroll 5 seconds after loading page
+  // setTimeout(function(){downtimer = setInterval(scrollDown, 40);}, 5000)
+
+  // Full autoscroll based on page height (issues on chrome, needs more testing)
+  /*
+  window.onscroll = function() {
+    if((window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight - 25) {
+      clearInterval(downtimer);
+      clearInterval(uptimer);
+      setTimeout(function(){uptimer = setInterval(scrollUp, 40);}, 5000)
+    }
+    if(window.scrollY === 0) {
+      clearInterval(downtimer);
+      clearInterval(uptimer);
+      setTimeout(function(){downtimer = setInterval(scrollDown, 60);}, 5000)
+    }
+  }
+  */
+
+  // implementation using purely timing
   downtimer = setInterval(scrollDown, 60);
   setTimeout(
     function(){
@@ -26,6 +58,7 @@ function autoscroll() {
   setTimeout(function(){
       clearInterval(uptimer);
       }, 205000)
+
 }
 
 function MenuBoard() {
@@ -58,7 +91,6 @@ function MenuBoard() {
             <div className='weather-time'>{weather.name} | {weather.main} | Temperature: {weather.temp}</div>
           </div>
           <div>
-          <body>
             <div className='menu-items'>
               <h2>Hot and Iced Coffees:</h2>
               <p>Brewed Coffee</p>
@@ -231,7 +263,6 @@ function MenuBoard() {
               <p>$3.25</p>
               <p>$2.95</p>
             </div>
-          </body>
           </div>
         </div>
         <div className='center'>
