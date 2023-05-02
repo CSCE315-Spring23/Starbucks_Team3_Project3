@@ -1,0 +1,181 @@
+.order-list-table {
+    border:1px solid #EEEEEE;
+    width: 100%;
+}
+
+.current-order-list {
+    background-color: #ff3355;
+    text-align: center;
+    align-items: center;
+    width: 450px;
+}
+
+.menu-item-buttons {
+    height: 500px;
+}
+
+/* CSS */
+.button-6 {
+    align-items: center;
+    background-color: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: .25rem;
+    box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+    box-sizing: border-box;
+    color: rgba(0, 0, 0, 0.85);
+    cursor: pointer;
+    display: inline-flex;
+    font-family: system-ui,-apple-system,system-ui,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    justify-content: center;
+    line-height: 1.25;
+    margin: 0;
+    min-height: 3rem;
+    min-width: 16rem;
+    padding: calc(.875rem - 1px) calc(1.5rem - 1px);
+    position: relative;
+    text-decoration: none;
+    transition: all 250ms;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: baseline;
+    width: auto;
+}
+
+.button-6:hover,
+.button-6:focus {
+    border-color: rgba(0, 0, 0, 0.15);
+    box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+    color: rgba(0, 0, 0, 0.65);
+}
+
+.button-6:hover {
+    transform: translateY(-1px);
+}
+
+.button-6:active {
+    background-color: #F0F0F1;
+    border-color: rgba(0, 0, 0, 0.15);
+    box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px;
+    color: rgba(0, 0, 0, 0.65);
+    transform: translateY(0);
+}
+
+/* CSS */
+.button-5 {
+    align-items: center;
+    background-clip: padding-box;
+    background-color: deepskyblue;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+    box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    display: inline-flex;
+    font-family: system-ui,-apple-system,system-ui,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    justify-content: center;
+    line-height: 1.25;
+    margin: 0;
+    min-height: 3rem;
+    padding: calc(.875rem - 1px) calc(1.5rem - 1px);
+    position: relative;
+    text-decoration: none;
+    transition: all 250ms;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: baseline;
+    width: auto;
+}
+
+.button-5:hover,
+.button-5:focus {
+    background-color: #5cf1bf;
+    box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+}
+
+.button-5:hover {
+    transform: translateY(-1px);
+}
+
+.button-5:active {
+    background-color: #c85000;
+    box-shadow: rgba(0, 0, 0, .06) 0 2px 4px;
+    transform: translateY(0);
+}
+
+.server-banner {
+    background-color: #00704A;
+    line-height: 100px;
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.server-body-container {
+    background-color: violet;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    height: 820px;
+}
+
+.server-body-container-right {
+    background-color: bisque;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 1025px;
+}
+
+.server-category-bar {
+    background-color: cornflowerblue;
+    outline: black;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    text-align: center;
+    font-size: 24px;
+    min-width: 800px;
+    line-height: 100px;
+}
+
+.server-container-below-categories {
+    background-color: lightcoral;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    height: 720px;
+}
+
+.server-addons {
+    background-color: yellow;
+    display: flex;
+    width: 445px;
+    min-height: 600px;
+    text-align: center;
+    align-items: center;
+    justify-content: space-around;
+    font-size: 24px;
+}
+
+.weather-time {
+    background-color: grey;
+    color: black;
+    line-height: 80px;
+    width: 500px;
+    text-align: center;
+    font-size: 24px;
+}
+
+.server-input-employee {
+    color: white;
+}
