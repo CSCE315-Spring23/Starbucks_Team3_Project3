@@ -38,6 +38,7 @@
     top: 0;
     height: 120px;
     width: 1920px;
+    z-index: 100 !important;
 }
 
 .footer {
@@ -50,6 +51,7 @@
     bottom: 0;
     height: 120px;
     width: 1920px;
+    z-index: 100 !important;
 }
 
 .starbucks-logo {
