@@ -65,7 +65,6 @@
 }
 
 .server-body-container {
-    background-color: violet;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -75,7 +74,6 @@
 }
 
 .server-body-container-left {
-    background-color: bisque;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -86,7 +84,6 @@
 }
 
 .server-body-container-right {
-    background-color: bisque;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -113,7 +110,6 @@
 }
 
 .server-container-below-categories {
-    background-color: lightcoral;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
