@@ -71,6 +71,7 @@ function SalesManage(){
                 {/*    <button className='manage-button'>Modify Menu Item</button>*/}
                 {/*</div>*/}
                 {/*<div className='show-selected'>{selectedItem !== "None" ? selectedItem.item_name : "No item selected"}</div>*/}
+                Sales
             </div>
 
             <div className='manager-table'>

@@ -71,6 +71,7 @@ function TransactionsManage(){
                 {/*    <button className='manage-button'>Modify Menu Item</button>*/}
                 {/*</div>*/}
                 {/*<div className='show-selected'>{selectedItem !== "None" ? selectedItem.item_name : "No item selected"}</div>*/}
+                Transactions
             </div>
 
             <div className='manager-table'>
