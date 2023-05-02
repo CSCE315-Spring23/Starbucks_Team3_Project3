@@ -1,0 +1,95 @@
+.background {
+    background: repeating-linear-gradient(45deg, #000000, #000000 50px, #151515 50px, #151515 100px);
+    height: 100%;
+    min-width: 1250px;
+    width: 97vw;
+    display: inline-block;
+    margin: 20px;
+
+}
+
+h1 {
+    color: white;
+    font-size: 70pt;
+    text-align: left;
+    line-height: 20px;
+    display: inline-block;
+}
+
+h2 {
+    color: white;
+    font-size: 50pt;
+    line-height: 30pt;
+}
+
+body {
+    display: inline-flex;
+}
+
+.menu-items {
+    color: white;
+    font-size: 30pt;
+    text-align: left;
+    line-height: 10px;
+    margin: 30px;
+    display: inline-block;
+}
+
+.menu-prices {
+    color: white;
+    font-size: 30pt;
+    text-align: right;
+    line-height: 10px;
+    margin: 30px;
+    display: inline-block;
+}
+
+.center {
+    text-align: center;
+}
+
+.weather-time {
+    background-color: white;
+    color: black;
+    line-height: 150px;
+    width: 600px;
+    text-align: center;
+    font-size: 24px;
+    display: inline-block;
+    margin: 10px;
+}
+
+.back {
+    background-color: white;
+    color: black;
+    line-height: 75px;
+    width: 300px;
+    text-align: center;
+    font-size: 24px;
+    display: inline-block;
+    margin: 10px;
+    border: solid;
+}
+
+.back:hover {
+    transition-duration: 0.1s;
+    background-color: grey;
+    color: white;
+}
+
+.starbucks-logo {
+    height: 100px;
+    width: 100px;
+    text-align: center;
+    font-size: 50px;
+    display: inline-block;
+    margin: 20px;
+}
+
+.starbucks-banner {
+    margin: 20px;
+    min-width: 1250px;
+    width: 97vw;
+    background: linear-gradient(90deg, #00704A, #22926C, #ffffff, #ffffff, #22926C, #00704A);
+}
+

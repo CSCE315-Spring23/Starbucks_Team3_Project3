@@ -15,8 +15,6 @@ import MenuBoard from "./pages/menu_board_view"
 import Server from "./pages/server_view"
 import Manager from "./pages/manager_view"
 
-
-
 function App() {
   return (
     <Router>
