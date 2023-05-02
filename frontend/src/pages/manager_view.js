@@ -5,6 +5,10 @@ import ManagerNavbar from "../components/manager/manager_navbar";
 import MenuManage from "../components/manager/body/menu_manage";
 
 import "../css/manager_body.css"
+import InventoryManage from "../components/manager/body/inventory_manage";
+import SalesManage from "../components/manager/body/sales_manage";
+import TransactionsManage from "../components/manager/body/transactions_manage";
+import EmployeeManage from "../components/manager/body/employees_manage";
 
 function Manager() {
 
@@ -26,11 +30,11 @@ function Manager() {
                         </div>
                     ) : currSection === 2 ? (
                         <div className='inventory-body'>
-                            {/* insert next nav here */}
+                            <InventoryManage/>
                         </div>
                     ) : currSection === 3 ? (
                         <div className='sales-body'>
-                            {/* insert next nav here */}
+                            <SalesManage/>
                         </div>
                     ) : currSection === 4 ? (
                         <div className='reports-body'>
@@ -38,11 +42,11 @@ function Manager() {
                         </div>
                     ) : currSection === 5 ? (
                         <div className='transaction-body'>
-                            {/* insert next nav here */}
+                            <TransactionsManage/>
                         </div>
                     ) : currSection === 6 ? (
                         <div className='employee-body'>
-                            {/* insert next nav here */}
+                            <EmployeeManage/>
                         </div>
                     ) : (
                         <div className='splash-screen'>Choose a menu to from the navbar</div>
