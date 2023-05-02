@@ -40,9 +40,15 @@
     align-items: center;
     position: fixed;
     left: 0;
-    top: 120px;
+    /*top: 120px;*/
     min-height: 960px;
     width: 240px;
+}
+
+.manager-body {
+    background-color: bisque;
+    position: relative;
+    left: 240px;
 }
 
 .manager-navbar-container h3 {

@@ -17,7 +17,7 @@ function Manager() {
         </div>
 
         <div className='manager-body-container'>
-          <div className='body'>
+          <div className='manager-body'>
             {currSection === 1 ? (
               <div className='menu-manage-body'>
                 <MenuManage setSection={setSection}/>
