@@ -1,17 +1,158 @@
 .order-list-table {
-    border:1px solid #EEEEEE;
+    border:1px solid;
     width: 100%;
 }
 
 .current-order-list {
-    background-color: #ff3355;
+    background-color: bisque;
     text-align: center;
     align-items: center;
-    width: 450px;
+    width: 400px;
+    min-height: 976px;
+    border: 3px solid;
+}
+
+#shadowbox {
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.2);
+    border: 3px solid;
+}
+
+.current-order-list h2 {
+    font-size: 24px;
+}
+
+.rainbow {
+    text-align: center;
+    text-decoration: underline;
+    font-size: 32px;
+    font-family: monospace;
+    letter-spacing: 5px;
+}
+
+.rainbow_text_animated {
+    background: linear-gradient(to right, #6666ff, #0099ff , #00ff00, #ff3399, #6666ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: rainbow_animation 6s ease-in-out infinite;
+    background-size: 400% 100%;
+}
+
+
+@keyframes rainbow_animation {
+    0%,100% {
+        background-position: 0 0;
+    }
+
+    50% {
+        background-position: 100% 0;
+    }
+}
+
+.server-banner {
+    background-color: #00704A;
+    height: 120px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    justify-content: space-around;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    z-index: 150;
+}
+
+.server-body-container {
+    background-color: violet;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    height: 820px;
+    position: relative;
+    top: 120px;
+}
+
+.server-body-container-left {
+    background-color: bisque;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 405px;
+    min-height: 980px;
+    position: fixed;
+    left: 0;
+}
+
+.server-body-container-right {
+    background-color: bisque;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 1035px;
+    min-height: 980px;
+    position: relative;
+    left: 405px;
+}
+
+.server-category-bar {
+    background-color: bisque;
+    outline: black;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    text-align: center;
+    font-size: 24px;
+    min-width: 1029px;
+    height: 96px;
+    border: 3px solid;
+    position: fixed;
+    top: 120px;
+    z-index: 100 !important;
+}
+
+.server-container-below-categories {
+    background-color: lightcoral;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    min-height: 960px;
+}
+
+.server-addons {
+    background-color: bisque;
+    display: flex;
+    width: 474px;
+    min-height: 976px;
+    justify-content: space-around;
+    font-size: 24px;
+    border: 3px solid;
+    position: fixed;
+    right: 0;
+}
+
+.server-weather-time {
+    background-color: grey;
+    color: black;
+    line-height: 80px;
+    width: 500px;
+    text-align: center;
+    font-size: 24px;
+}
+
+.server-input-employee {
+    color: white;
 }
 
 .menu-item-buttons {
-    height: 500px;
+    background-color: bisque;
+    height: 876px;
+    border: 3px solid;
+    min-width: 796px;
+    min-height: 2400px;
+    position: relative;
+    top: 100px;
 }
 
 /* CSS */
@@ -109,73 +250,3 @@
     transform: translateY(0);
 }
 
-.server-banner {
-    background-color: #00704A;
-    line-height: 100px;
-    display: flex;
-    flex-direction: row;
-    text-align: center;
-    justify-content: space-around;
-    align-items: center;
-}
-
-.server-body-container {
-    background-color: violet;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    height: 820px;
-}
-
-.server-body-container-right {
-    background-color: bisque;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    width: 1025px;
-}
-
-.server-category-bar {
-    background-color: cornflowerblue;
-    outline: black;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    text-align: center;
-    font-size: 24px;
-    min-width: 800px;
-    line-height: 100px;
-}
-
-.server-container-below-categories {
-    background-color: lightcoral;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-    height: 720px;
-}
-
-.server-addons {
-    background-color: yellow;
-    display: flex;
-    width: 445px;
-    min-height: 600px;
-    text-align: center;
-    align-items: center;
-    justify-content: space-around;
-    font-size: 24px;
-}
-
-.server-weather-time {
-    background-color: grey;
-    color: black;
-    line-height: 80px;
-    width: 500px;
-    text-align: center;
-    font-size: 24px;
-}
-
-.server-input-employee {
-    color: white;
-}
