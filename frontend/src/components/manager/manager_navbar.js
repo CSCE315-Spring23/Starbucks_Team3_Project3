@@ -12,14 +12,12 @@ function ManagerNavbar({ setSection }) {
     return (
         <div className='banner'>
             <div className='navbarTitle'>Manager Functions</div>
-            <div className='button'>Menu Management</div>
-            <div className='button'>Show menu board</div>
-            <div className='button'>Inventory</div>
-            <div className='button'>Sales</div>
-            <div className='button'>Reports</div>
-            <div className='button'>Transaction</div>
-            <div className='button'>Deliveries</div>
-            <div className='button'>Employees</div>
+            <div className='button' onClick={() => setSection(1)}>Menu</div>
+            <div className='button' onClick={() => setSection(2)}>Inventory</div>
+            <div className='button' onClick={() => setSection(3)}>Sales</div>
+            <div className='button' onClick={() => setSection(4)}>Reports</div>
+            <div className='button' onClick={() => setSection(5)}>Transaction</div>
+            <div className='button' onClick={() => setSection(6)}>Employees</div>
 
 
         </div>
