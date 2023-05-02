@@ -11,7 +11,7 @@ function ManagerBanner({ setSection }) {
     return (
       <div className='manager-banner'>
         <div className='starbucks-logo' style={{ backgroundImage: `url(${image}` }}></div>
-        <div className='weather-time'>Weather and Time</div>
+        <div className='manager-weather-time'>Weather and Time</div>
         <button className='button'>Change Language</button>
         <button className='button' onClick={() => navigate('/menu-board')}>Show menu board</button>
         <button className='button' onClick={() => navigate("/server")}>Server Page</button>
