@@ -1,0 +1,147 @@
+:root {
+    --banner-bg-color: #00704A;
+    --body-bg-color: bisque;
+    --box-button-bg-color: white;
+    --hover-box-button-bg-color: grey;
+    --text-color: black;
+    --hover-text-color: white;
+    font-family: "Atkinson-Regular", serif;
+}
+
+.manager-banner {
+    background-color: var(--banner-bg-color);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    height: 120px;
+    width: 100%;
+    z-index: 100 !important;
+}
+
+.manager-body-container {
+    display: flex;
+    /*background-color: var(--body-bg-color);*/
+    flex-direction: row;
+    justify-content: space-around;
+    height: 100%;
+    width: 100%;
+    position: relative;
+    top: 120px;
+}
+
+.manager-body-container-right {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+.manager-navbar-container {
+    display: flex;
+    background-color: #00704A;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    position: fixed;
+    left: 0;
+    height: 100%;
+    width: 240px;
+    z-index: 90 !important;
+}
+
+.manager-body {
+    position: relative;
+    left: 240px;
+    width: 100%;
+}
+
+.manager-navbar-container h3 {
+    font-size: 24px;
+}
+
+.manager-navbar-button {
+    background-color: var(--box-button-bg-color);
+    color: var(--text-color);
+    line-height: 70px;
+    min-width: 150px;
+    text-align: center;
+    font-size: 24px;
+    font-family: "Atkinson-Regular", serif;
+}
+
+.manager-navbar-button:hover {
+    transition-duration: 0.1s;
+    background-color: var(--hover-box-button-bg-color);
+    color: var(--hover-text-color);
+    transform: scale(1.1);
+}
+
+.manager-action-bar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 5%;
+    width: 100%;
+    position: relative;
+}
+
+.manager-weather-time {
+    background-color: #00704A;
+    color: #00704A;
+    line-height: 80px;
+    width: 500px;
+    text-align: center;
+    font-size: 24px;
+}
+
+.show-selected {
+    font-size: 28px;
+}
+
+.managing-buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 5%;
+    width: 100%;
+    left: 240px;
+}
+
+.manage-button {
+    background-color: white;
+    padding: 10px;
+}
+
+.manage-button:hover {
+    background-color: gray;
+    color: white;
+}
+
+.manager-table {
+    background-color: white;
+    width: 100%;
+}
+
+.sortable {
+    background-color: white;
+    color: black;
+    height: auto;
+    width: auto;
+}
+
+.sortable:hover {
+    background-color: gray;
+    color: white;
+}
+
+.non-sortable {
+    background-color: white;
+    color: black;
+    height: auto;
+    width: auto;
+}

@@ -13,10 +13,10 @@
 .button {
     background-color: var(--box-button-bg-color);
     color: var(--text-color);
-    line-height: 100px;
-    min-width: 200px;
+    line-height: 80px;
+    min-width: 180px;
     text-align: center;
-    font-size: 24px;
+    font-size: 20px;
     font-family: "Atkinson-Regular";
 }
 

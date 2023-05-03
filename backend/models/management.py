@@ -284,7 +284,7 @@ def getInventory():
     return results
 
 
-def addMenuItem(name: str, display: str, category: str, sized: bool, ingredients: list[tuple[str, float]],
+def addMenuItem(name: str, display: str, category: str, sized: bool, ingredients: list[dict],
                 price, autocalc=False):
     """
     Adds a menu item including the sized variants if applicable with the given ingredients and price
@@ -296,15 +296,20 @@ def addMenuItem(name: str, display: str, category: str, sized: bool, ingredients
     :param price: price of the item or tuple for the three different prices
     :param autocalc: flag that determines if pricing is auto-calculated for sized drink at ratio of .85 and 1.25 for tall and venti respectively
     """
+    # print(name, display, category, sized, ingredients, price, autocalc)
     conn = db.DBConnection()
     itemId = conn.query("SELECT MAX(item_id) FROM menu_items")[0][0] + 1
-    if len(conn.query(f"SELECT item_name FROM menu_items WHERE item_name LIKE {name + '%'}")) < 1:
+    if len(conn.query(f"SELECT item_name FROM menu_items WHERE item_name LIKE '{name + '%'}'")) >= 1:
         raise ValueError(f'{name} is already in the database')
     if price < 0:
         raise ValueError("Price cannot be less than 0")
+    items = []
+    amounts = []
     for ingredient in ingredients:
-        if ingredient[1] < 0:
-            raise ValueError(f"{ingredient[0]} has amount less than 0")
+        items.append(ingredient['name'])
+        amounts.append(ingredient['amount'])
+        if ingredient["amount"] < 0:
+            raise ValueError(f"{ingredient['name']} has amount less than 0")
     # if category not in currentCategories:
     #     raise ValueError("Category not currently supported")
     if sized:
@@ -313,23 +318,23 @@ def addMenuItem(name: str, display: str, category: str, sized: bool, ingredients
         conn.query(
             "INSERT INTO menu_items (item_id, item_name, display_name, category, size, ingredients, amounts, price)"
             "VALUES (%s, %s, %s, %s, 'tall', %s, %s, %s)",
-            False, (itemId, name + "-tall", display, category, ingredients[:][0], ingredients[:][1], price[0]))
+            False, (itemId, name + "-tall", display, category, items, [x * .5 for x in amounts], price[0]))
         itemId += 1
         conn.query(
             "INSERT INTO menu_items (item_id, item_name, display_name, category, size, ingredients, amounts, price)"
             "VALUES (%s, %s, %s, %s, 'grande', %s, %s, %s)",
-            False, (itemId, name + "-grande", display, category, ingredients[:][0], ingredients[:][1], price[1]))
+            False, (itemId, name + "-grande", display, category, items, amounts, price[1]))
         itemId += 1
         conn.query(
             "INSERT INTO menu_items (item_id, item_name, display_name, category, size, ingredients, amounts, price)"
             "VALUES (%s, %s, %s, %s, 'venti', %s, %s, %s)",
-            False, (itemId, name + "-venti", display, category, ingredients[:][0], ingredients[:][1], price[2]))
+            False, (itemId, name + "-venti", display, category, items, [x * 1.5 for x in amounts], price[2]))
         return itemId-2  # Item id of tall
     else:
         conn.query(
             "INSERT INTO menu_items (item_id, item_name, display_name, category, size, ingredients, amounts, price)"
             "VALUES (%s, %s, %s, %s, 'NA', %s, %s, %s)",
-            False, (itemId, name, display, category, ingredients[:][0], ingredients[:][1], price))
+            False, (itemId, name, display, category, items, amounts, price))
         return itemId
 
 def removeMenuItem(identifier):
@@ -341,7 +346,7 @@ def removeMenuItem(identifier):
     conn = db.DBConnection()
     size = None
     if isinstance(identifier, str):
-        size, identifier = conn.query("SELECT size,item_id FROM menu_items WHERE item_name=%s", params=(identifier,))
+        size, identifier = conn.query("SELECT size,item_id FROM menu_items WHERE item_name=%s", params=(identifier,))[0]
 
     elif isinstance(identifier, int):
         size = conn.query("SELECT size FROM menu_items WHERE item_id=%s", params=(identifier,))
@@ -365,7 +370,7 @@ def removeMenuItem(identifier):
         conn.query("DELETE FROM menu_items WHERE item_id=%s", False, (identifier,))
 
 
-def updateMenuIngredients(id, newIngredients, sized):
+def updateMenuIngredients(id, newIngredients):
     """
     Updates the ingredients of the item with the given id to the updated list
     :param id: id of the menu item
@@ -373,32 +378,24 @@ def updateMenuIngredients(id, newIngredients, sized):
     :param sized: bool of if the item is sized
     """
     conn = db.DBConnection()
-    if not sized:
-        conn.query("UPDATE menu_items SET ingredients = %s, amounts = %s WHERE item_id = %s", False,
-                   (newIngredients[:][0], newIngredients[:][1], id))
-    else:
-        size = conn.query("SELECT size FROM menu_items WHERE item_id=%s", True, (id,))[0][0]
-        if size == 'tall':
-            conn.query("UPDATE menu_items SET ingredients = %s, amounts = %s WHERE item_id = %s", False,
-                       (newIngredients[0][:][0], newIngredients[0][:][1], id))
-            conn.query("UPDATE menu_items SET ingredients = %s, amounts = %s WHERE item_id = %s", False,
-                       (newIngredients[1][:][0], newIngredients[1][:][1], id + 1))
-            conn.query("UPDATE menu_items SET ingredients = %s, amounts = %s WHERE item_id = %s", False,
-                       (newIngredients[2][:][0], newIngredients[2][:][1], id + 2))
-        elif size == 'grande':
-            conn.query("UPDATE menu_items SET ingredients = %s, amounts = %s WHERE item_id = %s", False,
-                       (newIngredients[0][:][0], newIngredients[0][:][1], id - 1))
-            conn.query("UPDATE menu_items SET ingredients = %s, amounts = %s WHERE item_id = %s", False,
-                       (newIngredients[1][:][0], newIngredients[1][:][1], id))
-            conn.query("UPDATE menu_items SET ingredients = %s, amounts = %s WHERE item_id = %s", False,
-                       (newIngredients[2][:][0], newIngredients[2][:][1], id + 1))
-        else:
-            conn.query("UPDATE menu_items SET ingredients = %s, amounts = %s WHERE item_id = %s", False,
-                       (newIngredients[0][:][0], newIngredients[0][:][1], id - 2))
-            conn.query("UPDATE menu_items SET ingredients = %s, amounts = %s WHERE item_id = %s", False,
-                       (newIngredients[1][:][0], newIngredients[1][:][1], id - 1))
-            conn.query("UPDATE menu_items SET ingredients = %s, amounts = %s WHERE item_id = %s", False,
-                       (newIngredients[2][:][0], newIngredients[2][:][1], id))
+    items = []
+    amounts = []
+    for newIngredient in newIngredients:
+        items.append(newIngredient['inventory_name'])
+        amounts.append(newIngredient['amount'])
+    conn.query("UPDATE menu_items SET ingredients = %s, amounts = %s WHERE item_name = %s", False, (items, amounts, id))
+
+
+def getItem(identifier):
+    """
+    Gets the price and ingredient of the given item
+    :param identifier: a string or int representing the item_name or item_id respectively
+    :type identifier: int or str
+    :return: Returns the price and ingredients of the given item
+    """
+    conn = db.DBConnection()
+    price = conn.query('SELECT price FROM menu_items WHERE item_name= %s', True, (identifier,))[0][0]
+    return {'ingredients': getIngredients(identifier), 'price': price}
 
 
 def getIngredients(identifier):
