@@ -9,6 +9,7 @@ import InventoryManage from "../components/manager/body/inventory_manage";
 import SalesManage from "../components/manager/body/sales_manage";
 import TransactionsManage from "../components/manager/body/transactions_manage";
 import EmployeeManage from "../components/manager/body/employees_manage";
+import ReportManager from "../components/manager/body/reports";
 
 function Manager() {
 
@@ -38,7 +39,7 @@ function Manager() {
                         </div>
                     ) : currSection === 4 ? (
                         <div className='reports-body'>
-                            {/* insert next nav here */}
+                            <ReportManager/>
                         </div>
                     ) : currSection === 5 ? (
                         <div className='transaction-body'>
