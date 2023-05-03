@@ -607,12 +607,12 @@ def voidItem(identifier, amount):
     if isinstance(identifier, str):
         if conn.query("SELECT quantity FROM inventory WHERE inventory_name=%s", True, (identifier,))[0][0] < amount:
             raise ValueError("amount to void is greater than available inventory in database")
-        conn.query(f'UPDATE inventory SET last_restocked = %s, quantity=quantity+%s WHERE inventory_name=%s', False, (datetime.datetime.now().date(), amount, identifier))
+        conn.query(f'UPDATE inventory SET last_restocked = %s, quantity=quantity-%s WHERE inventory_name=%s', False, (datetime.datetime.now().date(), amount, identifier))
 
     elif isinstance(identifier, int):
         if conn.query("SELECT quantity FROM inventory WHERE inventory_id=%s", True, identifier)[0][0] < amount:
             raise ValueError("amount to void is greater than available inventory in database")
-        conn.query('UPDATE inventory SET last_restocked = %s, quantity=quantity+%s WHERE inventory_id=%s', False, (datetime.datetime.now().date(), amount, identifier))
+        conn.query('UPDATE inventory SET last_restocked = %s, quantity=quantity-%s WHERE inventory_id=%s', False, (datetime.datetime.now().date(), amount, identifier))
     # else:
     #     raise TypeError("identifier is neither string or int")
 
