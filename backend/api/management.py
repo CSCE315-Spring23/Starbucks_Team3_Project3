@@ -94,14 +94,14 @@ def getAndUpdateInventory():
     elif request.method == 'PUT':
         data = request.get_json()
         try:
-            newId = man.addInventoryItem(data['name'], data['amount', data['cost'], data['threshold'] if 'threshold' in data else 25])
-            return newId, 201
+            newId = man.addInventoryItem(data['name'], data['amount'], data['cost'], data['threshold'] if 'threshold' in data else 25)
+            return f"{newId}", 201
         except ValueError as e:
             return e, 400
     elif request.method == 'DELETE':
         data = request.get_json()
         try:
-            status, msg = man.removeIngredient(data['name'], data['allow_stock'], data['allow_menu'])
+            status, msg = man.removeIngredient(data['name'], True, True)
             if status:
                 return msg, 200
             else:
@@ -129,11 +129,10 @@ def restockInventory():
     """
     try:
         data = request.get_json()
-        for key, value in data.items():
-            if data[key]['amount'] < 0:
-                return f"{data[key]['name']} cannot restock with a negative amount", 500
-            man.restockItem(data[key]['name'], data[key]['amount'])
-            return "", 204
+        if data['amount'] < 0:
+            return f"{data['name']} cannot restock with a negative amount", 500
+        man.restockItem(data['name'], data['amount'])
+        return "", 204
     except Exception as e:
         return e, 400
 
@@ -147,7 +146,7 @@ def voidInventoryItem():
     """
     try:
         data = request.get_json()
-        man.voidItem(data['inventory_name'], data['amount'])
+        man.voidItem(data['name'], data['amount'])
         return "", 204
     except Exception as e:
         return e, 400
@@ -212,3 +211,14 @@ def getItem():
     data = request.get_json()
     # print(data)
     return man.getItem(data['name']), 200
+
+
+@app.route("/management/getinvitem", methods=["POST"])
+def getInvItem():
+    """
+    Gets the requested item from the database
+    :return: The JSON of the item
+    """
+    data = request.get_json()
+    # print(data)
+    return man.getInvItem(data['name']), 200

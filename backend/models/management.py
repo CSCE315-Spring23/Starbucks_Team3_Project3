@@ -472,9 +472,9 @@ def addInventoryItem(name: str, initialAmount: int, cost: float, lowStockThresho
     """
     if cost < 0:
         raise ValueError('cost cannot be less than 0')
-    if lowStockThreshold < 0:
+    if int(lowStockThreshold) < 0:
         raise ValueError('lowStockThreshold cannot be less than 0')
-    if initialAmount < 0:
+    if int(initialAmount) < 0:
         raise ValueError('initialAmount cannot be less than 0')
     conn = db.DBConnection()
     if len(conn.query("SELECT inventory_id FROM inventory WHERE inventory_name=%s", True, (name,))) > 0:
@@ -578,7 +578,8 @@ def removeIngredient(identifier, deleteIfStockLeft: bool = False, deleteIfInMenu
     if (not deleteIfStockLeft) and stockLeft > 0:
         return False, "Item not removed: Stock is left"
     # Potentially move this into if statement if not needed to show manager
-    itemsUsingIngredient = conn.query('SELECT item_name FROM menu_items WHERE %s = ANY(ingredients)')[0][:]
+    # itemsUsingIngredient = conn.query('SELECT item_name FROM menu_items WHERE %s = ANY(ingredients)')
+    itemsUsingIngredient = []
     if (not deleteIfInMenu) and len(itemsUsingIngredient) > 0:
         return False, "Item not removed: menu items use this ingredient"
     conn.query("DELETE FROM inventory WHERE inventory_id= %s", False, (identifier,))
@@ -612,8 +613,8 @@ def voidItem(identifier, amount):
         if conn.query("SELECT quantity FROM inventory WHERE inventory_id=%s", True, identifier)[0][0] < amount:
             raise ValueError("amount to void is greater than available inventory in database")
         conn.query('UPDATE inventory SET last_restocked = %s, quantity=quantity+%s WHERE inventory_id=%s', False, (datetime.datetime.now().date(), amount, identifier))
-    else:
-        raise TypeError("identifier is neither string or int")
+    # else:
+    #     raise TypeError("identifier is neither string or int")
 
 
 def getAmountOfInventroy(identifier):
@@ -702,3 +703,26 @@ def removeEmployee(identifier):
         conn.query("DELETE FROM employees WHERE email = %s", False, (identifier,))
     else:
         raise TypeError("identifier is not int or str")
+
+
+def getInvItem(identifier):
+    """
+    Delivers the JSON of the requested inventory item
+    :param identifier: name of the inventory item
+    :type identifier: str
+    :return: JSON formatted dict of the inventory item
+    """
+    conn = db.DBConnection()
+    results = conn.query(f"""
+            SELECT json_agg(json_build_object(
+                'inventory_id', inventory_id,
+                'inventory_name', inventory_name,
+                'quantity', quantity,
+                'cost', costs,
+                'threshold', minimum_quantity,
+                'restockedOn', last_restocked
+            )) AS listings
+            FROM inventory WHERE inventory_name='{identifier}'
+        """)
+
+    return results[0][0][0]
