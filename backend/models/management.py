@@ -612,8 +612,8 @@ def voidItem(identifier, amount):
         if conn.query("SELECT quantity FROM inventory WHERE inventory_id=%s", True, identifier)[0][0] < amount:
             raise ValueError("amount to void is greater than available inventory in database")
         conn.query('UPDATE inventory SET last_restocked = %s, quantity=quantity+%s WHERE inventory_id=%s', False, (datetime.datetime.now().date(), amount, identifier))
-    else:
-        raise TypeError("identifier is neither string or int")
+    # else:
+    #     raise TypeError("identifier is neither string or int")
 
 
 def getAmountOfInventroy(identifier):
@@ -702,3 +702,26 @@ def removeEmployee(identifier):
         conn.query("DELETE FROM employees WHERE email = %s", False, (identifier,))
     else:
         raise TypeError("identifier is not int or str")
+
+
+def getInvItem(identifier):
+    """
+    Delivers the JSON of the requested inventory item
+    :param identifier: name of the inventory item
+    :type identifier: str
+    :return: JSON formatted dict of the inventory item
+    """
+    conn = db.DBConnection()
+    results = conn.query(f"""
+            SELECT json_agg(json_build_object(
+                'inventory_id', inventory_id,
+                'inventory_name', inventory_name,
+                'quantity', quantity,
+                'cost', costs,
+                'threshold', minimum_quantity,
+                'restockedOn', last_restocked
+            )) AS listings
+            FROM inventory WHERE inventory_name='{identifier}'
+        """)
+
+    return results[0][0][0]
