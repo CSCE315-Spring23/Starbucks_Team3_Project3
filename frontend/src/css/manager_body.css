@@ -5,7 +5,7 @@
     --hover-box-button-bg-color: grey;
     --text-color: black;
     --hover-text-color: white;
-    font-family: "Atkinson-Regular";
+    font-family: "Atkinson-Regular", serif;
 }
 
 .manager-banner {
@@ -44,7 +44,7 @@
     display: flex;
     background-color: #00704A;
     flex-direction: column;
-    justify-content: start;
+    justify-content: flex-start;
     align-items: center;
     position: fixed;
     left: 0;
@@ -70,7 +70,7 @@
     min-width: 150px;
     text-align: center;
     font-size: 24px;
-    font-family: "Atkinson-Regular";
+    font-family: "Atkinson-Regular", serif;
 }
 
 .manager-navbar-button:hover {

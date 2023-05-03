@@ -54,9 +54,10 @@ def getAndUpdateMenu():
         return man.getMenuItems(), 200
     elif request.method == 'PUT':
         data = request.get_json()
+        # print(data)
         try:
-            newId = man.addMenuItem(data['name'], data['display'], data['category'], data['sized'], data['ingredients'], data['price'], True if data['sized'] and isinstance(data['price'], int) else False)
-            return newId, 200
+            newId = man.addMenuItem(data['name'], data['display'], data['category'], data['sized'], data['ingredients'], data['price'], True if data['sized'] and (isinstance(data['price'], int) or isinstance(data['price'], float)) else False)
+            return str(newId), 200
         except ValueError as e:
             return e, 400
     elif request.method == 'DELETE':
@@ -70,9 +71,9 @@ def getAndUpdateMenu():
         data = request.get_json()
         try:
             if 'price' in data:
-                man.adjustPrice(data['item_name'], data['price'])
+                man.adjustPrice(data['name'], data['price'])
             if 'ingredients' in data:
-                man.updateMenuIngredients(data['item_name'], data['ingredients'], data['sized'])
+                man.updateMenuIngredients(data['name'], data['ingredients'])
             return "", 204
         except Exception as e:
             return e, 406
@@ -200,3 +201,14 @@ def lowStock():
         data = request.get_json()
         man.changeLowStockThreshold(data['inventory_name'], data['threshold'])
         return "Threshold has been changed", 200
+
+
+@app.route("/management/getitem", methods=["POST"])
+def getItem():
+    """
+    Gets the requested item from the database
+    :return: The JSON of the item
+    """
+    data = request.get_json()
+    # print(data)
+    return man.getItem(data['name']), 200
